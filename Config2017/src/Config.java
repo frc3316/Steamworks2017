@@ -139,6 +139,8 @@ public class Config
 				 */				
 				addToConstantsA("CHASSIS_MOTOR_LEFT_REVERSE", true);
 				addToConstantsA("CHASSIS_MOTOR_RIGHT_REVERSE", false);
+				addToConstants("CHASSIS_LEFT_ENCODER_REVERSE", true);
+				addToConstants("CHASSIS_RIGHT_ENCODER_REVERSE", false);
 			}
 		}
 
@@ -166,20 +168,26 @@ public class Config
 			 */
 			{
 				// PID
-				addToVariables("chassis_DriveDistance_PID_KP", 0.0);
-				addToVariables("chassis_DriveDistance_PID_KI", 0.0);
-				addToVariables("chassis_DriveDistance_PID_KD", 0.0);
+				addToVariables("chassis_DriveByCamera_PID_KP", 0.0);
+				addToVariables("chassis_DriveByCamera_PID_KI", 0.0);
+				addToVariables("chassis_DriveByCamera_PID_KD", 0.0);
 
 				addToVariables("chassis_DriveDistance_KV", 0.5);
 
 				addToVariables("chassis_DriveDistance_PID_Tolerance", 0.01);
 				addToVariables("chassis_DriveDistance_PID_Setpoint", 0.0);
+				
+				addToVariables("chassis_DriveDistance_PID_KP", 0.0);
+				addToVariables("chassis_DriveDistance_PID_KI", 0.0);
+				addToVariables("chassis_DriveDistance_PID_KD", 0.0);
 			}
 			
 			/*
 			 * Autonomous
 			 */
-			{}
+			{
+				
+			}
 
 			/*
 			 * Set Constant Voltage

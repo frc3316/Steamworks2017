@@ -227,7 +227,11 @@ public class IO
 				/*
 				 * Robot A
 				 */
-				{}
+				{putDIOA("CHASSIS_LEFT_ENCODER_CHANNEL_A", 4);
+				putDIOA("CHASSIS_LEFT_ENCODER_CHANNEL_B", 5);
+
+				putDIOA("CHASSIS_RIGHT_ENCODER_CHANNEL_A", 2);
+				putDIOA("CHASSIS_RIGHT_ENCODER_CHANNEL_B", 3);}
 
 				/*
 				 * Robot B
