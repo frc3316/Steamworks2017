@@ -59,4 +59,29 @@ local.properties
 *.ear
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
+
+# Compiled source #
+###################
+*/*.pyc
+
+# Packages #
+############
+
+# Logs and databases #
+######################
+*/*.log
+
+# OS generated files #
+######################
+*/.DS_Store
+*/ehthumbs.db
+*/Icon
+*/Thumbs.db
+*/.tmtags
+*/.idea
+*/tags
+*/vendor.tags
+*/tmtagsHistory
+*/*.sublime-project
+*/*.sublime-workspace
+*/hs_err_pid*
