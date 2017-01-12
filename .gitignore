@@ -1,13 +1,13 @@
 
 .metadata
-bin/
-tmp/
+*/bin/
+*/tmp/
 *.tmp
 *.bak
 *.swp
 *~.nib
 local.properties
-.settings/
+*/.settings/
 .loadpath
 .recommenders
 
@@ -15,7 +15,7 @@ local.properties
 .project
 
 # External tool builders
-.externalToolBuilders/
+*/.externalToolBuilders/
 
 # Locally stored "Eclipse launch configurations"
 *.launch
@@ -45,13 +45,13 @@ local.properties
 .springBeans
 
 # Code Recommenders
-.recommenders/
+*/.recommenders/
 
 *.class
 
 
 # Mobile Tools for Java (J2ME)
-.mtj.tmp/
+*/.mtj.tmp/
 
 # Package Files #
 *.jar
