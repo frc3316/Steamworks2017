@@ -1,6 +1,7 @@
-import dbug_contour
+from dbug_contour import DbugContour
 
-class DBugAbstractImage:
+
+class DBugAbstractImage(object):
     #  TODO: add docs
     def __init__(self, image):
         pass
@@ -15,6 +16,7 @@ class DBugColorImage(DBugAbstractImage):
     def filter_with_colors(self, lower_bound, upper_bound):
         return DBugBinaryImage()
 
+
 class DBugBinaryImage(DBugAbstractImage):
     """
     a DBugBinaryImage instance represents an image with white or black pixels only.
@@ -22,4 +24,4 @@ class DBugBinaryImage(DBugAbstractImage):
     """
 
     def detect_contours(self):
-        return [dbug_contour.DbugContour(), dbug_contour.DbugContour()]
+        return [DbugContour(), DbugContour()]

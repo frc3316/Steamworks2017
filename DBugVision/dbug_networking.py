@@ -1,3 +1,5 @@
-class DBugNetworking:
+
+
+class DBugNetworking(object):
     #  TODO: add docs
     pass
