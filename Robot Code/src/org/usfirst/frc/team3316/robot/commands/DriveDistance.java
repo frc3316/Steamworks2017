@@ -1,93 +1,114 @@
 package org.usfirst.frc.team3316.robot.commands;
 
-import java.sql.Time;
-
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.chassis.motion.MotionPlanner;
+import org.usfirst.frc.team3316.robot.chassis.motion.PlannedMotion;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
-public class DriveDistance extends DBugCommand {
-	
+public class DriveDistance extends DBugCommand
+{
+
+	private double dist, initTime = 0, initDistance = 0;
 	private PIDController pid;
-	
-    private double dist,initTime = 0, initDistance = 0;
-	
-	public DriveDistance(double distance) {
-        requires(Robot.chassis);
-        pid = new PIDController(0,0,0, new PIDSource()
+	private PlannedMotion motion;
+
+	public DriveDistance(double distance)
+	{
+		requires(Robot.chassis);
+		this.dist = distance;
+		motion = MotionPlanner.planMotion(dist);
+		initPID();
+	}
+
+	private void initPID()
+	{
+		pid = new PIDController(0, 0, 0, new PIDSource()
 		{
-			
-			@Override
 			public void setPIDSourceType(PIDSourceType pidSource)
 			{
 				return;
 			}
-			
-			@Override
+
 			public double pidGet()
 			{
-				double currentDistance = Robot.chassis.getDistance() - initDistance;				
-				return currentDistance;
+				double currentDist = Robot.chassis.getDistance() - initDistance;
+
+				// REMOVE AFTER TESTINGS
+				SmartDashboard.putNumber("Current Distance", currentDist);
+
+				return currentDist;
 			}
-			
-			@Override
+
 			public PIDSourceType getPIDSourceType()
 			{
-				// TODO Auto-generated method stub
-				return null;
+				return PIDSourceType.kDisplacement;
 			}
 		}, new PIDOutput()
 		{
-			
-			@Override
+
 			public void pidWrite(double output)
 			{
-				
-				return;
+				double currentTime = Timer.getFPGATimestamp() - initTime;
+				double profileVelocity = motion.getVelocity(currentTime);
+
+				double velocity = output + profileVelocity * (double) config.get("chassis_DriveDistance_KV");
+				Robot.chassis.setMotors(velocity, velocity);
 			}
 		}, 0.02);
-        this.dist = distance;
-        
-    }
+	}
 
-    // Called just before this Command runs the first time
-    protected void init() {
-    	pid.setPID((double) config.get("chassis_DriveDistance_PID_KP"),(double) config.get("chassis_DriveDistance_PID_KI"),(double) config.get("chassis_DriveDistance_PID_KD"));
-    	pid.setOutputRange(-1.0, 1.0);
-    	pid.setSetpoint(dist);
-    	
-    	initTime = Timer.getFPGATimestamp();
-    	initDistance = Robot.chassis.getDistance();
-    	
-    	pid.enable();
-    }
+	// Called just before this Command runs the first time
+	protected void init()
+	{
+		pid.setOutputRange(-1, 1);
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {}
+		pid.setAbsoluteTolerance((double) config.get("chassis_DriveDistance_PID_Tolerance"));
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-    	double measuredspeed = Robot.chassis.getLeftSpeed() + Robot.chassis.getRightSpeed();
-    	return measuredspeed == 0 && pid.onTarget();
-    }
+		pid.setPID((double) config.get("chassis_DriveDistance_PID_KP") / 1000,
+				(double) config.get("chassis_DriveDistance_PID_KI") / 1000,
+				(double) config.get("chassis_DriveDistance_PID_KD") / 1000);
 
-    // Called once after isFinished returns true
-    protected void fin() {
-    	pid.reset();
-    	pid.disable();
-    	Robot.chassis.setMotors(0, 0);
-    }
+		pid.setSetpoint(dist);
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interr() {
-    	fin();
-    }
+		initTime = Timer.getFPGATimestamp();
+		initDistance = Robot.chassis.getDistance();
+
+		pid.enable();
+	}
+
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute()
+	{
+	}
+
+	// Make this return true when this Command no longer needs to run execute()
+	protected boolean isFinished()
+	{
+		double measuredspeed = Robot.chassis.getLeftSpeed() + Robot.chassis.getRightSpeed();
+		return measuredspeed == 0 && pid.onTarget();
+	}
+
+	// Called once after isFinished returns true
+	protected void fin()
+	{
+		pid.reset();
+		pid.disable();
+		Robot.chassis.setMotors(0, 0);
+	}
+
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interr()
+	{
+		fin();
+	}
 }
