@@ -1,3 +1,4 @@
+
 import java.util.Hashtable;
 
 import javax.xml.ws.soap.AddressingFeature;
@@ -137,8 +138,8 @@ public class Config
 				/*
 				 * Chassis
 				 */				
-				addToConstantsA("CHASSIS_MOTOR_LEFT_REVERSE", true);
-				addToConstantsA("CHASSIS_MOTOR_RIGHT_REVERSE", false);
+				addToConstantsA("CHASSIS_MOTOR_LEFT_REVERSE", false);
+				addToConstantsA("CHASSIS_MOTOR_RIGHT_REVERSE", true);
 				addToConstants("CHASSIS_LEFT_ENCODER_REVERSE", true);
 				addToConstants("CHASSIS_RIGHT_ENCODER_REVERSE", false);
 			}
