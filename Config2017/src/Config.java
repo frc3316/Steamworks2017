@@ -1,7 +1,5 @@
 import java.util.Hashtable;
 
-import javax.xml.ws.soap.AddressingFeature;
-
 public class Config 
 {
 	public static Hashtable<String, Object> variablesB;

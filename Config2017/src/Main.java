@@ -76,8 +76,8 @@ public class Main
 			out = new FileOutputStream("C:/config/configFileA.ser");
 			output = new ObjectOutputStream(out);
 			
-			output.writeObject(config.constantsA);
-			output.writeObject(config.variablesA);
+			output.writeObject(Config.constantsA);
+			output.writeObject(Config.variablesA);
 			
 			output.close();
 			out.close();
@@ -86,8 +86,8 @@ public class Main
 			out = new FileOutputStream("C:/config/configFileB.ser");
 			output = new ObjectOutputStream(out);
 			
-			output.writeObject(config.constantsB);
-			output.writeObject(config.variablesB);
+			output.writeObject(Config.constantsB);
+			output.writeObject(Config.variablesB);
 			
 			output.close();
 			out.close();
