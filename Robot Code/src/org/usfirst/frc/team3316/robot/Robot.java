@@ -104,31 +104,6 @@ public class Robot extends IterativeRobot
 		/*
 		 * Choosers
 		 */
-		autonChooser = new SendableChooser();
-		autonChooser.addDefault("Empty Auton", new DBugCommand()
-		{
-			protected boolean isFinished()
-			{
-				return false;
-			}
-			
-			protected void interr()
-			{
-			}
-			
-			protected void init()
-			{
-			}
-			
-			protected void fin()
-			{
-			}
-			
-			protected void execute()
-			{
-			}
-		});
-		SmartDashboard.putData("Auton Chooser", autonChooser);
 		}
 		catch (Exception e)
 		{
@@ -148,8 +123,7 @@ public class Robot extends IterativeRobot
 
 	public void autonomousInit()
 	{
-		if ((autonChooser.getSelected()) != null)
-			((Command) autonChooser.getSelected()).start();
+		
 	}
 
 	public void autonomousPeriodic()
@@ -159,8 +133,7 @@ public class Robot extends IterativeRobot
 
 	public void teleopInit()
 	{
-		if ((autonChooser.getSelected()) != null)
-			((Command) autonChooser.getSelected()).cancel();
+		
 	}
 
 	public void teleopPeriodic()

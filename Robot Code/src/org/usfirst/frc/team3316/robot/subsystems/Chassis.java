@@ -15,8 +15,6 @@ public class Chassis extends DBugSubsystem
 	// Actuators
 	private DBugSpeedController leftMotor1, rightMotor2, leftMotor2, rightMotor1;
 
-	private DoubleSolenoid longPistons, shortPistonsLeft, shortPistonsRight;
-
 	// Sensors
 	private AHRS navx; // For the navX
 //	private Encoder leftEncoder;
@@ -54,117 +52,27 @@ public class Chassis extends DBugSubsystem
 	{
 		logger.finest("Setting chassis. left: " + left + ", right: " + right);
 		
+		// Validate the given values are in the range
+		left = normalizeInput(left);
+		right = normalizeInput(right);
+		
 		leftMotor1.setMotor(left);
 		leftMotor2.setMotor(left);
 
 		rightMotor1.setMotor(right);
 		rightMotor2.setMotor(right);
 	}
-
-	/*
-	 * Piston methods
-	 */
-	public boolean openLongPistons()
-	{
-		if (areShortPistonsLeftExtended() || areShortPistonsRightExtended())
-		{
-			logger.severe("Tried to open long pistons when short pistons are open. Aborting.");
-			return false;
-		}
-		else
-		{
-			longPistons.set(Value.kForward);
-			return true;
-		} 
-	}
-
-	public boolean closeLongPistons()
-	{
-		longPistons.set(Value.kReverse);
-		return true;
-	}
-
-	public boolean openShortPistonsLeft()
-	{
-		if (!areLongPistonsExtended())
-		{
-			logger.severe("Tried to open short pistons when long pistons are closed. Aborting.");
-			return false;
-		}
-		else
-		{
-			shortPistonsLeft.set(Value.kForward);
-			return true;
-		}
-	}
-
-	public boolean openShortPistonsRight()
-	{
-		if (!areLongPistonsExtended())
-		{
-			logger.severe("Tried to open short pistons when long pistons are closed. Aborting.");
-			return false;
-		}
-		else
-		{
-			shortPistonsRight.set(Value.kForward);
-			return true;
-		}
-	}
-
-	public boolean closeShortPistonsLeft()
-	{
-		shortPistonsLeft.set(Value.kReverse);
-		return true;
-	}
-
-	public boolean closeShortPistonsRight()
-	{
-		shortPistonsRight.set(Value.kReverse);
-		return true;
-	}
-
+	
 	/**
-	 * Closes all of the chassis pistons.
-	 * 
-	 * @return Whether all of the closing methods have succeeded.
+	 * This method normalizes the input for the speed controller
+	 * @param input
+	 * @return the normalized input
 	 */
-	public boolean closeAllPistons()
-	{
-		return closeLongPistons() && closeShortPistonsLeft() && closeShortPistonsRight();
-	}
-
-	/**
-	 * Returns whether the long pistons are extended.
-	 */
-	public boolean areLongPistonsExtended()
-	{
-		return longPistons.get().equals(Value.kForward);
-	}
-
-	/**
-	 * Returns whether all of the short pistons are extended.
-	 */
-	public boolean areShortPistonsExtended()
-	{
-		return shortPistonsLeft.get().equals(Value.kForward)
-				&& shortPistonsRight.get().equals(Value.kForward);
-	}
-
-	/**
-	 * Returns whether the left short pistons are extended
-	 */
-	public boolean areShortPistonsLeftExtended()
-	{
-		return shortPistonsLeft.get().equals(Value.kForward);
-	}
-
-	/**
-	 * Returns whether the right short pistons are extended
-	 */
-	public boolean areShortPistonsRightExtended()
-	{
-		return shortPistonsRight.get().equals(Value.kForward);
+	public double normalizeInput(double input) {
+		input = Math.max(0.0, input);
+		input = Math.min(input, 1.0);
+		
+		return input;
 	}
 
 	/*
