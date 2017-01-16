@@ -179,14 +179,12 @@ public class Config
 			 */
 			{
 				// PID
-				addToVariables("chassis_DriveDistance_PID_KP", 0.0);
-				addToVariables("chassis_DriveDistance_PID_KI", 0.0);
-				addToVariables("chassis_DriveDistance_PID_KD", 0.0);
+				addToVariables("chassis_DriveDistance_PID_KP", 0.0); // TODO: Change it
+				addToVariables("chassis_DriveDistance_PID_KI", 0.0); // TODO: Change it
+				addToVariables("chassis_DriveDistance_PID_KD", 0.0); // TODO: Change it
 
-				addToVariables("chassis_DriveDistance_KV", 0.5);
-
-				addToVariables("chassis_DriveDistance_PID_Tolerance", 0.01);
-				addToVariables("chassis_DriveDistance_PID_Setpoint", 0.0);
+				addToVariables("chassis_DriveDistance_PID_Tolerance", 0.01); // In meters
+				addToVariables("chassis_DriveDistance_PID_Setpoint", 0.0); // TODO: Change it
 			}
 			
 			/*
@@ -199,14 +197,15 @@ public class Config
 				addToVariables("chassis_SetHeading_PID_KD", 0.0); // TODO: Change it
 
 				addToVariables("chassis_SetHeading_PID_Tolerance", 0.5); // TODO: Change it
-				addToVariables("chassis_SetHeadingCamera_PID_Setpoint", 0.0);
 				addToVariables("chassis_SetHeadingGyro_PID_Setpoint", 0.0); // TODO: Change it
 			}
 			
 			/*
 			 * Autonomous
 			 */
-			{}
+			{
+				addToVariables("chassis_DriveDistance_Distance", 1.0); // TODO: In meters
+			}
 
 			/*
 			 * Set Constant Voltage

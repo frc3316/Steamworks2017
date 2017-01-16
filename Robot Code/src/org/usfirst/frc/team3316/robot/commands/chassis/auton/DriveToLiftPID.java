@@ -12,12 +12,12 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 /**
  *
  */
-public class DriveToLift extends DBugCommand {
+public class DriveToLiftPID extends DBugCommand {
 
 	private double pidInput, v;
 	private PIDController pid;
 
-	public DriveToLift() {
+	public DriveToLiftPID() {
 		pid = new PIDController(0, 0, 0, new PIDSource() {
 
 			@Override

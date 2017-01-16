@@ -17,8 +17,8 @@ public class Chassis extends DBugSubsystem
 
 	// Sensors
 	private AHRS navx; // For the navX
-//	private Encoder leftEncoder;
-//	private Encoder rightEncoder;
+//	private Encoder leftEncoder; // TODO: Remove comment-out after installing encoders
+//	private Encoder rightEncoder; // TODO: Remove comment-out after installing encoders
 
 	// Variables
 	private double pitchOffset, rollOffset;
@@ -122,18 +122,20 @@ public class Chassis extends DBugSubsystem
 		return toReturn;
 	}
 
-//	/*
-//	 * Encoder Methods
-//	 */
-//	public double getLeftDistance()
-//	{
-//		return leftEncoder.getDistance();
-//	}
-//
-//	public double getRightDistance()
-//	{
-//		return rightEncoder.getDistance();
-//	}
+	/*
+	 * Encoder Methods
+	 */
+	public double getLeftDistance()
+	{
+//		return leftEncoder.getDistance(); // TODO: Remove comment-out after installing encoders
+		return 0.0;
+	}
+
+	public double getRightDistance()
+	{
+//		return rightEncoder.getDistance(); // TODO: Remove comment-out after installing encoders
+		return 0.0;
+	}
 //
 //	public double getLeftSpeed()
 //	{
@@ -147,14 +149,15 @@ public class Chassis extends DBugSubsystem
 //										// second units.
 //	}
 //
-//	public double getDistance()
-//	{
-//		return (rightEncoder.getDistance() + leftEncoder.getDistance()) / 2;
-//	}
-//
-//	public void resetEncoders()
-//	{
+	public double getDistance()
+	{
+//		return (rightEncoder.getDistance() + leftEncoder.getDistance()) / 2; // TODO: Remove comment-out after installing encoders
+		return 0.0;
+	}
+
+	public void resetEncoders()
+	{
 //		rightEncoder.reset();
 //		leftEncoder.reset();
-//	}
+	}
 }
