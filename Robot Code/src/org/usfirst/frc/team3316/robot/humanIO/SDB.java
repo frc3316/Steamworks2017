@@ -145,7 +145,13 @@ public class SDB
 		SmartDashboard.putData(new StartCompressor());
 		SmartDashboard.putData(new StopCompressor());
 		
+		startCameraStream(); // Camera stream for the drivers
+		
 		logger.info("Finished initSDB()");
+	}
+	
+	private void startCameraStream() {
+		CameraServer.getInstance().startAutomaticCapture();
 	}
 
 	/**
