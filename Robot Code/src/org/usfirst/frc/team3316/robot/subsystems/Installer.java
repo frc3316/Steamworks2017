@@ -22,8 +22,7 @@ public class Installer extends DBugSubsystem {
     public void initDefaultCommand() {
     }
 
-    // TODO Finish method
-    public boolean gearIsReadyToBeInstalled() {
+    public boolean gearIsInTheRightPosition() {
 	return gearSwitch.get();
     }
 
@@ -31,11 +30,16 @@ public class Installer extends DBugSubsystem {
 	return pegSwitch.get();
     }
 
+    public boolean isMechanismSet() {
+	return mechanismIsSet;
+    }
+
     public void setMechanism(boolean isSet) {
 	mechanismIsSet = isSet;
     }
 
-    public boolean isMechanismSet() {
-	return mechanismIsSet;
+    // TODO Finish method
+    public boolean gearIsReadyToBeInstalled() {
+	return gearIsInTheRightPosition();
     }
 }
