@@ -11,6 +11,7 @@ import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 import org.usfirst.frc.team3316.robot.robotIO.Actuators;
 import org.usfirst.frc.team3316.robot.robotIO.Sensors;
 import org.usfirst.frc.team3316.robot.subsystems.Chassis;
+import org.usfirst.frc.team3316.robot.subsystems.Installer;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -26,159 +27,143 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-public class Robot extends IterativeRobot
-{
-	public static Config config;
-	public static DBugLogger logger;
-	public static Timer timer;
+public class Robot extends IterativeRobot {
+    public static Config config;
+    public static DBugLogger logger;
+    public static Timer timer;
 
+    /*
+     * Human IO
+     */
+    public static Joysticks joysticks;
+    public static SDB sdb;
+    /*
+     * Robot IO
+     */
+    public static Actuators actuators;
+    public static Sensors sensors;
+    /*
+     * Subsystems
+     */
+    public static Chassis chassis;
+    public static Installer installer;
+
+    Command autonomousCommand;
+    SendableChooser autonChooser;
+
+    /**
+     * This function is run when the robot is first started up and should be
+     * used for any initialization code.
+     */
+    public void robotInit() {
 	/*
-	 * Human IO
+	 * Above all else
 	 */
-	public static Joysticks joysticks;
-	public static SDB sdb;
-	/*
-	 * Robot IO
-	 */
-	public static Actuators actuators;
-	public static Sensors sensors;
-	/*
-	 * Subsystems
-	 */
-	public static Chassis chassis;
+	try {
+	    logger = new DBugLogger();
+	    timer = new Timer();
+	    config = new Config();
 
-	Command autonomousCommand;
-	SendableChooser autonChooser;
+	    /*
+	     * Human IO (that does not require subsystems)
+	     */
+	    joysticks = new Joysticks();
 
-	/**
-	 * This function is run when the robot is first started up and should be
-	 * used for any initialization code.
-	 */
-	public void robotInit()
-	{
-		/*
-		 * Above all else
-		 */
-		try
-		{
-		logger = new DBugLogger();
-		timer = new Timer();
-		config = new Config();
+	    /*
+	     * Robot IO
+	     */
+	    actuators = new Actuators();
+	    sensors = new Sensors();
 
-		/*
-		 * Human IO (that does not require subsystems)
-		 */
-		joysticks = new Joysticks();
+	    Robot.actuators.GeneralActuators();
+	    Robot.sensors.GeneralSensors();
+	    
+	    Robot.sensors.InstallerSensors();
 
-		/*
-		 * Robot IO
-		 */
-		actuators = new Actuators();
-		sensors = new Sensors();
+	    /*
+	     * Subsystems
+	     */
+	    chassis = new Chassis();
+	    installer = new Installer();
 
-		Robot.actuators.GeneralActuators();
-		Robot.sensors.GeneralSensors();
+	    /*
+	     * Human IO (that requires subsystems)
+	     */
+	    joysticks.initButtons();
 
-		/*
-		 * Subsystems
-		 */
-		chassis = new Chassis();
+	    sdb = new SDB();
 
-		/*
-		 * Human IO (that requires subsystems)
-		 */
-		joysticks.initButtons();
+	    /*
+	     * Timer
+	     */
+	    sdb.timerInit();
 
-		sdb = new SDB();
+	    /*
+	     * La verite (turns out that apostrophes makes errors)
+	     */
+	    logger.info(returnTheTruth());
 
-		/*
-		 * Timer
-		 */
-		sdb.timerInit();
-
-		/*
-		 * La verite (turns out that apostrophes makes errors)
-		 */
-		logger.info(returnTheTruth());
-		
-		/*
-		 * Choosers
-		 */
-		autonChooser = new SendableChooser();
-		autonChooser.addDefault("Empty Auton", new DBugCommand()
-		{
-			protected boolean isFinished()
-			{
-				return false;
-			}
-			
-			protected void interr()
-			{
-			}
-			
-			protected void init()
-			{
-			}
-			
-			protected void fin()
-			{
-			}
-			
-			protected void execute()
-			{
-			}
-		});
-		SmartDashboard.putData("Auton Chooser", autonChooser);
+	    /*
+	     * Choosers
+	     */
+	    autonChooser = new SendableChooser();
+	    autonChooser.addDefault("Empty Auton", new DBugCommand() {
+		protected boolean isFinished() {
+		    return false;
 		}
-		catch (Exception e)
-		{
-			logger.severe(e);
+
+		protected void interr() {
 		}
-	}
 
-	public void disabledInit()
-	{
+		protected void init() {
+		}
 
-	}
+		protected void fin() {
+		}
 
-	public void disabledPeriodic()
-	{
-		Scheduler.getInstance().run();
+		protected void execute() {
+		}
+	    });
+	    SmartDashboard.putData("Auton Chooser", autonChooser);
+	} catch (Exception e) {
+	    logger.severe(e);
 	}
+    }
 
-	public void autonomousInit()
-	{
-		if ((autonChooser.getSelected()) != null)
-			((Command) autonChooser.getSelected()).start();
-	}
+    public void disabledInit() {
 
-	public void autonomousPeriodic()
-	{
-		Scheduler.getInstance().run();
-	}
+    }
 
-	public void teleopInit()
-	{
-		if ((autonChooser.getSelected()) != null)
-			((Command) autonChooser.getSelected()).cancel();
-	}
+    public void disabledPeriodic() {
+	Scheduler.getInstance().run();
+    }
 
-	public void teleopPeriodic()
-	{
-		Scheduler.getInstance().run();
-	}
+    public void autonomousInit() {
+	if ((autonChooser.getSelected()) != null)
+	    ((Command) autonChooser.getSelected()).start();
+    }
 
-	public void testIniwt()
-	{
-	}
+    public void autonomousPeriodic() {
+	Scheduler.getInstance().run();
+    }
 
-	public void testPeriodic()
-	{
-		LiveWindow.run();
-	}
+    public void teleopInit() {
+	if ((autonChooser.getSelected()) != null)
+	    ((Command) autonChooser.getSelected()).cancel();
+    }
 
-	private String returnTheTruth()
-	{
-		return "Vita is the Melech!!";
-	}
+    public void teleopPeriodic() {
+	Scheduler.getInstance().run();
+    }
+
+    public void testIniwt() {
+    }
+
+    public void testPeriodic() {
+	LiveWindow.run();
+    }
+
+    private String returnTheTruth() {
+	return "Vita is the Melech!!";
+    }
 }

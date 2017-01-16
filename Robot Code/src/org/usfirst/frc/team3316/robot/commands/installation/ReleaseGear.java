@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3316.robot.commands.installation;
 
+import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
 public class ReleaseGear extends DBugCommand {
@@ -18,8 +19,7 @@ public class ReleaseGear extends DBugCommand {
 
     @Override
     protected void init() {
-	// TODO Auto-generated method stub
-
+	Robot.installer.setMechanism(false);
     }
 
     @Override
