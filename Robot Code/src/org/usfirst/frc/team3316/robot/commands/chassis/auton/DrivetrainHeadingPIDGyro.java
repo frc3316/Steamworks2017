@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3316.robot.commands.chassis;
+package org.usfirst.frc.team3316.robot.commands.chassis.auton;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
@@ -12,12 +12,12 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 /**
  *
  */
-public class DriveToLift extends DBugCommand {
+public class DrivetrainHeadingPIDGyro extends DBugCommand {
 
-	private double pidInput, v;
+	private double leftV, rightV, setpoint;
 	private PIDController pid;
 
-	public DriveToLift() {
+	public DrivetrainHeadingPIDGyro() {
 		pid = new PIDController(0, 0, 0, new PIDSource() {
 
 			@Override
@@ -26,7 +26,7 @@ public class DriveToLift extends DBugCommand {
 
 			@Override
 			public double pidGet() {
-				return pidInput;
+				return Robot.chassis.getYaw();
 			}
 
 			@Override
@@ -38,21 +38,23 @@ public class DriveToLift extends DBugCommand {
 			@Override
 			public void pidWrite(double arg0) {
 				// TODO Auto-generated method stub
-				v = arg0;
+				leftV = arg0;
+				rightV = -arg0;
 			}
 		});
 	}
 
 	// Called just before this Command runs the first time
 	protected void init() {
-		pidInput = 0.0;
-
-		pid.setAbsoluteTolerance((double) config.get("chassis_Dr_PID_Tolerance"));
+		leftV = 0.0;
+		rightV = 0.0;
+		setpoint = 0.0;
+		
+		// Setting intial values for PID
+		pid.setAbsoluteTolerance((double) config.get("chassis_SetHeading_PID_Tolerance"));
 		pid.setOutputRange(-1.0, 1.0);
 		pid.setPID((double) config.get("chassis_SetHeading_PID_KP"), (double) config.get("chassis_SetHeading_PID_KI"),
 				(double) config.get("chassis_SetHeading_PID_KD"));
-
-		pid.setSetpoint((double) config.get("chassis_SetHeadingCamera_PID_Setpoint"));
 
 		pid.enable(); // Starting PID
 	}
@@ -61,9 +63,10 @@ public class DriveToLift extends DBugCommand {
 	protected void execute() {
 		if (AlignDrivetrain.isObjectDetected()) {
 			// Lift detected
-			pidInput = AlignDrivetrain.getLiftAngle();
-
-			Robot.chassis.setMotors(v, v);
+			setpoint = Robot.chassis.getYaw() + AlignDrivetrain.getLiftAngle();
+			pid.setSetpoint(setpoint);
+			
+			Robot.chassis.setMotors(leftV, rightV);
 		} else {
 			// Lift not detected
 			pid.disable();

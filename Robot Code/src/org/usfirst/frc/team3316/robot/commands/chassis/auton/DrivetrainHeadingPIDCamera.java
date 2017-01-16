@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3316.robot.commands.chassis;
+package org.usfirst.frc.team3316.robot.commands.chassis.auton;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
@@ -47,6 +47,8 @@ public class DrivetrainHeadingPIDCamera extends DBugCommand {
 	// Called just before this Command runs the first time
 	protected void init() {
 		pidInput = 0.0;
+		leftV = 0.0;
+		rightV = 0.0;
 
 		pid.setAbsoluteTolerance((double) config.get("chassis_SetHeading_PID_Tolerance"));
 		pid.setOutputRange(-1.0, 1.0);
