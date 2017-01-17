@@ -3,6 +3,7 @@
 from constants import *
 from dbug_networking import DBugNetworking
 from dbug_video_stream import DBugVideoStream
+from dbug_result_object import DBugResult
 from dbug_contour import DbugContour
 
 
@@ -16,7 +17,8 @@ def filter_sort_contours(contours):
              This list may not contain all the original DbugContours in contours, since we filter the given list for
              Better performance.
     """
-    pass
+
+    return []
 
 
 def init_vision_command():
@@ -40,6 +42,17 @@ def run_vision_command(cam, robot_com):
             binary_image = image.filter_with_colors(LOWER_BOUND, UPPER_BOUND)
             unfiltered_contours = binary_image.detect_contours()
             filtered_contours = filter_sort_contours(unfiltered_contours)
+
+            result_obj = None
+
+            if len(filtered_contours) >=2:
+                result_obj = DBugResult(bounder1=filtered_contours[0],
+                                        bounder2=filtered_contours[1])
+
+            if result_obj is None or result_obj.azimuth_angle == UNABLE_TO_PROC_DEFULT_VAL:
+                robot_com.send_no_data()
+            else:
+                robot_com.send_data(result_obj=result_obj)
 
             # TODO: Get the 2 contours, calculate center, send to robot
 
