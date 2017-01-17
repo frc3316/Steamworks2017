@@ -13,6 +13,9 @@ class DBugColorImage(DBugAbstractImage):
     This class helps interact and extract data from the underling image represented as an OpenCV image.
     """
 
+    def __init__(self, cv2_image):
+        pass
+
     def filter_with_colors(self, lower_bound, upper_bound):
         return DBugBinaryImage()
 

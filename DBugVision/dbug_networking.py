@@ -1,6 +1,6 @@
 import socket
 from dbug_result_object import DBugResult
-
+from logger import logger
 
 class DBugNetworking(object):
     """
@@ -16,7 +16,7 @@ class DBugNetworking(object):
         """
         try:
             self._address = (socket.gethostbyname(host), port)
-            # TODO: add logs
+            logger.debug("Finally managed to get host: %r" % (self._address,))
         except:
             self._address = ("10.33.16.20", port)
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

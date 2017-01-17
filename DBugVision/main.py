@@ -25,8 +25,13 @@ def init_vision_command():
 
     # The communication channel to the robot
     robot_com = DBugNetworking()
+
     # Video stream to get the images from
-    cam = DBugVideoStream(camera_device_index=DBugVideoStream.get_camera_usb_device_index())
+    camera_device_index = DBugVideoStream.get_camera_usb_device_index()
+    if camera_device_index is None:
+        cam = DBugVideoStream(camera_device_index=camera_device_index)
+    else:
+        cam = DBugVideoStream()
 
     return cam, robot_com
 
@@ -45,11 +50,12 @@ def run_vision_command(cam, robot_com):
 
             result_obj = None
 
-            if len(filtered_contours) >=2:
+            if len(filtered_contours) >= 2:
+
                 result_obj = DBugResult(bounder1=filtered_contours[0],
                                         bounder2=filtered_contours[1])
 
-            if result_obj is None or result_obj.azimuth_angle == UNABLE_TO_PROC_DEFULT_VAL:
+            if result_obj is None or result_obj.azimuth_angle == UNABLE_TO_PROC_DEFAULT_VAL:
                 robot_com.send_no_data()
             else:
                 robot_com.send_data(result_obj=result_obj)
