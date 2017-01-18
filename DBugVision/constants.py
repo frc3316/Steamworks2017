@@ -1,7 +1,9 @@
+import numpy as np
+
 # Video Color Filtering
 
-LOWER_BOUND = (0,0,0)
-UPPER_BOUND = (0,0,0)
+LOWER_BOUND = np.array([0,0,0])
+UPPER_BOUND = np.array([0,0,0])
 
 # Unable To Process Value
 
@@ -20,3 +22,6 @@ RESIZE_IMAGE_HEIGHT = 240
 
 # The default amount of frames to read from the camera in each update in order to clear the buffer
 DEFAULT_READ_BUFFER_AMOUNT = 4
+
+ROBORIO_MDNS = "roborio-3316-frc.local"
+ROBORIO_PORT = 8000

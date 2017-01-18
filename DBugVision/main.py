@@ -5,6 +5,7 @@ from dbug_networking import DBugNetworking
 from dbug_video_stream import DBugVideoStream
 from dbug_result_object import DBugResult
 from dbug_contour import DbugContour
+import cv2
 
 
 # NOTE: For Barak's QA - is this the right place to write such function?
@@ -18,16 +19,20 @@ def filter_sort_contours(contours):
              Better performance.
     """
 
-    return []
+    return contours
 
 
 def init_vision_command():
 
     # The communication channel to the robot
-    robot_com = DBugNetworking()
+    robot_com = DBugNetworking(host=ROBORIO_MDNS,port=ROBORIO_PORT)
 
     # Video stream to get the images from
     camera_device_index = DBugVideoStream.get_camera_usb_device_index()
+    camera_device_index = 0 if camera_device_index is None else camera_device_index
+
+    print("Found camera index: " + str(camera_device_index))
+
     if camera_device_index is None:
         cam = DBugVideoStream(camera_device_index=camera_device_index)
     else:
@@ -43,8 +48,8 @@ def run_vision_command(cam, robot_com):
         # Making sure the vision process does not crash
         try:
 
-            image = cam.get_image()
-            binary_image = image.filter_with_colors(LOWER_BOUND, UPPER_BOUND)
+            frame = cam.get_image()
+            binary_image = frame.filter_with_colors(LOWER_BOUND, UPPER_BOUND)
             unfiltered_contours = binary_image.detect_contours()
             filtered_contours = filter_sort_contours(unfiltered_contours)
 
@@ -60,7 +65,8 @@ def run_vision_command(cam, robot_com):
             else:
                 robot_com.send_data(result_obj=result_obj)
 
-            # TODO: Get the 2 contours, calculate center, send to robot
+            # Display the image
+            cv2.imshow("Original", frame.image)
 
         except Exception as error:
 

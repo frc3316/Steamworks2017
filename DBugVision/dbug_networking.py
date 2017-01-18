@@ -2,6 +2,7 @@ import socket
 from dbug_result_object import DBugResult
 from logger import logger
 
+
 class DBugNetworking(object):
     """
     A class to send data to a UDP socket

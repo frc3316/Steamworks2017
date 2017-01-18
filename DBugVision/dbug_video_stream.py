@@ -18,6 +18,7 @@ class DBugVideoStream(object):
         :param read_buffer_amount: The amount of frames to read from the camera in each update in order to clear the buffer
         """
         self.cam = VideoCapture(camera_device_index)
+        self._set_cam_props()
         self.read_buffer_amount = read_buffer_amount
 
     def _set_cam_props(self):
