@@ -208,10 +208,10 @@ public class IO
 				 * Robot A
 				 */
 				{
-					putPWMA("CHASSIS_MOTOR_LEFT_1", 3);
-					putCANA("CHASSIS_MOTOR_LEFT_2", 14);
+					putPWMA("CHASSIS_MOTOR_LEFT_1", 0);
+					putPWMA("CHASSIS_MOTOR_LEFT_2", 1);
 					putPWMA("CHASSIS_MOTOR_RIGHT_1", 2);
-					putCANA("CHASSIS_MOTOR_RIGHT_2", 15);
+					putPWMA("CHASSIS_MOTOR_RIGHT_2", 3);
 				}
 
 				/*
@@ -258,11 +258,11 @@ public class IO
 				 * Robot A
 				 */
 				{
-					putPDPA("CHASSIS_MOTOR_LEFT_1_PDP_CHANNEL", 2);
-					putPDPA("CHASSIS_MOTOR_LEFT_2_PDP_CHANNEL", 3);
+					putPDPA("CHASSIS_MOTOR_LEFT_1_PDP_CHANNEL", 0);
+					putPDPA("CHASSIS_MOTOR_LEFT_2_PDP_CHANNEL", 1);
 
-					putPDPA("CHASSIS_MOTOR_RIGHT_1_PDP_CHANNEL", 4);
-					putPDPA("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL", 5); 
+					putPDPA("CHASSIS_MOTOR_RIGHT_1_PDP_CHANNEL", 2);
+					putPDPA("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL", 3); 
 				}
 
 				/*
