@@ -49,7 +49,7 @@ public class Robot extends IterativeRobot {
     public static Installer installer;
 
     Command autonomousCommand;
-    SendableChooser autonChooser;
+    SendableChooser<DBugCommand> autonChooser;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -106,7 +106,7 @@ public class Robot extends IterativeRobot {
 	    /*
 	     * Choosers
 	     */
-	    autonChooser = new SendableChooser();
+	    autonChooser = new SendableChooser<DBugCommand>();
 	    autonChooser.addDefault("Empty Auton", new DBugCommand() {
 		protected boolean isFinished() {
 		    return false;
