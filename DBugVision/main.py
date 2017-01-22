@@ -1,11 +1,11 @@
 # Imports:
-
+import cv2
 from constants import *
 from dbug_networking import DBugNetworking
 from dbug_video_stream import DBugVideoStream
 from dbug_result_object import DBugResult
+from logger import logger
 from dbug_contour import DbugContour
-import cv2
 
 
 def filter_sort_contours(contours):
@@ -17,8 +17,21 @@ def filter_sort_contours(contours):
              This list may not contain all the original DbugContours in contours, since we filter the given list for
              Better performance.
     """
+    potential_bounders = []
+    for contour in contours:
+        (x_offset, y_offset, width, height) = contour.get_rotated_enclosing_rectangle()
+        if (MIN_BOUND_RECT_AREA > width*height) or (MAX_BOUND_RECT_AREA < width*height):
+            logger.debug("Rect denied, min-max rect area with area: " + str(width*height))
+            continue
 
-    return contours
+        ratio = height / width
+        if (MIN_HEIGHT_WIDTH_RATIO > ratio) or (MIN_HEIGHT_WIDTH_RATIO < ratio):
+            logger.debug("Rect denied, height/width ratio")
+            continue
+
+        potential_bounders.append(contour)
+
+    return potential_bounders
 
 
 def init_vision_command():
@@ -41,7 +54,8 @@ def init_vision_command():
 
 
 def run_vision_command(cam, robot_com):
-    # Capture images non-stop, process them and send the results to the robot
+
+    # Capture frames non-stop, process them and send the results to the robot
     while True:
 
         # Making sure the vision process does not crash
@@ -61,11 +75,20 @@ def run_vision_command(cam, robot_com):
 
             if result_obj is None or result_obj.azimuth_angle == UNABLE_TO_PROC_DEFAULT_VAL:
                 robot_com.send_no_data()
+                logger.warning("Couldn't find bounders... sending no data")
             else:
                 robot_com.send_data(result_obj=result_obj)
 
-            # Display the image
-            cv2.imshow("Original", frame.image)
+            # Saving or showing image
+            # TODO move this to a separate method
+
+            if SHOULD_SHOW_GUI_IMAGES:
+
+                # Display the image
+                cv2_contours = [c.contour for c in filtered_contours[:2]]
+                copy_image = frame.image.copy()
+                cv2.drawContours(copy_image, cv2_contours, -1, (0,255,0), 1)
+                cv2.imshow("Original", copy_image)
 
         except Exception as error:
 
