@@ -27,6 +27,9 @@ class DBugNetworking(object):
         return '{0:.2f}'.format(float(param))
 
     def format_data(self, result_obj):
+        """
+        :return: result_obj as a dictionary with the data in result_obj
+        """
         if result_obj is not None:
             identified = 1
         else:
@@ -37,9 +40,11 @@ class DBugNetworking(object):
                     IOD=DBugNetworking.format_parameter(identified))
 
     def send_data(self, result_obj=None):
-
-        # TODO:add docs
-
+        """
+        Sending the given result_obj to the host of self
+        :param result_obj: The DBugResult instance to send
+        :return: None
+        """
         formatted_data = str(self.format_data(result_obj))
         self.sock.sendto(formatted_data.replace(' ', '') + '\n', self._address)
 

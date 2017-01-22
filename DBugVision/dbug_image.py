@@ -1,6 +1,7 @@
 from dbug_contour import DbugContour
 import cv2
 
+
 class DBugAbstractImage(object):
     """
     The abstract class of an image (e.g: frame taken from a camera), all types of images should inherit from
@@ -47,4 +48,4 @@ class DBugBinaryImage(DBugAbstractImage):
         :return: the contours that were found as cv2 contours.
         """
         (contours, _) = cv2.findContours(self.image.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-        return contours
+        return [DbugContour(cv_contour=contour) for contour in contours]

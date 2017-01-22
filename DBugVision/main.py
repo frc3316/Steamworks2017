@@ -8,7 +8,6 @@ from dbug_contour import DbugContour
 import cv2
 
 
-# NOTE: For Barak's QA - is this the right place to write such function?
 def filter_sort_contours(contours):
     """
     Filters the given list of contours and sorting them according to the probability of being one of the bounders
