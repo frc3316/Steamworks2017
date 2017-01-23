@@ -1,5 +1,6 @@
 # Imports:
 import cv2
+import numpy as np
 from constants import *
 from dbug_networking import DBugNetworking
 from dbug_video_stream import DBugVideoStream
@@ -19,8 +20,8 @@ def filter_sort_contours(contours):
     """
     potential_bounders = []
     for contour in contours:
-        (x_offset, y_offset, width, height) = contour.get_rotated_enclosing_rectangle()
-        if (MIN_BOUND_RECT_AREA > width*height) or (MAX_BOUND_RECT_AREA < width*height):
+        (x_offset, y_offset, width, height) = contour.straight_enclosing_rectangle()
+        if not (MIN_BOUND_RECT_AREA < contour.contour_area() < MAX_BOUND_RECT_AREA):
             logger.debug("Rect denied, min-max rect area with area: " + str(width*height))
             continue
 
@@ -76,6 +77,7 @@ def run_vision_command(cam, robot_com):
             if result_obj is None or result_obj.azimuth_angle == UNABLE_TO_PROC_DEFAULT_VAL:
                 robot_com.send_no_data()
                 logger.warning("Couldn't find bounders... sending no data")
+                continue
             else:
                 robot_com.send_data(result_obj=result_obj)
 
@@ -84,17 +86,39 @@ def run_vision_command(cam, robot_com):
 
             if SHOULD_SHOW_GUI_IMAGES:
 
-                # Display the image
+                # Filtered contours:
                 cv2_contours = [c.contour for c in filtered_contours[:2]]
                 copy_image = frame.image.copy()
                 cv2.drawContours(copy_image, cv2_contours, -1, (0,255,0), 1)
-                cv2.imshow("Original", copy_image)
 
-        except Exception as error:
+                # Rotated enclosing rectangles on bounders:
+
+                for bounder in filtered_contours[:2]:
+                    rect = bounder.rotated_enclosing_rectangle()
+                    box = cv2.cv.BoxPoints(rect)
+                    box = np.int0(box)
+                    cv2.drawContours(copy_image, [box], 0, (0,0,255),2)
+                    cv2.drawContours(copy_image, [bounder.contour], -1, (255,0,0), 1)
+
+                # Merged contour of bounders
+                merged_contour = DbugContour.merge_contours(filtered_contours[0], filtered_contours[1])
+                rect = merged_contour.rotated_enclosing_rectangle()
+                box = cv2.cv.BoxPoints(rect)
+                box = np.int0(box)
+                cv2.drawContours(copy_image, [box], 0, (0,255,255),2)
+
+                # Angle text:
+                font = cv2.FONT_HERSHEY_SIMPLEX
+                cv2.putText(copy_image,'AA: ' + str(result_obj.azimuth_angle),(30,30), font, 1, (255,0,0), 2)
+
+                cv2.imshow("Original", copy_image)
+                cv2.imshow("Binary", binary_image.image)
+
+
+        except MemoryError as error:
 
             # MARK: Possible Exception and reasons:
             # 1. Example Exception - Reason For Exception
-
             print "An Error Occurred: " + str(error)
             print "Skipping to the next frame!"
 

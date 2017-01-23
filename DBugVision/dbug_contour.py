@@ -1,6 +1,7 @@
 from cv2 import boundingRect
-
-
+from cv2 import contourArea
+from cv2 import minAreaRect
+from numpy import vstack
 class DbugContour(object):
     """
     The Dbug rapper for a cv2 contour
@@ -11,9 +12,35 @@ class DbugContour(object):
         """
         self.contour = cv_contour
 
-    def get_rotated_enclosing_rectangle(self):
+    def straight_enclosing_rectangle(self):
         """
-        Calculates and returns the minimum enclosing bounding rectangle of the contour self is wrapping
+        Calculates and returns the (straight-no angle) bounding rectangle of the contour self is wrapping
         :return: (x,y,w,h), Let (x,y) be the top-left coordinate of the rectangle and (w,h) be its width and height.
         """
         return boundingRect(self.contour)
+
+    def contour_area(self):
+        """
+        :return: The number of non-zero pixels in the contour self is wrapping
+        """
+        return contourArea(self.contour)
+
+    def rotated_enclosing_rectangle(self):
+        """
+        :return: The minimum enclosing bounding rectangle of the contour self is wrapping
+        """
+        return minAreaRect(self.contour)
+
+    def min_rotated_enclosing_rectangle_angle(self):
+        """
+        :return: The rotation angle of the minimum enclosing bounding rectangle of the contour self is wrapping
+        """
+        return self.rotated_enclosing_rectangle()[2]
+
+    @staticmethod
+    def merge_contours(contour1, contour2):
+        """
+        :return: One contour which is the merger of contour1, contour 2 (holds both of their points)
+        """
+        cont = vstack([contour1.contour, contour2.contour])
+        return DbugContour(cv_contour=cont)

@@ -3,7 +3,7 @@ import numpy as np
 # Video Color Filtering
 
 LOWER_BOUND = np.array([0,0,0])
-UPPER_BOUND = np.array([10,10,10])
+UPPER_BOUND = np.array([100,100,100])
 
 # Unable To Process Value
 
@@ -11,6 +11,9 @@ UNABLE_TO_PROC_DEFAULT_VAL = 3316
 DEFAULT_CAMERA_USB_INDEX = 0
 
 # Camera Settings:
+
+CAMERA_VIEW_ANGLE_Y = 59.8  # in degrees
+CAMERA_VIEW_ANGLE_X = 35.2  # in degrees
 
 BRIGHTNESS = 0.01
 SATURATION = 1
