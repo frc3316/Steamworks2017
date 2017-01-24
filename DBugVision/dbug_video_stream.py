@@ -68,9 +68,10 @@ class DBugVideoStream(object):
         else:  # this occurs if the loop wasn't broken - lets use the new frame
             frame = new_frame
 
-        image = rot90(frame, 1) if ROTATE_CLOCKWISE else rot90(frame, 3)
+        if ROTATE_CLOCKWISE:
+            frame = rot90(frame, 1)
 
-        return DBugColorImage(cv2_image=image)
+        return DBugColorImage(cv2_image=frame)
 
     @staticmethod
     def get_camera_usb_device_index():

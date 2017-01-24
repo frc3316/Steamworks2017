@@ -2,6 +2,8 @@ from cv2 import boundingRect
 from cv2 import contourArea
 from cv2 import minAreaRect
 from numpy import vstack
+
+
 class DbugContour(object):
     """
     The Dbug rapper for a cv2 contour
@@ -27,7 +29,8 @@ class DbugContour(object):
 
     def rotated_enclosing_rectangle(self):
         """
-        :return: The minimum enclosing bounding rectangle of the contour self is wrapping
+        :return: The minimum enclosing bounding rectangle of the contour self is wrapping.
+                 Tuple of center (x,y), (width, height), angle of rotation.
         """
         return minAreaRect(self.contour)
 

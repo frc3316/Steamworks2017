@@ -1,12 +1,12 @@
 # Imports:
-import cv2
-import numpy as np
 from constants import *
 from dbug_networking import DBugNetworking
 from dbug_video_stream import DBugVideoStream
 from dbug_result_object import DBugResult
 from logger import logger
 from dbug_contour import DbugContour
+
+# TODO: move constants of dumping image, show gui windows and etc to command line args
 
 
 def filter_sort_contours(contours):
@@ -25,12 +25,15 @@ def filter_sort_contours(contours):
             logger.debug("Rect denied, min-max rect area with area: " + str(width*height))
             continue
 
-        ratio = height / width
-        if (MIN_HEIGHT_WIDTH_RATIO > ratio) or (MIN_HEIGHT_WIDTH_RATIO < ratio):
+        ratio = float(height) / float(width)
+        if (MIN_HEIGHT_WIDTH_RATIO > ratio) or (MAX_HEIGHT_WIDTH_RATIO < ratio):
             logger.debug("Rect denied, height/width ratio")
+            print("R" + str(ratio))
             continue
 
         potential_bounders.append(contour)
+
+    potential_bounders.sort(key=lambda cnt: cnt.contour_area(), reverse=True)
 
     return potential_bounders
 
@@ -82,40 +85,36 @@ def run_vision_command(cam, robot_com):
                 robot_com.send_data(result_obj=result_obj)
 
             # Saving or showing image
-            # TODO move this to a separate method
+            # TODO move this to a separate method, where should i put it Barak?
 
             if SHOULD_SHOW_GUI_IMAGES:
 
                 # Filtered contours:
-                cv2_contours = [c.contour for c in filtered_contours[:2]]
-                copy_image = frame.image.copy()
-                cv2.drawContours(copy_image, cv2_contours, -1, (0,255,0), 1)
+                copy_image = frame.copy()
+                copy_image.draw_contours(filtered_contours, line_color=(255,255,0))
 
                 # Rotated enclosing rectangles on bounders:
 
                 for bounder in filtered_contours[:2]:
-                    rect = bounder.rotated_enclosing_rectangle()
-                    box = cv2.cv.BoxPoints(rect)
-                    box = np.int0(box)
-                    cv2.drawContours(copy_image, [box], 0, (0,0,255),2)
-                    cv2.drawContours(copy_image, [bounder.contour], -1, (255,0,0), 1)
+                    copy_image.draw_rotated_enclosing_rectangle(contour=bounder)
+                    copy_image.draw_contours([bounder.contour], line_color=(255,0,0))
 
-                # Merged contour of bounders
+                # Merged contour of bounders:
+
                 merged_contour = DbugContour.merge_contours(filtered_contours[0], filtered_contours[1])
-                rect = merged_contour.rotated_enclosing_rectangle()
-                box = cv2.cv.BoxPoints(rect)
-                box = np.int0(box)
-                cv2.drawContours(copy_image, [box], 0, (0,255,255),2)
+                copy_image.draw_rotated_enclosing_rectangle(contour=merged_contour)
 
                 # Angle text:
-                font = cv2.FONT_HERSHEY_SIMPLEX
-                cv2.putText(copy_image,'AA: ' + str(result_obj.azimuth_angle),(30,30), font, 1, (255,0,0), 2)
 
-                cv2.imshow("Original", copy_image)
-                cv2.imshow("Binary", binary_image.image)
+                copy_image.draw_text('AA: ' + str(result_obj.azimuth_angle), origin=(30,30))
+
+                # Finally display the frames:
+
+                copy_image.display_gui_window(window_title="Original")
+                binary_image.display_gui_window(window_title="Binary")
 
 
-        except MemoryError as error:
+        except Exception as error:
 
             # MARK: Possible Exception and reasons:
             # 1. Example Exception - Reason For Exception
