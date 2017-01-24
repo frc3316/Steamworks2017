@@ -64,7 +64,7 @@ class DBugColorImage(DBugAbstractImage):
         """
         :return: a copy of self - a new image with the exact same pixels
         """
-        return DBugColorImage(cv2_image=super.copy().image)
+        return DBugColorImage(cv2_image=super(DBugColorImage, self).copy().image)
 
     def draw_rotated_enclosing_rectangle(self, contour, line_color=(0,0,0), line_thickness=1):
         """
@@ -75,7 +75,7 @@ class DBugColorImage(DBugAbstractImage):
         rect = contour.rotated_enclosing_rectangle()
         box = cv2.cv.BoxPoints(rect)
         box = np.int0(box)
-        self.draw_contours([box], line_color=line_color, line_thickness=line_thickness)
+        self.draw_contours([DbugContour(cv_contour=box)], line_color=line_color, line_thickness=line_thickness)
 
     def draw_text(self, text, origin, font=cv2.FONT_HERSHEY_SIMPLEX, text_scale=0.7, text_color=(255,0,0), thickness=2):
         """
@@ -109,4 +109,4 @@ class DBugBinaryImage(DBugAbstractImage):
         """
         :return: a copy of self - a new image with the exact same pixels
         """
-        return DBugBinaryImage(cv2_image=super.copy().image)
+        return DBugBinaryImage(cv2_image=super(DBugBinaryImage, self).copy().image)

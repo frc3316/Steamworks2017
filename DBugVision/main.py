@@ -96,13 +96,13 @@ def run_vision_command(cam, robot_com):
                 # Rotated enclosing rectangles on bounders:
 
                 for bounder in filtered_contours[:2]:
-                    copy_image.draw_rotated_enclosing_rectangle(contour=bounder)
-                    copy_image.draw_contours([bounder.contour], line_color=(255,0,0))
+                    copy_image.draw_rotated_enclosing_rectangle(contour=bounder, line_color=(0,0,255))
+                    copy_image.draw_contours([bounder], line_color=(255,0,0))
 
                 # Merged contour of bounders:
 
                 merged_contour = DbugContour.merge_contours(filtered_contours[0], filtered_contours[1])
-                copy_image.draw_rotated_enclosing_rectangle(contour=merged_contour)
+                copy_image.draw_rotated_enclosing_rectangle(contour=merged_contour, line_color=(0,255,0))
 
                 # Angle text:
 
@@ -114,7 +114,7 @@ def run_vision_command(cam, robot_com):
                 binary_image.display_gui_window(window_title="Binary")
 
 
-        except Exception as error:
+        except MemoryError as error:
 
             # MARK: Possible Exception and reasons:
             # 1. Example Exception - Reason For Exception
