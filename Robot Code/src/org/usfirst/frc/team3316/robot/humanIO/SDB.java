@@ -13,6 +13,7 @@ import org.usfirst.frc.team3316.robot.commands.StartCompressor;
 import org.usfirst.frc.team3316.robot.commands.StopCompressor;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
+import org.usfirst.frc.team3316.robot.vision.VisionServer;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -39,6 +40,7 @@ public class SDB
 
 			// For drivers
 			// TODO: Add "for-drivers" indications
+			put("Vision Connected", VisionServer.isConnected);
 		}
 
 		private void put(String name, double d)

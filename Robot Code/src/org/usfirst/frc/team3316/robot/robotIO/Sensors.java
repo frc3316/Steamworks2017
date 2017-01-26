@@ -6,6 +6,7 @@ package org.usfirst.frc.team3316.robot.robotIO;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
+import org.usfirst.frc.team3316.robot.vision.VisionServer;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -33,6 +34,16 @@ public class Sensors
 	public void GeneralSensors()
 	{
 		pdp = new PowerDistributionPanel();
+	}
+	
+	/*
+	 * Vision
+	 */
+	public void VisionSensors()
+	{
+		VisionServer visionServer = new VisionServer();
+		Thread visionThread = new Thread(visionServer);
+		visionThread.start();
 	}
 
 	/*
