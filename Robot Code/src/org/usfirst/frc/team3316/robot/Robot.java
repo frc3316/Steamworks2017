@@ -27,8 +27,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-public class Robot extends IterativeRobot
-{
+public class Robot extends IterativeRobot {
 	public static Config config;
 	public static DBugLogger logger;
 	public static Timer timer;
@@ -48,8 +47,7 @@ public class Robot extends IterativeRobot
 	 */
 	public static Chassis chassis;
 	public static Intake intake;
-	
-	
+
 	Command autonomousCommand;
 	SendableChooser autonChooser;
 
@@ -57,99 +55,76 @@ public class Robot extends IterativeRobot
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
-	public void robotInit()
-	{
+	public void robotInit() {
 		/*
 		 * Above all else
 		 */
-		try
-		{
-		logger = new DBugLogger();
-		timer = new Timer();
-		config = new Config();
+		try {
+			logger = new DBugLogger();
+			timer = new Timer();
+			config = new Config();
 
-		/*
-		 * Human IO (that does not require subsystems)
-		 */
-		joysticks = new Joysticks();
-		sdb = new SDB();
+			/*
+			 * Human IO (that does not require subsystems)
+			 */
+			joysticks = new Joysticks();
+			sdb = new SDB();
 
-		/*
-		 * Robot IO
-		 */
-		actuators = new Actuators();
-		sensors = new Sensors();
+			/*
+			 * Robot IO
+			 */
+			actuators = new Actuators();
+			sensors = new Sensors();
 
-		Robot.actuators.GeneralActuators();
-		Robot.sensors.GeneralSensors();
+			Robot.actuators.GeneralActuators();
+			Robot.sensors.GeneralSensors();
 
-		/*
-		 * Subsystems
-		 */
-		chassis = new Chassis();
-		intake = new Intake();
+			/*
+			 * Subsystems
+			 */
+			chassis = new Chassis();
+			intake = new Intake();
 
-		/*
-		 * Human IO (that requires subsystems)
-		 */
-		joysticks.initButtons();
+			/*
+			 * Human IO (that requires subsystems)
+			 */
+			joysticks.initButtons();
 
-		/*
-		 * Timer
-		 */
-		sdb.timerInit();
-
-		/*
-		 * La verite (turns out that apostrophes makes errors)
-		 */
-		logger.info(returnTheTruth());
-		
-		}
-		catch (Exception e)
-		{
+			/*
+			 * Timer
+			 */
+			sdb.timerInit();
+		} catch (Exception e) {
 			logger.severe(e);
 		}
 	}
 
-	public void disabledInit()
-	{
+	public void disabledInit() {
 
 	}
 
-	public void disabledPeriodic()
-	{
+	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 	}
 
-	public void autonomousInit()
-	{
+	public void autonomousInit() {
 	}
 
-	public void autonomousPeriodic()
-	{
+	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 	}
 
-	public void teleopInit()
-	{
+	public void teleopInit() {
 	}
 
-	public void teleopPeriodic()
-	{
+	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 	}
 
-	public void testIniwt()
-	{
+	public void testIniwt() {
 	}
 
-	public void testPeriodic()
-	{
+	public void testPeriodic() {
 		LiveWindow.run();
-	}
-
-	private String returnTheTruth()
-	{
-		return "Vita is the Melech!!";
 	}
 }
