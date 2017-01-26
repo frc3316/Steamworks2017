@@ -11,6 +11,7 @@ import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 import org.usfirst.frc.team3316.robot.robotIO.Actuators;
 import org.usfirst.frc.team3316.robot.robotIO.Sensors;
 import org.usfirst.frc.team3316.robot.subsystems.Chassis;
+import org.usfirst.frc.team3316.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -46,7 +47,9 @@ public class Robot extends IterativeRobot
 	 * Subsystems
 	 */
 	public static Chassis chassis;
-
+	public static Intake intake;
+	
+	
 	Command autonomousCommand;
 	SendableChooser autonChooser;
 
@@ -69,6 +72,7 @@ public class Robot extends IterativeRobot
 		 * Human IO (that does not require subsystems)
 		 */
 		joysticks = new Joysticks();
+		sdb = new SDB();
 
 		/*
 		 * Robot IO
@@ -83,13 +87,12 @@ public class Robot extends IterativeRobot
 		 * Subsystems
 		 */
 		chassis = new Chassis();
+		intake = new Intake();
 
 		/*
 		 * Human IO (that requires subsystems)
 		 */
 		joysticks.initButtons();
-
-		sdb = new SDB();
 
 		/*
 		 * Timer
@@ -101,34 +104,6 @@ public class Robot extends IterativeRobot
 		 */
 		logger.info(returnTheTruth());
 		
-		/*
-		 * Choosers
-		 */
-		autonChooser = new SendableChooser();
-		autonChooser.addDefault("Empty Auton", new DBugCommand()
-		{
-			protected boolean isFinished()
-			{
-				return false;
-			}
-			
-			protected void interr()
-			{
-			}
-			
-			protected void init()
-			{
-			}
-			
-			protected void fin()
-			{
-			}
-			
-			protected void execute()
-			{
-			}
-		});
-		SmartDashboard.putData("Auton Chooser", autonChooser);
 		}
 		catch (Exception e)
 		{
@@ -148,8 +123,6 @@ public class Robot extends IterativeRobot
 
 	public void autonomousInit()
 	{
-		if ((autonChooser.getSelected()) != null)
-			((Command) autonChooser.getSelected()).start();
 	}
 
 	public void autonomousPeriodic()
@@ -159,8 +132,6 @@ public class Robot extends IterativeRobot
 
 	public void teleopInit()
 	{
-		if ((autonChooser.getSelected()) != null)
-			((Command) autonChooser.getSelected()).cancel();
 	}
 
 	public void teleopPeriodic()

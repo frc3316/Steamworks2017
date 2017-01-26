@@ -11,6 +11,7 @@ import java.util.TimerTask;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.StartCompressor;
 import org.usfirst.frc.team3316.robot.commands.StopCompressor;
+import org.usfirst.frc.team3316.robot.commands.intake.MoveIntake;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
@@ -139,11 +140,19 @@ public class SDB
 
 	private void initSDB()
 	{
+		System.out.println("SDB is running");
+		logger.info("SDB is running");
+		
 		SmartDashboard.putData(new UpdateVariablesInConfig()); // NEVER REMOVE
 																// THIS COMMAND
 		
 		SmartDashboard.putData(new StartCompressor());
 		SmartDashboard.putData(new StopCompressor());
+		
+		// Intake
+		
+		putConfigVariableInSDB("intake_MoveIntake_V");
+		
 		
 		logger.info("Finished initSDB()");
 	}

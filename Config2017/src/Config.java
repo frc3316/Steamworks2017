@@ -118,7 +118,11 @@ public class Config
 				/*
 				 * Buttons
 				 */
-				{}
+				{
+					// Joystick operator
+
+					addToVariables("button_Intake_Toggle", 5);
+				}
 			}
 		}
 
@@ -135,8 +139,13 @@ public class Config
 				/*
 				 * Chassis
 				 */				
-				addToConstantsA("CHASSIS_MOTOR_LEFT_REVERSE", true);
-				addToConstantsA("CHASSIS_MOTOR_RIGHT_REVERSE", false);
+				addToConstantsA("CHASSIS_MOTOR_LEFT_REVERSE", false);
+				addToConstantsA("CHASSIS_MOTOR_RIGHT_REVERSE", true);
+				
+				/*
+				 * Intake
+				 */
+				addToConstantsA("INTAKE_MOTOR_REVERSE", false);
 			}
 		}
 
@@ -186,6 +195,23 @@ public class Config
 				addToVariables("chassis_SetConstantVoltage_Voltage", 0.0);
 			}
 
+		}
+		
+		/*
+		 * Intake
+		 */
+		{
+			/*
+			 * Constants
+			 */
+			{}
+
+			/*
+			 * Variables
+			 */
+			{
+				addToVariables("intake_MoveIntake_V", 0.75);
+			}
 		}
 	}
 }

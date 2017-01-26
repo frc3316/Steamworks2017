@@ -20,7 +20,10 @@ public class Actuators
 	// Chassis
 	public DBugSpeedController chassisLeft1, chassisLeft2, chassisRight1, chassisRight2;
 	public SpeedController chassisLeft1SC, chassisLeft2SC, chassisRight1SC, chassisRight2SC;
-
+	
+	// Intake
+	public DBugSpeedController intakeMotor;
+	public SpeedController intakeMotorSC;
 	
 	public Actuators() {}
 
@@ -53,10 +56,10 @@ public class Actuators
 	 */
 	private void ChassisActuatorsA()
 	{
-		chassisLeft1SC = new VictorSP((int) Robot.config.get("CHASSIS_MOTOR_LEFT_1"));
-		chassisLeft2SC = new VictorSP((int) Robot.config.get("CHASSIS_MOTOR_LEFT_2"));
-		chassisRight1SC = new VictorSP((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_1"));
-		chassisRight2SC = new VictorSP((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_2"));
+		chassisLeft1SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_1"));
+		chassisLeft2SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_2"));
+		chassisRight1SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_1"));
+		chassisRight2SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_2"));
 	}
 
 	private void ChassisActuatorsB()
@@ -83,5 +86,30 @@ public class Actuators
 		chassisRight2 = new DBugSpeedController(chassisRight2SC,
 				(boolean) Robot.config.get("CHASSIS_MOTOR_RIGHT_REVERSE"),
 				(int) config.get("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL"));
+	}
+	
+	/*
+	 * Intake
+	 */
+	private void IntakeActuatorsA()
+	{
+		intakeMotorSC = new Talon((int) Robot.config.get("INTAKE_MOTOR"));
+	}
+
+	private void IntakeActuatorsB()
+	{}
+	
+	public void IntakeActuators()
+	{
+		if (config.robotA)
+		{
+			IntakeActuatorsA();
+		}
+		else
+		{
+			IntakeActuatorsB();
+		}
+		intakeMotor = new DBugSpeedController(intakeMotorSC, (boolean) Robot.config.get("INTAKE_MOTOR_REVERSE"),
+				(int) config.get("INTAKE_MOTOR_PDP_CHANNEL"));
 	}
 }
