@@ -43,7 +43,7 @@ public class Chassis extends DBugSubsystem
 
 	public void initDefaultCommand()
 	{
-		setDefaultCommand(new TankDriveXbox());
+		setDefaultCommand(new TankDrive());
 	}
 
 	/*

@@ -7,6 +7,8 @@ import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
+import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.*;
 
 public class Actuators
@@ -24,6 +26,10 @@ public class Actuators
 	// Intake
 	public DBugSpeedController intakeMotor;
 	public SpeedController intakeMotorSC;
+	
+	// Climbing
+	public DBugSpeedController climbingMotor;
+	public SpeedController climbingMotorSC;
 	
 	public Actuators() {}
 
@@ -56,10 +62,10 @@ public class Actuators
 	 */
 	private void ChassisActuatorsA()
 	{
-		chassisLeft1SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_1"));
-		chassisLeft2SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_2"));
-		chassisRight1SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_1"));
-		chassisRight2SC = new Talon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_2"));
+		chassisLeft1SC = new CANTalon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_1"));
+		chassisLeft2SC = new CANTalon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_2"));
+		chassisRight1SC = new CANTalon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_1"));
+		chassisRight2SC = new CANTalon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_2"));
 	}
 
 	private void ChassisActuatorsB()
@@ -110,6 +116,31 @@ public class Actuators
 			IntakeActuatorsB();
 		}
 		intakeMotor = new DBugSpeedController(intakeMotorSC, (boolean) Robot.config.get("INTAKE_MOTOR_REVERSE"),
+				(int) config.get("INTAKE_MOTOR_PDP_CHANNEL"));
+	}
+	
+	/*
+	 * Intake
+	 */
+	private void ClimbingActuatorsA()
+	{
+		climbingMotorSC = new Talon((int) Robot.config.get("INTAKE_MOTOR"));
+	}
+
+	private void ClimbingActuatorsB()
+	{}
+	
+	public void ClimbingActuators()
+	{
+		if (config.robotA)
+		{
+			ClimbingActuatorsA();
+		}
+		else
+		{
+			ClimbingActuatorsB();
+		}
+		climbingMotor = new DBugSpeedController(intakeMotorSC, (boolean) Robot.config.get("INTAKE_MOTOR_REVERSE"),
 				(int) config.get("INTAKE_MOTOR_PDP_CHANNEL"));
 	}
 }
