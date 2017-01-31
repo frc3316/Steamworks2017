@@ -208,10 +208,10 @@ public class IO
 				 * Robot A
 				 */
 				{
-					putCANA("CHASSIS_MOTOR_LEFT_1", 0);
-					putCANA("CHASSIS_MOTOR_LEFT_2", 1);
-					putCANA("CHASSIS_MOTOR_RIGHT_1", 2);
-					putCANA("CHASSIS_MOTOR_RIGHT_2", 3);
+					putCANA("CHASSIS_MOTOR_LEFT_1", 2);
+					putCANA("CHASSIS_MOTOR_LEFT_2", 3);
+					putCANA("CHASSIS_MOTOR_RIGHT_1", 0);
+					putCANA("CHASSIS_MOTOR_RIGHT_2", 1);
 					
 					putPWMA("INTAKE_MOTOR", 4);
 				}

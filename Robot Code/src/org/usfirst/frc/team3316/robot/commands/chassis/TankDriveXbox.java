@@ -53,7 +53,7 @@ public class TankDriveXbox extends Drive
 	protected static double getRightY()
 	{
 		updateConfigVariables();
-		double y = deadBand(joystickOperator.getRawAxis(5));
+		double y = deadBand(joystickOperator.getRawAxis(3));
 		if (invertY)
 		{
 			return -y;
