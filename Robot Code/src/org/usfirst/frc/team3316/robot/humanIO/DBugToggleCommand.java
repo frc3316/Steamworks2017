@@ -18,29 +18,15 @@ public class DBugToggleCommand extends DBugCommand {
 		this.cmd2 = cmd2;
 	}
 
-	public DBugToggleCommand(Command cmd) {
-		this.cmd1 = cmd;
-	}
-
 	protected void init() {
-		if (cmd2 != null) {
-			if (toggle) {
-				toggle = false;
-				cmd2.start();
-			} else {
-				toggle = true;
-				cmd1.start();
-			}
-		}
-		else
-		{
-			if (toggle) {
-				toggle = false;
-				cmd1.cancel();
-			} else {
-				toggle = true;
-				cmd1.start();
-			}
+		if (toggle) {
+			toggle = false;
+			cmd1.cancel();
+			cmd2.start();
+		} else {
+			toggle = true;
+			cmd2.cancel();
+			cmd1.start();
 		}
 	}
 

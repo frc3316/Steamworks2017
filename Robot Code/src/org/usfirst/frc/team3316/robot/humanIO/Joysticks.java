@@ -4,6 +4,7 @@
 package org.usfirst.frc.team3316.robot.humanIO;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.commands.intake.IntakeEmptyCommand;
 import org.usfirst.frc.team3316.robot.commands.intake.MoveIntake;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
@@ -61,6 +62,6 @@ public class Joysticks
 		// TODO: Add buttons after creating subsystems
 		
 		DBugJoystickButton toggleIntakeBtn = new DBugJoystickButton(joystickOperator, "button_Intake_Toggle");
-		toggleIntakeBtn.whenPressed(new DBugToggleCommand(new MoveIntake()));
+		toggleIntakeBtn.whenPressed(new DBugToggleCommand(new MoveIntake(), new IntakeEmptyCommand()));
 	}
 }
