@@ -163,6 +163,8 @@ public class Config
 			 */
 			{
 				addToVariables("chassis_TankDrive_DeadBand", 0.05);
+				
+				addToVariables("chassis_Axis_Sensitivity", 0.5);
 
 				addToVariables("chassis_TankDrive_InvertX", false);
 				addToVariables("chassis_TankDrive_InvertY", true);

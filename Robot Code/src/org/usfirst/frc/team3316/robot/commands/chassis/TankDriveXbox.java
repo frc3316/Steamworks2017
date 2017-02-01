@@ -4,8 +4,7 @@ import org.usfirst.frc.team3316.robot.Robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 
-public class TankDriveXbox extends Drive
-{
+public class TankDriveXbox extends Drive {
 	// TODO: Add commenting
 
 	protected static Joystick joystickLeft, joystickRight, joystickOperator;
@@ -14,79 +13,66 @@ public class TankDriveXbox extends Drive
 
 	static double deadBand = 0.0;
 
-	public TankDriveXbox()
-	{
+	public TankDriveXbox() {
 		super();
 		joystickLeft = Robot.joysticks.joystickLeft;
 		joystickRight = Robot.joysticks.joystickRight;
 		joystickOperator = Robot.joysticks.joystickOperator;
 	}
 
-	protected void set()
-	{
-		left = getLeftY();
-		right = getRightY();
+	protected void set() {
+		left = getLeftY() * (double) Robot.config.get("chassis_Axis_Sensitivity");
+		right = getRightY() * (double) Robot.config.get("chassis_Axis_Sensitivity");
 	}
 
-	protected static double getLeftY()
-	{
+	protected static double getLeftY() {
 		updateConfigVariables();
 		double y = deadBand(joystickOperator.getRawAxis(1));
-		if (invertY)
-		{
+		if (invertY) {
 			return -y;
 		}
 		return y;
 	}
 
-	protected static double getLeftX()
-	{
+	protected static double getLeftX() {
 		updateConfigVariables();
 		double x = deadBand(joystickLeft.getX());
-		if (invertX)
-		{
+		if (invertX) {
 			return -x;
 		}
 		return x;
 	}
 
-	protected static double getRightY()
-	{
+	protected static double getRightY() {
 		updateConfigVariables();
 		double y = deadBand(joystickOperator.getRawAxis(3));
-		if (invertY)
-		{
+		if (invertY) {
 			return -y;
 		}
 		return y;
 	}
 
-	protected static double getRightX()
-	{
+	protected static double getRightX() {
 		updateConfigVariables();
 		double x = deadBand(joystickRight.getX());
-		if (invertX)
-		{
+		if (invertX) {
 			return -x;
 		}
 		return x;
 	}
 
-	private static double deadBand(double x)
-	{
-		if (Math.abs(x) < deadBand)
-		{
+	private static double deadBand(double x) {
+		if (Math.abs(x) < deadBand) {
 			return 0;
 		}
 		return x;
 	}
 
 	/*
-	 * Here we call the get method of the config every execute because we want the variables to update without
-	 * needing to cancel the commands.
+	 * Here we call the get method of the config every execute because we want
+	 * the variables to update without needing to cancel the commands.
 	 */
-	private static void updateConfigVariables()
-	{
+	private static void updateConfigVariables() {
 		deadBand = (double) config.get("chassis_TankDrive_DeadBand");
 
 		invertX = (boolean) config.get("chassis_TankDrive_InvertX");

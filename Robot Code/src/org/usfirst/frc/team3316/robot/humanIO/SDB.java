@@ -18,22 +18,18 @@ import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class SDB
-{
+public class SDB {
 	/*
 	 * Runnable that periodically updates values from the robot into the
 	 * SmartDashboard This is the place where all of the robot data should be
 	 * displayed from
 	 */
-	private class UpdateSDBTask extends TimerTask
-	{
-		public UpdateSDBTask()
-		{
+	private class UpdateSDBTask extends TimerTask {
+		public UpdateSDBTask() {
 			logger.info("Created UpdateSDBTask");
 		}
 
-		public void run()
-		{
+		public void run() {
 			/*
 			 * Insert put methods here
 			 */
@@ -42,23 +38,19 @@ public class SDB
 			// TODO: Add "for-drivers" indications
 		}
 
-		private void put(String name, double d)
-		{
+		private void put(String name, double d) {
 			SmartDashboard.putNumber(name, d);
 		}
 
-		private void put(String name, int i)
-		{
+		private void put(String name, int i) {
 			SmartDashboard.putNumber(name, i);
 		}
 
-		private void put(String name, boolean b)
-		{
+		private void put(String name, boolean b) {
 			SmartDashboard.putBoolean(name, b);
 		}
 
-		private void put(String name, String s)
-		{
+		private void put(String name, String s) {
 			SmartDashboard.putString(name, s);
 		}
 	}
@@ -72,17 +64,15 @@ public class SDB
 
 	private CameraServer server;
 
-	public SDB()
-	{
+	public SDB() {
 		variablesInSDB = new Hashtable<String, Class<?>>();
-		
+
 		initLiveWindow();
 		initSDB();
 		// initDriverCamera();
 	}
 
-	public void timerInit()
-	{
+	public void timerInit() {
 		updateSDBTask = new UpdateSDBTask();
 		Robot.timer.schedule(updateSDBTask, 0, 10);
 	}
@@ -94,36 +84,26 @@ public class SDB
 	 *            the key required
 	 * @return whether the value was put in the SmartDashboard
 	 */
-	public boolean putConfigVariableInSDB(String key)
-	{
+	public boolean putConfigVariableInSDB(String key) {
 		Object value = config.get(key);
-		if (value != null)
-		{
+		if (value != null) {
 			Class<?> type = value.getClass();
 
 			boolean constant = Character.isUpperCase(key.codePointAt(0))
 					&& Character.isUpperCase(key.codePointAt(key.length() - 1));
 
-			if (type == Double.class)
-			{
+			if (type == Double.class) {
 				SmartDashboard.putNumber(key, (double) value);
-			}
-			else if (type == Integer.class)
-			{
+			} else if (type == Integer.class) {
 				SmartDashboard.putNumber(key, (int) value);
-			}
-			else if (type == Boolean.class)
-			{
+			} else if (type == Boolean.class) {
 				SmartDashboard.putBoolean(key, (boolean) value);
 			}
 
-			if (!constant)
-			{
+			if (!constant) {
 				variablesInSDB.put(key, type);
 				logger.info("Added to SDB " + key + " of type " + type + " and allows for its modification");
-			}
-			else
-			{
+			} else {
 				logger.info("Added to SDB " + key + " of type " + type + " BUT DOES NOT ALLOW for its modification");
 			}
 
@@ -133,27 +113,27 @@ public class SDB
 		return false;
 	}
 
-	public Set<Entry<String, Class<?>>> getVariablesInSDB()
-	{
+	public Set<Entry<String, Class<?>>> getVariablesInSDB() {
 		return variablesInSDB.entrySet();
 	}
 
-	private void initSDB()
-	{
+	private void initSDB() {
 		System.out.println("SDB is running");
 		logger.info("SDB is running");
-		
+
 		SmartDashboard.putData(new UpdateVariablesInConfig()); // NEVER REMOVE
 																// THIS COMMAND
-		
+
 		SmartDashboard.putData(new StartCompressor());
 		SmartDashboard.putData(new StopCompressor());
-		
+
+		// Chassis
+
+		putConfigVariableInSDB("chassis_Axis_Sensitivity");
 		// Intake
-		
+
 		putConfigVariableInSDB("intake_MoveIntake_V");
-		
-		
+
 		logger.info("Finished initSDB()");
 	}
 
@@ -161,8 +141,7 @@ public class SDB
 	 * This method puts in the live window of the test mode all of the robot's
 	 * actuators and sensors. It is disgusting.
 	 */
-	public void initLiveWindow()
-	{
-//		logger.info("Finished initLiveWindow()");
+	public void initLiveWindow() {
+		// logger.info("Finished initLiveWindow()");
 	}
 }
