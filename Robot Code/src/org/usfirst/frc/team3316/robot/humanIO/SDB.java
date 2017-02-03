@@ -130,6 +130,9 @@ public class SDB {
 		// Chassis
 
 		putConfigVariableInSDB("chassis_Axis_Sensitivity");
+		putConfigVariableInSDB("chassis_Joystick_Left_Axis");
+		putConfigVariableInSDB("chassis_Joystick_Right_Axis");
+		
 		// Intake
 
 		putConfigVariableInSDB("intake_MoveIntake_V");

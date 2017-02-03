@@ -21,13 +21,13 @@ public class TankDriveXbox extends Drive {
 	}
 
 	protected void set() {
-		left = getLeftY() * (double) Robot.config.get("chassis_Axis_Sensitivity");
-		right = getRightY() * (double) Robot.config.get("chassis_Axis_Sensitivity");
+		right = getLeftY() * (double) Robot.config.get("chassis_Axis_Sensitivity");
+		left = getRightY() * (double) Robot.config.get("chassis_Axis_Sensitivity");
 	}
 
 	protected static double getLeftY() {
 		updateConfigVariables();
-		double y = deadBand(joystickOperator.getRawAxis(1));
+		double y = deadBand(joystickOperator.getRawAxis((int) config.get("chassis_Joystick_Left_Axis")));
 		if (invertY) {
 			return -y;
 		}
@@ -45,7 +45,7 @@ public class TankDriveXbox extends Drive {
 
 	protected static double getRightY() {
 		updateConfigVariables();
-		double y = deadBand(joystickOperator.getRawAxis(3));
+		double y = deadBand(joystickOperator.getRawAxis((int) config.get("chassis_Joystick_Right_Axis")));
 		if (invertY) {
 			return -y;
 		}
