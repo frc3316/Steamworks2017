@@ -17,15 +17,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class DriveDistance extends DBugCommand
 {
 
-	private double dist, initTime = 0, initDistance = 0;
+	private double dist, initDistance = 0;
 	private PIDController pid;
-	private PlannedMotion motion;
 
 	public DriveDistance(double distance)
 	{
 		requires(Robot.chassis);
 		this.dist = distance;
-		motion = MotionPlanner.planMotion(dist);
 		initPID();
 	}
 
@@ -79,7 +77,6 @@ public class DriveDistance extends DBugCommand
 
 		pid.setSetpoint(dist);
 
-		initTime = Timer.getFPGATimestamp();
 		initDistance = Robot.chassis.getDistance();
 
 		pid.enable();

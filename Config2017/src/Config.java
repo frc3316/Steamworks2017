@@ -188,18 +188,18 @@ public class Config
 			 */
 			{
 				// PID
-				addToVariables("chassis_DriveByCamera_PID_KP", 0.0);
-				addToVariables("chassis_DriveByCamera_PID_KI", 0.0);
-				addToVariables("chassis_DriveByCamera_PID_KD", 0.0);
-
-				addToVariables("chassis_DriveDistance_KV", 0.5);
-
-				addToVariables("chassis_DriveDistance_PID_Tolerance", 0.01);
-				addToVariables("chassis_DriveDistance_PID_Setpoint", 0.0);
-				
-				addToVariables("chassis_DriveDistance_PID_KP", 0.0);
-				addToVariables("chassis_DriveDistance_PID_KI", 0.0);
-				addToVariables("chassis_DriveDistance_PID_KD", 0.0);
+					// BY CAMERA
+					addToVariables("chassis_DriveByCamera_PID_KP", 0.0);
+					addToVariables("chassis_DriveByCamera_PID_KI", 0.0);
+					addToVariables("chassis_DriveByCamera_PID_KD", 0.0);
+					
+					// BY ENCODERS
+					addToVariables("chassis_DriveDistance_PID_Tolerance", 0.01);
+					addToVariables("chassis_DriveDistance_PID_Setpoint", 0.0);
+					
+					addToVariables("chassis_DriveDistance_PID_KP", 0.0);
+					addToVariables("chassis_DriveDistance_PID_KI", 0.0);
+					addToVariables("chassis_DriveDistance_PID_KD", 0.0);
 			}
 			
 			/*
