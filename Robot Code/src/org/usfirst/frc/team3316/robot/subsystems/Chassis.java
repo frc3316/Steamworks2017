@@ -106,6 +106,13 @@ public class Chassis extends DBugSubsystem
 		}
 		return toReturn;
 	}
+	
+	public void setBrake(boolean breakMode) {
+		Robot.actuators.chassisLeft1.switchToBrake(breakMode);
+		Robot.actuators.chassisLeft2.switchToBrake(breakMode);
+		Robot.actuators.chassisRight1.switchToBrake(breakMode);
+		Robot.actuators.chassisRight2.switchToBrake(breakMode);
+	}
 
 //	/*
 //	 * Encoder Methods

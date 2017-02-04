@@ -3,6 +3,7 @@ package org.usfirst.frc.team3316.robot.commands.chassis;
 import org.usfirst.frc.team3316.robot.Robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Joystick.ButtonType;
 
 public class TankDriveXbox extends Drive {
 	// TODO: Add commenting
@@ -10,17 +11,29 @@ public class TankDriveXbox extends Drive {
 	protected static Joystick joystickLeft, joystickRight, joystickOperator;
 
 	static boolean invertY, invertX;
-
-	static double deadBand = 0.0;
+	
+	static double deadBand = 0.0, speedFactor;
 
 	public TankDriveXbox() {
 		super();
 		joystickLeft = Robot.joysticks.joystickLeft;
 		joystickRight = Robot.joysticks.joystickRight;
 		joystickOperator = Robot.joysticks.joystickOperator;
+		
+		speedFactor = (double) config.get("chassis_SpeedFactor_Medium");
 	}
 
-	protected void set() {
+	protected void set() {		
+		if (Robot.joysticks.lowerSpeedBtn.get()) {
+			speedFactor = (double) config.get("chassis_SpeedFactor_Medium");
+		}
+		else if (Robot.joysticks.higherSpeedBtn.get()) {
+			speedFactor = (double) config.get("chassis_SpeedFactor_Higher");
+		}
+		else {
+			speedFactor = (double) config.get("chassis_SpeedFactor_Medium");
+		}
+		
 		right = getLeftY() * (double) Robot.config.get("chassis_Axis_Sensitivity");
 		left = getRightY() * (double) Robot.config.get("chassis_Axis_Sensitivity");
 	}

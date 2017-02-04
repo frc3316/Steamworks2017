@@ -15,6 +15,8 @@ import org.usfirst.frc.team3316.robot.commands.intake.MoveIntake;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
+import com.ctre.CANTalon;
+
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -129,9 +131,11 @@ public class SDB {
 
 		// Chassis
 
-		putConfigVariableInSDB("chassis_Axis_Sensitivity");
-		putConfigVariableInSDB("chassis_Joystick_Left_Axis");
-		putConfigVariableInSDB("chassis_Joystick_Right_Axis");
+		putConfigVariableInSDB("chassis_SpeedFactor_Medium");
+		putConfigVariableInSDB("chassis_SpeedFactor_Higher");
+		putConfigVariableInSDB("chassis_SpeedFactor_Lower");
+		
+		SmartDashboard.putBoolean("Brake Mode", ((CANTalon) Robot.actuators.chassisLeft1SC).getBrakeEnableDuringNeutral());
 		
 		// Intake
 

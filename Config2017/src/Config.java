@@ -122,6 +122,10 @@ public class Config
 					// Joystick operator
 
 					addToVariables("button_Intake_Toggle", 5);
+					
+					addToVariables("button_Chassis_Break_Toggle", 1);
+					addToVariables("button_Chassis_LowerSpeed", 7);
+					addToVariables("button_Chassis_HigherSpeed", 8);
 				}
 			}
 		}
@@ -167,9 +171,9 @@ public class Config
 			{
 				addToVariables("chassis_TankDrive_DeadBand", 0.05);
 				
-				addToVariables("chassis_Axis_Sensitivity", -0.8);
-				addToVariables("chassis_Axis_Sensitivity_slow", -0.15);
-				addToVariables("chassis_Axis_Sensitivity_fast", -1.0);
+				addToVariables("chassis_SpeedFactor_Medium", -0.8);
+				addToVariables("chassis_SpeedFactor_Higher", -1.0);
+				addToVariables("chassis_SpeedFactor_Lower", -0.5);
 
 				addToVariables("chassis_TankDrive_InvertX", false);
 				addToVariables("chassis_TankDrive_InvertY", true);

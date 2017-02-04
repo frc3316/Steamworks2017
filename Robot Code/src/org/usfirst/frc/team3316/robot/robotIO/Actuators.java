@@ -120,7 +120,7 @@ public class Actuators
 	}
 	
 	/*
-	 * Intake
+	 * Climbing
 	 */
 	private void ClimbingActuatorsA()
 	{
