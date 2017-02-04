@@ -1,8 +1,6 @@
 
 import java.util.Hashtable;
 
-import javax.xml.ws.soap.AddressingFeature;
-
 public class Config 
 {
 	public static Hashtable<String, Object> variablesB;
@@ -121,7 +119,15 @@ public class Config
 				/*
 				 * Buttons
 				 */
-				{}
+				{
+					// Joystick operator
+
+					addToVariables("button_Intake_Toggle", 5);
+					
+					addToVariables("button_Chassis_Break_Toggle", 1);
+					addToVariables("button_Chassis_LowerSpeed", 7);
+					addToVariables("button_Chassis_HigherSpeed", 8);
+				}
 			}
 		}
 
@@ -140,8 +146,17 @@ public class Config
 				 */				
 				addToConstantsA("CHASSIS_MOTOR_LEFT_REVERSE", false);
 				addToConstantsA("CHASSIS_MOTOR_RIGHT_REVERSE", true);
+				
 				addToConstants("CHASSIS_LEFT_ENCODER_REVERSE", true);
 				addToConstants("CHASSIS_RIGHT_ENCODER_REVERSE", false);
+				
+				addToVariables("chassis_Joystick_Right_Axis", 5);
+				addToVariables("chassis_Joystick_Left_Axis", 1);
+				
+				/*
+				 * Intake
+				 */
+				addToConstantsA("INTAKE_MOTOR_REVERSE", false);
 			}
 		}
 
@@ -159,6 +174,10 @@ public class Config
 			 */
 			{
 				addToVariables("chassis_TankDrive_DeadBand", 0.05);
+				
+				addToVariables("chassis_SpeedFactor_Medium", -0.8);
+				addToVariables("chassis_SpeedFactor_Higher", -1.0);
+				addToVariables("chassis_SpeedFactor_Lower", -0.5);
 
 				addToVariables("chassis_TankDrive_InvertX", false);
 				addToVariables("chassis_TankDrive_InvertY", true);
@@ -197,6 +216,23 @@ public class Config
 				addToVariables("chassis_SetConstantVoltage_Voltage", 0.0);
 			}
 
+		}
+		
+		/*
+		 * Intake
+		 */
+		{
+			/*
+			 * Constants
+			 */
+			{}
+
+			/*
+			 * Variables
+			 */
+			{
+				addToVariables("intake_MoveIntake_V", -0.75);
+			}
 		}
 	}
 }

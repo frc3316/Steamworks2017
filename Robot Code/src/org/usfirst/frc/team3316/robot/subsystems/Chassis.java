@@ -2,6 +2,7 @@ package org.usfirst.frc.team3316.robot.subsystems;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.chassis.TankDrive;
+import org.usfirst.frc.team3316.robot.commands.chassis.TankDriveXbox;
 import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 
 import com.kauailabs.navx.frc.AHRS;
@@ -13,9 +14,7 @@ public class Chassis extends DBugSubsystem
 {
 	// Actuators
 	private DBugSpeedController leftMotor1, rightMotor2, leftMotor2, rightMotor1;
-
-	// private DoubleSolenoid longPistons, shortPistonsLeft, shortPistonsRight;
-
+	
 	// Sensors
 	private AHRS navx; // For the navX
 
@@ -45,7 +44,7 @@ public class Chassis extends DBugSubsystem
 
 	public void initDefaultCommand()
 	{
-		setDefaultCommand(new TankDrive());
+		setDefaultCommand(new TankDriveXbox());
 	}
 
 	/*
@@ -63,6 +62,7 @@ public class Chassis extends DBugSubsystem
 	}
 
 	/*
+<<<<<<< HEAD
 	 * Piston methods
 	 */
 	// public boolean openLongPistons()
@@ -169,6 +169,8 @@ public class Chassis extends DBugSubsystem
 	// }
 
 	/*
+=======
+>>>>>>> chassis
 	 * Methods related to NavX angle
 	 */
 
@@ -213,6 +215,13 @@ public class Chassis extends DBugSubsystem
 			toReturn -= 360;
 		}
 		return toReturn;
+	}
+	
+	public void setBrake(boolean breakMode) {
+		Robot.actuators.chassisLeft1.switchToBrake(breakMode);
+		Robot.actuators.chassisLeft2.switchToBrake(breakMode);
+		Robot.actuators.chassisRight1.switchToBrake(breakMode);
+		Robot.actuators.chassisRight2.switchToBrake(breakMode);
 	}
 
 	/*

@@ -11,6 +11,7 @@ import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 import org.usfirst.frc.team3316.robot.robotIO.Actuators;
 import org.usfirst.frc.team3316.robot.robotIO.Sensors;
 import org.usfirst.frc.team3316.robot.subsystems.Chassis;
+import org.usfirst.frc.team3316.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -26,8 +27,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
-public class Robot extends IterativeRobot
-{
+public class Robot extends IterativeRobot {
 	public static Config config;
 	public static DBugLogger logger;
 	public static Timer timer;
@@ -46,6 +46,7 @@ public class Robot extends IterativeRobot
 	 * Subsystems
 	 */
 	public static Chassis chassis;
+	public static Intake intake;
 
 	Command autonomousCommand;
 	SendableChooser<DBugCommand> autonChooser;
@@ -54,131 +55,76 @@ public class Robot extends IterativeRobot
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
-	public void robotInit()
-	{
+	public void robotInit() {
 		/*
 		 * Above all else
 		 */
-		try
-		{
-		logger = new DBugLogger();
-		timer = new Timer();
-		config = new Config();
+		try {
+			logger = new DBugLogger();
+			timer = new Timer();
+			config = new Config();
 
-		/*
-		 * Human IO (that does not require subsystems)
-		 */
-		joysticks = new Joysticks();
+			/*
+			 * Human IO (that does not require subsystems)
+			 */
+			joysticks = new Joysticks();
+			sdb = new SDB();
 
-		/*
-		 * Robot IO
-		 */
-		actuators = new Actuators();
-		sensors = new Sensors();
+			/*
+			 * Robot IO
+			 */
+			actuators = new Actuators();
+			sensors = new Sensors();
 
-		Robot.actuators.GeneralActuators();
-		Robot.sensors.GeneralSensors();
+			Robot.actuators.GeneralActuators();
+			Robot.sensors.GeneralSensors();
 
-		/*
-		 * Subsystems
-		 */
-		chassis = new Chassis();
+			/*
+			 * Subsystems
+			 */
+			chassis = new Chassis();
+			intake = new Intake();
 
-		/*
-		 * Human IO (that requires subsystems)
-		 */
-		joysticks.initButtons();
+			/*
+			 * Human IO (that requires subsystems)
+			 */
+			joysticks.initButtons();
 
-		sdb = new SDB();
-
-		/*
-		 * Timer
-		 */
-		sdb.timerInit();
-
-		/*
-		 * La verite (turns out that apostrophes makes errors)
-		 */
-		logger.info(returnTheTruth());
-		
-		/*
-		 * Choosers
-		 */
-		autonChooser = new SendableChooser<DBugCommand>();
-		autonChooser.addDefault("Empty Auton", new DBugCommand()
-		{
-			protected boolean isFinished()
-			{
-				return false;
-			}
-			
-			protected void interr()
-			{
-			}
-			
-			protected void init()
-			{
-			}
-			
-			protected void fin()
-			{
-			}
-			
-			protected void execute()
-			{
-			}
-		});
-		SmartDashboard.putData("Auton Chooser", autonChooser);
-		}
-		catch (Exception e)
-		{
+			/*
+			 * Timer
+			 */
+			sdb.timerInit();
+		} catch (Exception e) {
 			logger.severe(e);
 		}
 	}
 
-	public void disabledInit()
-	{
+	public void disabledInit() {
 
 	}
 
-	public void disabledPeriodic()
-	{
+	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 	}
 
-	public void autonomousInit()
-	{
-		if ((autonChooser.getSelected()) != null)
-			((Command) autonChooser.getSelected()).start();
+	public void autonomousInit() {
 	}
 
-	public void autonomousPeriodic()
-	{
+	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 	}
 
-	public void teleopInit()
-	{
-		if ((autonChooser.getSelected()) != null)
-			((Command) autonChooser.getSelected()).cancel();
+	public void teleopInit() {
 	}
 
-	public void teleopPeriodic()
-	{
+	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 	}
 
-	public void testIniwt()
-	{
+	public void testIniwt() {
 	}
 
-	public void testPeriodic()
-	{
+	public void testPeriodic() {
 		LiveWindow.run();
-	}
-
-	private String returnTheTruth()
-	{
-		return "Vita is the Melech!!";
 	}
 }

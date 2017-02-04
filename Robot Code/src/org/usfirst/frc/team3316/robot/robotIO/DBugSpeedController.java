@@ -89,6 +89,9 @@ public class DBugSpeedController
 	{
 		if (!isSetLimit || getCurrent() < maxCurrent)
 		{
+			v = Math.max(v, -1.0);
+			v = Math.min(v, 1.0);
+			
 			sc.set(v);
 			return true;
 		}
@@ -121,5 +124,11 @@ public class DBugSpeedController
 			return sc.get();
 		}
 
+	}
+	
+	public void switchToBrake(boolean breakMode) {
+		if (sc instanceof CANTalon) {
+			((CANTalon) sc).enableBrakeMode(breakMode);
+		}
 	}
 }

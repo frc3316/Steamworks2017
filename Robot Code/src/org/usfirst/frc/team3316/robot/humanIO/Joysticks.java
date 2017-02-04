@@ -4,6 +4,8 @@
 package org.usfirst.frc.team3316.robot.humanIO;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.commands.chassis.BrakeMode;
+import org.usfirst.frc.team3316.robot.commands.intake.MoveIntake;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
@@ -40,6 +42,7 @@ public class Joysticks
 	DBugLogger logger = Robot.logger;
 
 	public Joystick joystickLeft, joystickRight, joystickOperator;
+	public DBugJoystickButton lowerSpeedBtn, higherSpeedBtn;
 
 	/**
 	 * Initializes the joysticks.
@@ -58,5 +61,14 @@ public class Joysticks
 	public void initButtons()
 	{
 		// TODO: Add buttons after creating subsystems
+		
+		DBugJoystickButton toggleIntakeBtn = new DBugJoystickButton(joystickOperator, "button_Intake_Toggle");
+		toggleIntakeBtn.whenPressed(new DBugToggleCommand(new MoveIntake()));
+		
+		DBugJoystickButton toggleChassisBrakeMode = new DBugJoystickButton(joystickOperator, "button_Chassis_Break_Toggle");
+		toggleChassisBrakeMode.whenPressed(new DBugToggleCommand(new BrakeMode()));
+		
+		lowerSpeedBtn = new DBugJoystickButton(joystickOperator, "button_Chassis_LowerSpeed");
+		higherSpeedBtn = new DBugJoystickButton(joystickOperator, "button_Chassis_HigherSpeed");
 	}
 }
