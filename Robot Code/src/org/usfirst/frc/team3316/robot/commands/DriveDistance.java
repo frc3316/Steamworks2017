@@ -3,6 +3,8 @@ package org.usfirst.frc.team3316.robot.commands;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.chassis.motion.MotionPlanner;
 import org.usfirst.frc.team3316.robot.chassis.motion.PlannedMotion;
+import org.usfirst.frc.team3316.robot.commands.chassis.BrakeMode;
+import org.usfirst.frc.team3316.robot.commands.chassis.CoastMode;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
@@ -54,6 +56,8 @@ public class DriveDistance extends DBugCommand {
 
 	// Called just before this Command runs the first time
 	protected void init() {
+		Robot.chassis.setBrake(true);
+		
 		pid.setOutputRange(-1, 1);
 
 		pid.setAbsoluteTolerance((double) config.get("chassis_DriveDistance_PID_Tolerance"));

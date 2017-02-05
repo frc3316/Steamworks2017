@@ -16,6 +16,9 @@ public class TankDriveXbox extends Drive {
 
 	public TankDriveXbox() {
 		super();
+		
+		(new CoastMode()).start();
+		
 		joystickLeft = Robot.joysticks.joystickLeft;
 		joystickRight = Robot.joysticks.joystickRight;
 		joystickOperator = Robot.joysticks.joystickOperator;

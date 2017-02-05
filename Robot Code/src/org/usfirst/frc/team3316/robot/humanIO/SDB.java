@@ -146,6 +146,7 @@ public class SDB {
 			putConfigVariableInSDB("chassis_DriveDistance_PID_KI");
 			putConfigVariableInSDB("chassis_DriveDistance_PID_KD");
 			
+			SmartDashboard.putData("Drive 0.5 meter", new DriveDistance(0.5));
 			SmartDashboard.putData("Drive 1 meter", new DriveDistance(1.0));
 			SmartDashboard.putData("Drive 3 meter", new DriveDistance(3.0));
 		

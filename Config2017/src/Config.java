@@ -147,8 +147,8 @@ public class Config
 				addToConstantsA("CHASSIS_MOTOR_LEFT_REVERSE", false);
 				addToConstantsA("CHASSIS_MOTOR_RIGHT_REVERSE", true);
 				
-				addToConstants("CHASSIS_LEFT_ENCODER_REVERSE", true);
-				addToConstants("CHASSIS_RIGHT_ENCODER_REVERSE", false);
+				addToConstants("CHASSIS_LEFT_ENCODER_REVERSE", false);
+				addToConstants("CHASSIS_RIGHT_ENCODER_REVERSE", true);
 				
 				addToConstants("CHASSIS_ENCODERS_DISTANCE_PER_PULSE", 0.00124224); // in meters
 				
@@ -199,8 +199,8 @@ public class Config
 					addToVariables("chassis_DriveDistance_PID_Tolerance", 0.01);
 					addToVariables("chassis_DriveDistance_PID_Setpoint", 0.0);
 					
-					addToVariables("chassis_DriveDistance_PID_KP", 0.0);
-					addToVariables("chassis_DriveDistance_PID_KI", 0.0);
+					addToVariables("chassis_DriveDistance_PID_KP", 250.0);
+					addToVariables("chassis_DriveDistance_PID_KI", 2.5);
 					addToVariables("chassis_DriveDistance_PID_KD", 0.0);
 			}
 			

@@ -4,6 +4,7 @@ package org.usfirst.frc.team3316.robot;
 import java.util.Timer;
 
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
+import org.usfirst.frc.team3316.robot.commands.chassis.CoastMode;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.humanIO.Joysticks;
 import org.usfirst.frc.team3316.robot.humanIO.SDB;
@@ -100,11 +101,13 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void disabledInit() {
-
+		chassis.setBrake(false);
 	}
 
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		
+		chassis.setBrake(false);
 	}
 
 	public void autonomousInit() {
@@ -121,7 +124,7 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 	}
 
-	public void testIniwt() {
+	public void testInit() {
 	}
 
 	public void testPeriodic() {
