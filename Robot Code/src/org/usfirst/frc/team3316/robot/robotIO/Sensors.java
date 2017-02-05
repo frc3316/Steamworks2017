@@ -15,8 +15,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SPI;
 
-public class Sensors
-{
+public class Sensors {
 	Config config = Robot.config;
 	DBugLogger logger = Robot.logger;
 
@@ -25,35 +24,32 @@ public class Sensors
 	// Chassis
 	public AHRS navx;
 
-	public Encoder chassisLeftEncoder,chassisRightEncoder;
-	
-	public Sensors()
-	{
+	public Encoder chassisLeftEncoder, chassisRightEncoder;
+
+	public Sensors() {
 	}
 
 	/*
 	 * General
 	 */
-	public void GeneralSensors()
-	{
+	public void GeneralSensors() {
 		pdp = new PowerDistributionPanel();
 	}
 
 	/*
 	 * Chassis
 	 */
-	public void ChassisSensors()
-	{
-		try
-		{
+	public void ChassisSensors() {
+		try {
 			navx = new AHRS(SPI.Port.kMXP);
+		} catch (RuntimeException ex) {
+			DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
 		}
-		catch (RuntimeException ex)
-		{
-			DriverStation.reportError(
-					"Error instantiating navX MXP:  " + ex.getMessage(), true);
-		}
-		chassisLeftEncoder = new Encoder((int) config.get("CHASSIS_LEFT_ENCODER_CHANNEL_A"),(int) config.get("CHASSIS_LEFT_ENCODER_CHANNEL_B"),(boolean) config.get("CHASSIS_LEFT_ENCODER_REVERSE"), EncodingType.k4X);
-		chassisRightEncoder = new Encoder((int) config.get("CHASSIS_RIGHT_ENCODER_CHANNEL_A"),(int) config.get("CHASSIS_RIGHT_ENCODER_CHANNEL_B"),(boolean) config.get("CHASSIS_RIGHT_ENCODER_REVERSE"), EncodingType.k4X);
+		chassisLeftEncoder = new Encoder((int) config.get("CHASSIS_LEFT_ENCODER_CHANNEL_A"),
+				(int) config.get("CHASSIS_LEFT_ENCODER_CHANNEL_B"),
+				(boolean) config.get("CHASSIS_LEFT_ENCODER_REVERSE"), EncodingType.k4X);
+		chassisRightEncoder = new Encoder((int) config.get("CHASSIS_RIGHT_ENCODER_CHANNEL_A"),
+				(int) config.get("CHASSIS_RIGHT_ENCODER_CHANNEL_B"),
+				(boolean) config.get("CHASSIS_RIGHT_ENCODER_REVERSE"), EncodingType.k4X);
 	}
 }

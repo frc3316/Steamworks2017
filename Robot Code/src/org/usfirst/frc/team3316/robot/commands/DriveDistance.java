@@ -14,30 +14,24 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class DriveDistance extends DBugCommand
-{
+public class DriveDistance extends DBugCommand {
 
 	private double dist, initDistance = 0;
 	private PIDController pid;
 
-	public DriveDistance(double distance)
-	{
+	public DriveDistance(double distance) {
 		requires(Robot.chassis);
 		this.dist = distance;
 		initPID();
 	}
 
-	private void initPID()
-	{
-		pid = new PIDController(0, 0, 0, new PIDSource()
-		{
-			public void setPIDSourceType(PIDSourceType pidSource)
-			{
+	private void initPID() {
+		pid = new PIDController(0, 0, 0, new PIDSource() {
+			public void setPIDSourceType(PIDSourceType pidSource) {
 				return;
 			}
 
-			public double pidGet()
-			{
+			public double pidGet() {
 				double currentDist = Robot.chassis.getDistance() - initDistance;
 
 				// REMOVE AFTER TESTINGS
@@ -46,27 +40,20 @@ public class DriveDistance extends DBugCommand
 				return currentDist;
 			}
 
-			public PIDSourceType getPIDSourceType()
-			{
+			public PIDSourceType getPIDSourceType() {
 				return PIDSourceType.kDisplacement;
 			}
-		}, new PIDOutput()
-		{
+		}, new PIDOutput() {
 
-			public void pidWrite(double output)
-			{
-				double currentTime = Timer.getFPGATimestamp() - initTime;
-				double profileVelocity = motion.getVelocity(currentTime);
-
-				double velocity = output + profileVelocity * (double) config.get("chassis_DriveDistance_KV");
+			public void pidWrite(double output) {
+				double velocity = output;
 				Robot.chassis.setMotors(velocity, velocity);
 			}
 		}, 0.02);
 	}
 
 	// Called just before this Command runs the first time
-	protected void init()
-	{
+	protected void init() {
 		pid.setOutputRange(-1, 1);
 
 		pid.setAbsoluteTolerance((double) config.get("chassis_DriveDistance_PID_Tolerance"));
@@ -83,20 +70,16 @@ public class DriveDistance extends DBugCommand
 	}
 
 	// Called repeatedly when this Command is scheduled to run
-	protected void execute()
-	{
+	protected void execute() {
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
-	protected boolean isFinished()
-	{
-		double measuredspeed = Robot.chassis.getLeftSpeed() + Robot.chassis.getRightSpeed();
-		return measuredspeed == 0 && pid.onTarget();
+	protected boolean isFinished() {
+		return pid.onTarget();
 	}
 
 	// Called once after isFinished returns true
-	protected void fin()
-	{
+	protected void fin() {
 		pid.reset();
 		pid.disable();
 		Robot.chassis.setMotors(0, 0);
@@ -104,8 +87,7 @@ public class DriveDistance extends DBugCommand
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
-	protected void interr()
-	{
+	protected void interr() {
 		fin();
 	}
 }
