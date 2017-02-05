@@ -39,6 +39,8 @@ public class SDB {
 			put("Left Distance", Robot.chassis.getLeftDistance());
 			put("Right Distance", Robot.chassis.getRightDistance());
 			
+			SmartDashboard.putBoolean("Brake Mode", ((CANTalon) Robot.actuators.chassisLeft1SC).getBrakeEnableDuringNeutral());
+			
 			// For drivers
 			// TODO: Add "for-drivers" indications
 		}
@@ -137,8 +139,6 @@ public class SDB {
 		putConfigVariableInSDB("chassis_SpeedFactor_Medium");
 		putConfigVariableInSDB("chassis_SpeedFactor_Higher");
 		putConfigVariableInSDB("chassis_SpeedFactor_Lower");
-		
-		SmartDashboard.putBoolean("Brake Mode", ((CANTalon) Robot.actuators.chassisLeft1SC).getBrakeEnableDuringNeutral());
 		
 			// Drive-Distance PID
 			putConfigVariableInSDB("chassis_DriveDistance_PID_Tolerance");

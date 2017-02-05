@@ -150,6 +150,8 @@ public class Config
 				addToConstants("CHASSIS_LEFT_ENCODER_REVERSE", true);
 				addToConstants("CHASSIS_RIGHT_ENCODER_REVERSE", false);
 				
+				addToConstants("CHASSIS_ENCODERS_DISTANCE_PER_PULSE", 0.00124224); // in meters
+				
 				addToVariables("chassis_Joystick_Right_Axis", 5);
 				addToVariables("chassis_Joystick_Left_Axis", 1);
 				

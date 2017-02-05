@@ -48,7 +48,7 @@ public class DBugToggleCommand extends DBugCommand {
 	}
 
 	protected boolean isFinished() {
-		return (!cmd1.isRunning() && !cmd2.isRunning());
+		return true;
 	}
 
 	protected void fin() {

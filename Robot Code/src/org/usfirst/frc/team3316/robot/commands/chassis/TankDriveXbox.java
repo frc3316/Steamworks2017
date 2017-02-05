@@ -34,8 +34,8 @@ public class TankDriveXbox extends Drive {
 			speedFactor = (double) config.get("chassis_SpeedFactor_Medium");
 		}
 		
-		right = getLeftY() * (double) Robot.config.get("chassis_Axis_Sensitivity");
-		left = getRightY() * (double) Robot.config.get("chassis_Axis_Sensitivity");
+		right = getLeftY() * speedFactor;
+		left = getRightY() * speedFactor;
 	}
 
 	protected static double getLeftY() {

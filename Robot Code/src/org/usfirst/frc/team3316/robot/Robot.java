@@ -65,12 +65,6 @@ public class Robot extends IterativeRobot {
 			config = new Config();
 
 			/*
-			 * Human IO (that does not require subsystems)
-			 */
-			joysticks = new Joysticks();
-			sdb = new SDB();
-
-			/*
 			 * Robot IO
 			 */
 			actuators = new Actuators();
@@ -84,6 +78,12 @@ public class Robot extends IterativeRobot {
 			 */
 			chassis = new Chassis();
 			intake = new Intake();
+			
+			/*
+			 * Human IO (that does not require subsystems)
+			 */
+			joysticks = new Joysticks();
+			sdb = new SDB();
 
 			/*
 			 * Human IO (that requires subsystems)
