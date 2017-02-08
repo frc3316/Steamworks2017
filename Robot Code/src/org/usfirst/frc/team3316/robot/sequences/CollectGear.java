@@ -12,5 +12,5 @@ public class CollectGear extends DBugCommandGroup {
 		addSequential(new WaitForGear());
 		addParallel(new StopIntake());
 	}
-	
+	 
 }
