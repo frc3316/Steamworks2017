@@ -124,7 +124,7 @@ public class Actuators
 	 */
 	private void ClimbingActuatorsA()
 	{
-		climbingMotorSC = new Talon((int) Robot.config.get("INTAKE_MOTOR"));
+		climbingMotorSC = new VictorSP((int) Robot.config.get("CLIMBING_MOTOR"));
 	}
 
 	private void ClimbingActuatorsB()
@@ -140,7 +140,7 @@ public class Actuators
 		{
 			ClimbingActuatorsB();
 		}
-		climbingMotor = new DBugSpeedController(intakeMotorSC, (boolean) Robot.config.get("INTAKE_MOTOR_REVERSE"),
-				(int) config.get("INTAKE_MOTOR_PDP_CHANNEL"));
+		climbingMotor = new DBugSpeedController(climbingMotorSC, (boolean) Robot.config.get("CLIMBING_MOTOR_REVERSE"),
+				(int) config.get("CLIMBING_MOTOR_PDP_CHANNEL"));
 	}
 }

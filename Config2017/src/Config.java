@@ -123,6 +123,9 @@ public class Config
 
 					addToVariables("button_Intake_Toggle", 5);
 					
+					addToVariables("button_Climbing_Toggle", 6);
+					addToVariables("button_Climbing_Toggle", 7);
+					
 					addToVariables("button_Chassis_Break_Toggle", 1);
 					addToVariables("button_Chassis_LowerSpeed", 7);
 					addToVariables("button_Chassis_HigherSpeed", 8);
@@ -153,6 +156,11 @@ public class Config
 				 * Intake
 				 */
 				addToConstantsA("INTAKE_MOTOR_REVERSE", false);
+				
+				/*
+				 * Climbing
+				 */
+				addToConstantsA("CLIMBING_MOTOR_REVERSE", false);
 			}
 		}
 
@@ -222,6 +230,24 @@ public class Config
 			 */
 			{
 				addToVariables("intake_MoveIntake_V", -0.75);
+			}
+		}
+		
+		/*
+		 * Climbing
+		 */
+		{
+			/*
+			 * Constants
+			 */
+			{}
+			
+			/*
+			 * Variables
+			 */
+			{
+				addToVariables("climbing_Up_Voltage", 0.5);
+				addToVariables("climbing_Down_Voltage", -0.5);
 			}
 		}
 	}
