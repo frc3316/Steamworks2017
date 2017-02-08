@@ -12,6 +12,7 @@ import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DriveDistance;
 import org.usfirst.frc.team3316.robot.commands.StartCompressor;
 import org.usfirst.frc.team3316.robot.commands.StopCompressor;
+import org.usfirst.frc.team3316.robot.commands.TurnByGyro;
 import org.usfirst.frc.team3316.robot.commands.intake.MoveIntake;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
@@ -36,8 +37,7 @@ public class SDB {
 			/*
 			 * Insert put methods here
 			 */
-			put("Left Distance", Robot.chassis.getLeftDistance());
-			put("Right Distance", Robot.chassis.getRightDistance());
+			put("Yaw Angle", Robot.chassis.getYaw());
 			
 			SmartDashboard.putBoolean("Brake Mode", ((CANTalon) Robot.actuators.chassisLeft1SC).getBrakeEnableDuringNeutral());
 			
@@ -140,15 +140,29 @@ public class SDB {
 		putConfigVariableInSDB("chassis_SpeedFactor_Higher");
 		putConfigVariableInSDB("chassis_SpeedFactor_Lower");
 		
-			// Drive-Distance PID
-			putConfigVariableInSDB("chassis_DriveDistance_PID_Tolerance");
-			putConfigVariableInSDB("chassis_DriveDistance_PID_KP");
-			putConfigVariableInSDB("chassis_DriveDistance_PID_KI");
-			putConfigVariableInSDB("chassis_DriveDistance_PID_KD");
+//			// Drive-Distance PID
+//			putConfigVariableInSDB("chassis_DriveDistance_PID_Tolerance");
+//			putConfigVariableInSDB("chassis_DriveDistance_PID_KP");
+//			putConfigVariableInSDB("chassis_DriveDistance_PID_KI");
+//			putConfigVariableInSDB("chassis_DriveDistance_PID_KD");
+//			
+//			SmartDashboard.putData("Drive 0.5 meter", new DriveDistance(0.5));
+//			SmartDashboard.putData("Drive 1 meter", new DriveDistance(1.0));
+//			SmartDashboard.putData("Drive 3 meter", new DriveDistance(3.0));
+		
+			// Turn-By-Gyro PID
+			putConfigVariableInSDB("chassis_TurnByGyro_PID_Tolerance");
+				
+			putConfigVariableInSDB("chassis_TurnByGyro_PID_KP");
+			putConfigVariableInSDB("chassis_TurnByGyro_PID_KI");
+			putConfigVariableInSDB("chassis_TurnByGyro_PID_KD");
 			
-			SmartDashboard.putData("Drive 0.5 meter", new DriveDistance(0.5));
-			SmartDashboard.putData("Drive 1 meter", new DriveDistance(1.0));
-			SmartDashboard.putData("Drive 3 meter", new DriveDistance(3.0));
+			SmartDashboard.putData("Turn 10 deg", new TurnByGyro(10.0));
+			SmartDashboard.putData("Turn -10 deg", new TurnByGyro(-10.0));
+			SmartDashboard.putData("Turn 45 deg", new TurnByGyro(45.0));
+			SmartDashboard.putData("Turn -45 deg", new TurnByGyro(-45.0));
+			SmartDashboard.putData("Turn 90 deg", new TurnByGyro(90.0));
+			SmartDashboard.putData("Turn -90 deg", new TurnByGyro(-90.0));
 		
 		// Intake
 

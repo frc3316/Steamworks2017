@@ -16,14 +16,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class DriveDistance extends DBugCommand {
+public class TurnByGyro extends DBugCommand {
 
-	private double dist, initDistance = 0;
+	private double angle, initAngle = 0;
 	private PIDController pid;
 
-	public DriveDistance(double distance) {
+	public TurnByGyro(double angle) {
 		requires(Robot.chassis);
-		this.dist = distance;
+		this.angle = angle;
 		initPID();
 	}
 
@@ -34,12 +34,9 @@ public class DriveDistance extends DBugCommand {
 			}
 
 			public double pidGet() {
-				double currentDist = Robot.chassis.getDistance() - initDistance;
+				double currentAngle = Robot.chassis.getYaw();
 
-				// REMOVE AFTER TESTINGS
-				SmartDashboard.putNumber("Current Distance", currentDist);
-
-				return currentDist;
+				return currentAngle;
 			}
 
 			public PIDSourceType getPIDSourceType() {
@@ -49,7 +46,7 @@ public class DriveDistance extends DBugCommand {
 
 			public void pidWrite(double output) {
 				double velocity = output;
-				Robot.chassis.setMotors(velocity, velocity);
+				Robot.chassis.setMotors(velocity, -velocity);
 			}
 		}, 0.02);
 	}
@@ -60,15 +57,25 @@ public class DriveDistance extends DBugCommand {
 		
 		pid.setOutputRange(-1, 1);
 
-		pid.setAbsoluteTolerance((double) config.get("chassis_DriveDistance_PID_Tolerance"));
+		pid.setAbsoluteTolerance((double) config.get("chassis_TurnByGyro_PID_Tolerance"));
 
-		pid.setPID((double) config.get("chassis_DriveDistance_PID_KP") / 1000,
-				(double) config.get("chassis_DriveDistance_PID_KI") / 1000,
-				(double) config.get("chassis_DriveDistance_PID_KD") / 1000);
+		pid.setPID((double) config.get("chassis_TurnByGyro_PID_KP") / 10000,
+				(double) config.get("chassis_TurnByGyro_PID_KI") / 10000,
+				(double) config.get("chassis_TurnByGyro_PID_KD") / 10000);
+		
+		initAngle = Robot.chassis.getYaw();
+		double setpoint = initAngle + angle;
+		if (Math.abs(setpoint) > 180)
+		{
+			if (setpoint > 0) {
+				setpoint -= 360.0; // Move to the other side
+			}
+			else {
+				setpoint += 360.0; // Move to the other side
+			}
+		}
 
-		pid.setSetpoint(dist - initDistance);
-
-		initDistance = Robot.chassis.getDistance();
+		pid.setSetpoint(setpoint);
 
 		pid.enable();
 	}
