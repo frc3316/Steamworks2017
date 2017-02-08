@@ -124,7 +124,7 @@ public class Config
 					addToVariables("button_Intake_Toggle", 5);
 					
 					addToVariables("button_Climbing_Toggle", 6);
-					addToVariables("button_Climbing_Toggle", 7);
+					addToVariables("button_Climbing_Toggle", 7); 
 					
 					addToVariables("button_Chassis_Break_Toggle", 1);
 					addToVariables("button_Chassis_LowerSpeed", 7);
