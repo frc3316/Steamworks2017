@@ -210,9 +210,9 @@ public class Config
 				// PID
 					addToVariables("chassis_TurnByGyro_PID_Tolerance", 1.0);
 					
-					addToVariables("chassis_TurnByGyro_PID_KP", 0.0);
-					addToVariables("chassis_TurnByGyro_PID_KI", 0.0);
-					addToVariables("chassis_TurnByGyro_PID_KD", 0.0);
+					addToVariables("chassis_TurnByGyro_PID_KP", 120.0);
+					addToVariables("chassis_TurnByGyro_PID_KI", 0.9);
+					addToVariables("chassis_TurnByGyro_PID_KD", 0.7);
 			}
 			
 			/*

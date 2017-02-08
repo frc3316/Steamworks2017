@@ -88,7 +88,7 @@ public class Chassis extends DBugSubsystem
 
 	public double getYaw()
 	{
-		return fixYaw(navx.getYaw());
+		return navx.getAngle();
 	}
 
 	// Returns the same heading in the range (-180) to (180)

@@ -34,7 +34,7 @@ public class TurnByGyro extends DBugCommand {
 			}
 
 			public double pidGet() {
-				double currentAngle = Robot.chassis.getYaw();
+				double currentAngle = Robot.chassis.getYaw() - initAngle;
 
 				return currentAngle;
 			}
@@ -62,20 +62,10 @@ public class TurnByGyro extends DBugCommand {
 		pid.setPID((double) config.get("chassis_TurnByGyro_PID_KP") / 10000,
 				(double) config.get("chassis_TurnByGyro_PID_KI") / 10000,
 				(double) config.get("chassis_TurnByGyro_PID_KD") / 10000);
+
+		pid.setSetpoint(angle);
 		
 		initAngle = Robot.chassis.getYaw();
-		double setpoint = initAngle + angle;
-		if (Math.abs(setpoint) > 180)
-		{
-			if (setpoint > 0) {
-				setpoint -= 360.0; // Move to the other side
-			}
-			else {
-				setpoint += 360.0; // Move to the other side
-			}
-		}
-
-		pid.setSetpoint(setpoint);
 
 		pid.enable();
 	}
