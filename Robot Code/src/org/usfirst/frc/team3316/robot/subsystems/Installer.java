@@ -7,39 +7,19 @@ import edu.wpi.first.wpilibj.DigitalInput;
 // TODO Find a new name for this subsystem
 public class Installer extends DBugSubsystem {
 
-    private boolean mechanismIsSet;
-    private DigitalInput gearSwitch, pegSwitch;
-
-    // TODO Finish class
+    private DigitalInput switch1, switch2;
 
     public Installer() {
-	// TODO Finish
-	gearSwitch = Robot.sensors.gearSwitch;
-	pegSwitch = Robot.sensors.pegSwitch;
+    	Robot.sensors.InstallerSensors();
+    	
+		switch1 = Robot.sensors.installerSwitch1;
+		switch2 = Robot.sensors.installerSwitch2;
     }
 
     @Override
-    public void initDefaultCommand() {
-    }
+    public void initDefaultCommand() {}
 
-    public boolean gearIsInTheRightPosition() {
-	return gearSwitch.get();
-    }
-
-    public boolean pegIsPushed() {
-	return pegSwitch.get();
-    }
-
-    public boolean isMechanismSet() {
-	return mechanismIsSet;
-    }
-
-    public void setMechanism(boolean isSet) {
-	mechanismIsSet = isSet;
-    }
-
-    // TODO Finish method
-    public boolean gearIsReadyToBeInstalled() {
-	return gearIsInTheRightPosition();
+    public boolean PegPushes() {
+    	return switch1.get() && switch2.get();
     }
 }

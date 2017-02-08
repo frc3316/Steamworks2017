@@ -227,7 +227,10 @@ public class IO
 				/*
 				 * Robot A
 				 */
-				{}
+				{
+					putPWMA("INSTALLER_SWITCH1", 5);
+					putPWMA("INSTALLER_SWITCH1", 6);
+				}
 
 				/*
 				 * Robot B

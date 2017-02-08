@@ -15,42 +15,44 @@ import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SPI;
 
 public class Sensors {
-    Config config = Robot.config;
-    DBugLogger logger = Robot.logger;
+	Config config = Robot.config;
+	DBugLogger logger = Robot.logger;
 
-    // General
-    public PowerDistributionPanel pdp;
+	// General
+	public PowerDistributionPanel pdp;
 
-    // Chassis
-    public AHRS navx;
+	// Chassis
+	public AHRS navx;
 
-    // Installer
-    public DigitalInput gearSwitch;
-    public DigitalInput pegSwitch;
+	// Installer
+	public DigitalInput installerSwitch1, installerSwitch2;
 
-    public Sensors() {
-    }
-
-    /*
-     * General
-     */
-    public void GeneralSensors() {
-	pdp = new PowerDistributionPanel();
-    }
-
-    /*
-     * Chassis
-     */
-    public void ChassisSensors() {
-	try {
-	    navx = new AHRS(SPI.Port.kMXP);
-	} catch (RuntimeException ex) {
-	    DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
+	public Sensors() {
 	}
-    }
 
-    public void InstallerSensors() {
-	gearSwitch = new DigitalInput((int) config.get("GEAR_SWITCH"));
-	pegSwitch = new DigitalInput((int) config.get("PEG_SWITCH"));
-    }
+	/*
+	 * General
+	 */
+	public void GeneralSensors() {
+		pdp = new PowerDistributionPanel();
+	}
+
+	/*
+	 * Chassis
+	 */
+	public void ChassisSensors() {
+		try {
+			navx = new AHRS(SPI.Port.kMXP);
+		} catch (RuntimeException ex) {
+			DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
+		}
+	}
+
+	/*
+	 * Installer
+	 */
+	public void InstallerSensors() {
+		installerSwitch1 = new DigitalInput((int) config.get("INSTALLER_SWITCH1"));
+		installerSwitch2 = new DigitalInput((int) config.get("INSTALLER_SWITCH2"));
+	}
 }

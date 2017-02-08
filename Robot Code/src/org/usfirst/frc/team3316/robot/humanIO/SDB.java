@@ -35,11 +35,9 @@ public class SDB {
 
 			// For drivers
 			// TODO: Add "for-drivers" indications
-
-			put("Gear is in the right position", Robot.installer.gearIsInTheRightPosition());
-			put("Gear is ready to be installed", Robot.installer.gearIsReadyToBeInstalled());
-			put("Mechanism is set", Robot.installer.isMechanismSet());
-			put("Peg is pushed", Robot.installer.pegIsPushed());
+			
+			// Installer
+			put("Peg Pushes", Robot.installer.PegPushes());
 		}
 
 		private void put(String name, double d) {
