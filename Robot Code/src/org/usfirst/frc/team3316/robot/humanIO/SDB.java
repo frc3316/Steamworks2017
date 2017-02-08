@@ -40,6 +40,9 @@ public class SDB
 
 			// For drivers
 			// TODO: Add "for-drivers" indications
+			
+			// Intake
+			put("Is Gear In", Robot.intake.isGearIn());
 		}
 
 		private void put(String name, double d)

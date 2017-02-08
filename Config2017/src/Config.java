@@ -211,6 +211,7 @@ public class Config
 			 */
 			{
 				addToVariables("intake_MoveIntake_V", -0.75);
+				addToVariables("intake_RollIn_Voltage", 0.75);
 			}
 		}
 	}

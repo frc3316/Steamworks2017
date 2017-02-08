@@ -4,15 +4,23 @@ import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.intake.MoveIntake;
 import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 
+import edu.wpi.first.wpilibj.DigitalInput;
+
 public class Intake extends DBugSubsystem
 {
 	private DBugSpeedController motor;
+	private DigitalInput switch1;
 	
 	public Intake() {
 		// Actuators
 		Robot.actuators.IntakeActuators();
 		
 		motor = Robot.actuators.intakeMotor;
+		
+		// Sensors
+		Robot.sensors.IntakeSensors();
+		
+		switch1 = Robot.sensors.intakeSwitch;
 	}
 	
 	@Override
@@ -21,6 +29,10 @@ public class Intake extends DBugSubsystem
 	
 	public void setMotor(double v) {
 		motor.setMotor(v);
+	}
+	
+	public boolean isGearIn() {
+		return switch1.get();
 	}
 	
 }

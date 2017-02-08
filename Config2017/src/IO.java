@@ -229,7 +229,9 @@ public class IO
 				/*
 				 * Robot A
 				 */
-				{}
+				{
+					putPWMA("INTAKE_SWITCH", 4);
+				}
 
 				/*
 				 * Robot B

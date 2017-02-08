@@ -9,6 +9,7 @@ import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SPI;
@@ -22,6 +23,9 @@ public class Sensors
 
 	// Chassis
 	public AHRS navx;
+	
+	// Intake
+	public DigitalInput intakeSwitch;
 
 	public Sensors()
 	{
@@ -49,5 +53,13 @@ public class Sensors
 			DriverStation.reportError(
 					"Error instantiating navX MXP:  " + ex.getMessage(), true);
 		}
+	}
+	
+	/*
+	 * Intake
+	 */
+	public void IntakeSensors()
+	{
+		intakeSwitch = new DigitalInput((int) config.get("INTAKE_SWITCH"));
 	}
 }
