@@ -214,6 +214,8 @@ public class IO
 					putCANA("CHASSIS_MOTOR_RIGHT_2", 1);
 					
 					putPWMA("INTAKE_MOTOR", 1);
+					
+					putPWMA("CLIMBING_MOTOR", 0);
 				}
 
 				/*
@@ -229,7 +231,9 @@ public class IO
 				/*
 				 * Robot A
 				 */
-				{}
+				{
+					putPWMA("CLIMBING_SWITCH", 7);
+				}
 
 				/*
 				 * Robot B
@@ -266,6 +270,8 @@ public class IO
 					putPDPA("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL", 13);
 					
 					putPDPA("INTAKE_MOTOR_PDP_CHANNEL", 1);
+					
+					putPDPA("CLIMBING_MOTOR_PDP_CHANNEL", 11);
 				}
 
 				/*

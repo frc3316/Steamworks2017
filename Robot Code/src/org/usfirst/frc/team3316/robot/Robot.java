@@ -11,6 +11,7 @@ import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 import org.usfirst.frc.team3316.robot.robotIO.Actuators;
 import org.usfirst.frc.team3316.robot.robotIO.Sensors;
 import org.usfirst.frc.team3316.robot.subsystems.Chassis;
+import org.usfirst.frc.team3316.robot.subsystems.Climbing;
 import org.usfirst.frc.team3316.robot.subsystems.Intake;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -47,6 +48,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public static Chassis chassis;
 	public static Intake intake;
+	public static Climbing climbing;
 
 	Command autonomousCommand;
 	SendableChooser autonChooser;
@@ -84,6 +86,7 @@ public class Robot extends IterativeRobot {
 			 */
 			chassis = new Chassis();
 			intake = new Intake();
+			climbing = new Climbing();
 
 			/*
 			 * Human IO (that requires subsystems)
