@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 public class Intake extends DBugSubsystem
 {
 	private DBugSpeedController motor;
-	private DigitalInput switch1;
+	private DigitalInput switch1,switch2;
 	
 	public Intake() {
 		// Actuators
@@ -20,7 +20,8 @@ public class Intake extends DBugSubsystem
 		// Sensors
 		Robot.sensors.IntakeSensors();
 		
-		switch1 = Robot.sensors.intakeSwitch;
+		switch1 = Robot.sensors.intakeSwitch1;
+		switch2 = Robot.sensors.intakeSwitch2;
 	}
 	
 	@Override
@@ -32,7 +33,7 @@ public class Intake extends DBugSubsystem
 	}
 	
 	public boolean isGearIn() {
-		return switch1.get();
+		return switch1.get() || switch2.get();
 	}
 	
 }

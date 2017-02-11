@@ -20,19 +20,31 @@ public class DBugToggleCommand extends DBugCommand {
 		this.cmd2 = cmd2;
 	}
 
+	public DBugToggleCommand(Command cmd) {
+		this.cmd1 = cmd;
+	}
+
 	protected void init() {
 		counter++;
-		
-		if (toggle) {
+
+		if (cmd2 != null)
+			if (toggle) {
+				cmd1.cancel();
+				cmd2.start();
+				toggle = false;
+			} else {
+				cmd2.cancel();
+				cmd1.start();
+				toggle = true;
+			}
+		else if (toggle) {
 			cmd1.cancel();
-			cmd2.start();
 			toggle = false;
 		} else {
-			cmd2.cancel();
 			cmd1.start();
 			toggle = true;
 		}
-		
+
 		SmartDashboard.putNumber("counter", counter);
 	}
 
@@ -43,7 +55,8 @@ public class DBugToggleCommand extends DBugCommand {
 		return true;
 	}
 
-	protected void fin() {}
+	protected void fin() {
+	}
 
 	protected void interr() {
 		fin();

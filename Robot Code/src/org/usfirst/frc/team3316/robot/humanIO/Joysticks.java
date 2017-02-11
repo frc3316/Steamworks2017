@@ -62,6 +62,6 @@ public class Joysticks
 		// TODO: Add buttons after creating subsystems
 		
 		DBugJoystickButton toggleIntakeBtn = new DBugJoystickButton(joystickOperator, "button_Intake_Toggle");
-		toggleIntakeBtn.whenPressed(new DBugToggleCommand(new MoveIntake(), new IntakeEmptyCommand()));
+		toggleIntakeBtn.whenPressed(new DBugToggleCommand(new MoveIntake()));
 	}
 }

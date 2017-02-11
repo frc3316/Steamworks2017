@@ -25,7 +25,7 @@ public class Sensors
 	public AHRS navx;
 	
 	// Intake
-	public DigitalInput intakeSwitch;
+	public DigitalInput intakeSwitch1, intakeSwitch2;
 
 	public Sensors()
 	{
@@ -60,6 +60,7 @@ public class Sensors
 	 */
 	public void IntakeSensors()
 	{
-		intakeSwitch = new DigitalInput((int) config.get("INTAKE_SWITCH"));
+		intakeSwitch1 = new DigitalInput((int) config.get("INTAKE_SWITCH_1"));
+		intakeSwitch2 = new DigitalInput((int) config.get("INTAKE_SWITCH_2"));
 	}
 }

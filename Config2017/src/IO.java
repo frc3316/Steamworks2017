@@ -230,7 +230,8 @@ public class IO
 				 * Robot A
 				 */
 				{
-					putPWMA("INTAKE_SWITCH", 4);
+					putPWMA("INTAKE_SWITCH_1", 4);
+					putPWMA("INTAKE_SWITCH_2", 5);
 				}
 
 				/*
