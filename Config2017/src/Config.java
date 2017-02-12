@@ -148,8 +148,8 @@ public class Config
 				addToConstantsA("CHASSIS_MOTOR_LEFT_REVERSE", false);
 				addToConstantsA("CHASSIS_MOTOR_RIGHT_REVERSE", true);
 				
-				addToVariables("chassis_Joystick_Right_Axis", 5);
-				addToVariables("chassis_Joystick_Left_Axis", 1);
+				addToVariables("chassis_Joystick_Right_Axis", 1);
+				addToVariables("chassis_Joystick_Left_Axis", 5);
 				
 				/*
 				 * Intake
@@ -228,7 +228,7 @@ public class Config
 			 * Variables
 			 */
 			{
-				addToVariables("intake_MoveIntake_V", -0.75);
+				addToVariables("intake_MoveIntake_V", 0.9);
 			}
 		}
 		

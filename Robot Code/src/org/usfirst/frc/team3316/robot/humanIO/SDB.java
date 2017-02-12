@@ -129,14 +129,6 @@ public class SDB {
 		SmartDashboard.putData(new StartCompressor());
 		SmartDashboard.putData(new StopCompressor());
 
-		// Chassis
-
-		putConfigVariableInSDB("chassis_SpeedFactor_Medium");
-		putConfigVariableInSDB("chassis_SpeedFactor_Higher");
-		putConfigVariableInSDB("chassis_SpeedFactor_Lower");
-		
-		SmartDashboard.putBoolean("Brake Mode", ((CANTalon) Robot.actuators.chassisLeft1SC).getBrakeEnableDuringNeutral());
-		
 		// Intake
 
 		putConfigVariableInSDB("intake_MoveIntake_V");

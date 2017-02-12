@@ -65,7 +65,7 @@ public class Robot extends IterativeRobot {
 			logger = new DBugLogger();
 			timer = new Timer();
 			config = new Config();
-
+			
 			/*
 			 * Human IO (that does not require subsystems)
 			 */
@@ -87,7 +87,7 @@ public class Robot extends IterativeRobot {
 			chassis = new Chassis();
 			intake = new Intake();
 			climbing = new Climbing();
-
+			
 			/*
 			 * Human IO (that requires subsystems)
 			 */

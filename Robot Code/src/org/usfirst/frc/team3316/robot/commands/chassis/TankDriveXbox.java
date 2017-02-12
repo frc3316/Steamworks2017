@@ -24,18 +24,10 @@ public class TankDriveXbox extends Drive {
 	}
 
 	protected void set() {		
-		if (Robot.joysticks.lowerSpeedBtn.get()) {
 			speedFactor = (double) config.get("chassis_SpeedFactor_Medium");
-		}
-		else if (Robot.joysticks.higherSpeedBtn.get()) {
-			speedFactor = (double) config.get("chassis_SpeedFactor_Higher");
-		}
-		else {
-			speedFactor = (double) config.get("chassis_SpeedFactor_Medium");
-		}
 		
-		right = getLeftY() * (double) Robot.config.get("chassis_Axis_Sensitivity");
-		left = getRightY() * (double) Robot.config.get("chassis_Axis_Sensitivity");
+		right = getLeftY();
+		left = getRightY();
 	}
 
 	protected static double getLeftY() {
