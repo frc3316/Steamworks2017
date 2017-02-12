@@ -2,21 +2,20 @@ package org.usfirst.frc.team3316.robot.commands.intake;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
-public class IntakeEmptyCommand extends DBugCommand {
+public class WaitForGear extends DBugCommand {
 	
-	public IntakeEmptyCommand() {
-		requires(Robot.intake);
-	}
+	public WaitForGear() {}
 	
 	@Override
 	protected void init() {}
 
 	@Override
-	protected void execute() {}
+	protected void execute() {
+	}
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return Robot.intake.isGearIn();
 	}
 
 	@Override

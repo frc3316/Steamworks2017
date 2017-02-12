@@ -233,6 +233,9 @@ public class IO
 				 */
 				{
 					putPWMA("CLIMBING_SWITCH", 7);
+					
+					putPWMA("INTAKE_SWITCH_1", 4);
+					putPWMA("INTAKE_SWITCH_2", 5);
 				}
 
 				/*

@@ -28,6 +28,9 @@ public class Sensors
 	// Climbing
 	public DigitalInput climbingSwitch;
 
+	// Intake
+	public DigitalInput intakeSwitch1, intakeSwitch2;
+
 	public Sensors()
 	{
 	}
@@ -61,5 +64,14 @@ public class Sensors
 	 */
 	public void ClimbingSensors() {
 		climbingSwitch = new DigitalInput((int) config.get("CLIMBING_SWITCH"));
+	}
+	
+	/*
+	 * Intake
+	 */
+	public void IntakeSensors()
+	{
+		intakeSwitch1 = new DigitalInput((int) config.get("INTAKE_SWITCH_1"));
+		intakeSwitch2 = new DigitalInput((int) config.get("INTAKE_SWITCH_2"));
 	}
 }

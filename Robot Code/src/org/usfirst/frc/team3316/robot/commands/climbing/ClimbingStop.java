@@ -4,6 +4,9 @@ import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
 public class ClimbingStop extends DBugCommand {
+	public ClimbingStop() {
+		requires(Robot.climbing);
+	}
 
 	@Override
 	protected void init() {
