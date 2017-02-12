@@ -15,11 +15,11 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.SPI;
 
-public class Sensors
-{
+public class Sensors {
 	Config config = Robot.config;
 	DBugLogger logger = Robot.logger;
 
+	// General
 	public PowerDistributionPanel pdp;
 
 	// Chassis
@@ -31,32 +31,36 @@ public class Sensors
 	// Intake
 	public DigitalInput intakeSwitch1, intakeSwitch2;
 
-	public Sensors()
-	{
+	// Installer
+	public DigitalInput installerSwitch1, installerSwitch2;
+
+	public Sensors() {
 	}
 
 	/*
 	 * General
 	 */
-	public void GeneralSensors()
-	{
+	public void GeneralSensors() {
 		pdp = new PowerDistributionPanel();
 	}
 
 	/*
 	 * Chassis
 	 */
-	public void ChassisSensors()
-	{
-		try
-		{
+	public void ChassisSensors() {
+		try {
 			navx = new AHRS(SPI.Port.kMXP);
+		} catch (RuntimeException ex) {
+			DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
 		}
-		catch (RuntimeException ex)
-		{
-			DriverStation.reportError(
-					"Error instantiating navX MXP:  " + ex.getMessage(), true);
-		}
+	}
+
+	/*
+	 * Installer
+	 */
+	public void InstallerSensors() {
+		installerSwitch1 = new DigitalInput((int) config.get("INSTALLER_SWITCH1"));
+		installerSwitch2 = new DigitalInput((int) config.get("INSTALLER_SWITCH2"));
 	}
 	
 	/*

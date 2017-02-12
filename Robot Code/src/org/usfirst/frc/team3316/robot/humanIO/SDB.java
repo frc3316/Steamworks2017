@@ -41,6 +41,9 @@ public class SDB {
 			
 			// Intake
 			put("Is Gear In", Robot.intake.isGearIn());
+
+			// Installer
+			put("Peg Pushes", Robot.installer.PegPushes());
 		}
 
 		private void put(String name, double d) {
@@ -123,11 +126,11 @@ public class SDB {
 	}
 
 	private void initSDB() {
-		System.out.println("SDB is running");
-		logger.info("SDB is running");
-
 		SmartDashboard.putData(new UpdateVariablesInConfig()); // NEVER REMOVE
 																// THIS COMMAND
+
+		SmartDashboard.putData(new UpdateVariablesInConfig()); // NEVER REMOVE
+		// THIS COMMAND
 
 		SmartDashboard.putData(new StartCompressor());
 		SmartDashboard.putData(new StopCompressor());

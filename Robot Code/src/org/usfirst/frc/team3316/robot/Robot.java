@@ -13,6 +13,7 @@ import org.usfirst.frc.team3316.robot.robotIO.Sensors;
 import org.usfirst.frc.team3316.robot.subsystems.Chassis;
 import org.usfirst.frc.team3316.robot.subsystems.Climbing;
 import org.usfirst.frc.team3316.robot.subsystems.Intake;
+import org.usfirst.frc.team3316.robot.subsystems.Installer;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -47,11 +48,12 @@ public class Robot extends IterativeRobot {
 	 * Subsystems
 	 */
 	public static Chassis chassis;
-	public static Intake intake;
+	public static Installer installer;
 	public static Climbing climbing;
+	public static Intake intake;
 
 	Command autonomousCommand;
-	SendableChooser autonChooser;
+	SendableChooser<DBugCommand> autonChooser;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -65,7 +67,7 @@ public class Robot extends IterativeRobot {
 			logger = new DBugLogger();
 			timer = new Timer();
 			config = new Config();
-			
+
 			/*
 			 * Human IO (that does not require subsystems)
 			 */
@@ -87,7 +89,7 @@ public class Robot extends IterativeRobot {
 			chassis = new Chassis();
 			intake = new Intake();
 			climbing = new Climbing();
-			
+
 			/*
 			 * Human IO (that requires subsystems)
 			 */

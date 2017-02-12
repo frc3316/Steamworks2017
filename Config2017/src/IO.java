@@ -236,6 +236,9 @@ public class IO
 					
 					putPWMA("INTAKE_SWITCH_1", 4);
 					putPWMA("INTAKE_SWITCH_2", 5);
+
+					putPWMA("INSTALLER_SWITCH1", 5);
+					putPWMA("INSTALLER_SWITCH1", 6);
 				}
 
 				/*
