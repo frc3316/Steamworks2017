@@ -236,6 +236,7 @@ public class IO
 					
 					putPWMA("INTAKE_SWITCH_1", 4);
 					putPWMA("INTAKE_SWITCH_2", 5);
+					putPWMA("INTAKE_SWITCH_3", 9); //TODO: FAKE!
 
 					putPWMA("INSTALLER_SWITCH_1", 7);
 					putPWMA("INSTALLER_SWITCH_2", 6);

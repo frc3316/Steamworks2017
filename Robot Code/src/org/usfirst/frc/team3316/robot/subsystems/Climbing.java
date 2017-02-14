@@ -1,47 +1,40 @@
 package org.usfirst.frc.team3316.robot.subsystems;
 
 import org.usfirst.frc.team3316.robot.Robot;
-import org.usfirst.frc.team3316.robot.commands.chassis.TankDrive;
-import org.usfirst.frc.team3316.robot.commands.chassis.TankDriveXbox;
 import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
+import org.usfirst.frc.team3316.robot.utils.Utils;
 
-import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.AnalogInput;
 
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+public class Climbing extends DBugSubsystem {
+    // Actuators
+    private DBugSpeedController motor;
 
-public class Climbing extends DBugSubsystem
-{
+    // Sensors
+    private AnalogInput limitSwitch;
+    double thresh;
+
+    public Climbing() {
 	// Actuators
-	private DBugSpeedController motor;
-	
+	Robot.actuators.ClimbingActuators();
+
+	motor = Robot.actuators.climbingMotor;
+
 	// Sensors
-	private DigitalInput limitSwitch;
-	
-	public Climbing()
-	{
-		// Actuators
-		Robot.actuators.ClimbingActuators();
-		
-		motor = Robot.actuators.climbingMotor;
+	Robot.sensors.ClimbingSensors();
 
-		// Sensors
-		Robot.sensors.ClimbingSensors();
-		
-		limitSwitch = Robot.sensors.climbingSwitch;
-	}
+	limitSwitch = Robot.sensors.climbingSwitch;
+	thresh = (double) Robot.config.get("INSTALLER_SWITCH_THRESH");
+    }
 
-	public void initDefaultCommand()
-	{}
-	
-	public void setMotor(double v)
-	{
-		motor.setMotor(v);
-	}
-	
-	public boolean isClimbingRaising() {
-		return limitSwitch.get();
-	}
+    public void initDefaultCommand() {
+    }
+
+    public void setMotor(double v) {
+	motor.setMotor(v);
+    }
+
+    public boolean isClimbingRaising() {
+	return Utils.AnalogToDigitalInput(limitSwitch, thresh);
+    }
 }

@@ -20,7 +20,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,111 +29,111 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
-	public static Config config;
-	public static DBugLogger logger;
-	public static Timer timer;
+    public static Config config;
+    public static DBugLogger logger;
+    public static Timer timer;
 
+    /*
+     * Human IO
+     */
+    public static Joysticks joysticks;
+    public static SDB sdb;
+    /*
+     * Robot IO
+     */
+    public static Actuators actuators;
+    public static Sensors sensors;
+    /*
+     * Subsystems
+     */
+    public static Chassis chassis;
+    public static Installer installer;
+    public static Climbing climbing;
+    public static Intake intake;
+
+    Command autonomousCommand;
+    SendableChooser<DBugCommand> autonChooser;
+
+    /**
+     * This function is run when the robot is first started up and should be
+     * used for any initialization code.
+     */
+    public void robotInit() {
 	/*
-	 * Human IO
+	 * Above all else
 	 */
-	public static Joysticks joysticks;
-	public static SDB sdb;
-	/*
-	 * Robot IO
-	 */
-	public static Actuators actuators;
-	public static Sensors sensors;
-	/*
-	 * Subsystems
-	 */
-	public static Chassis chassis;
-	public static Installer installer;
-	public static Climbing climbing;
-	public static Intake intake;
+	try {
+	    logger = new DBugLogger();
+	    timer = new Timer();
+	    config = new Config();
 
-	Command autonomousCommand;
-	SendableChooser<DBugCommand> autonChooser;
+	    /*
+	     * Human IO (that does not require subsystems)
+	     */
+	    joysticks = new Joysticks();
 
-	/**
-	 * This function is run when the robot is first started up and should be
-	 * used for any initialization code.
-	 */
-	public void robotInit() {
-		/*
-		 * Above all else
-		 */
-		try {
-			logger = new DBugLogger();
-			timer = new Timer();
-			config = new Config();
+	    /*
+	     * Robot IO
+	     */
+	    actuators = new Actuators();
+	    sensors = new Sensors();
 
-			/*
-			 * Human IO (that does not require subsystems)
-			 */
-			joysticks = new Joysticks();
+	    Robot.actuators.GeneralActuators();
+	    Robot.sensors.GeneralSensors();
 
-			/*
-			 * Robot IO
-			 */
-			actuators = new Actuators();
-			sensors = new Sensors();
+	    /*
+	     * Subsystems
+	     */
+	    chassis = new Chassis();
+	    intake = new Intake();
+	    climbing = new Climbing();
+	    installer = new Installer();
 
-			Robot.actuators.GeneralActuators();
-			Robot.sensors.GeneralSensors();
+	    /*
+	     * Human IO (that requires subsystems)
+	     */
+	    sdb = new SDB();
 
-			/*
-			 * Subsystems
-			 */
-			chassis = new Chassis();
-			intake = new Intake();
-			climbing = new Climbing();
-			installer = new Installer();
+	    /*
+	     * Human IO (that requires subsystems)
+	     */
+	    joysticks.initButtons();
 
-			/*
-			 * Human IO (that requires subsystems)
-			 */
-			sdb = new SDB();
-			
-			/*
-			 * Human IO (that requires subsystems)
-			 */
-			joysticks.initButtons();
-
-			/*
-			 * Timer
-			 */
-			sdb.timerInit();
-		} catch (Exception e) {
-			logger.severe(e);
-		}
+	    /*
+	     * Timer
+	     */
+	    sdb.timerInit();
+	} catch (Exception e) {
+	    logger.severe(e);
 	}
+    }
 
-	public void disabledInit() {
+    public void disabledInit() {
 
-	}
+    }
 
-	public void disabledPeriodic() {
-		Scheduler.getInstance().run();
-	}
+    public void disabledPeriodic() {
+	Scheduler.getInstance().run();
+    }
 
-	public void autonomousInit() {
-	}
+    public void autonomousInit() {
+    }
 
-	public void autonomousPeriodic() {
-		Scheduler.getInstance().run();
-	}
+    public void autonomousPeriodic() {
+	Scheduler.getInstance().run();
+    }
 
-	public void teleopInit() {
-	}
+    public void teleopInit() {
+    }
 
-	public void teleopPeriodic() {
-		Scheduler.getInstance().run();
-	}
+    public void teleopPeriodic() {
+	Scheduler.getInstance().run();
+    }
 
-	public void testIniwt() {
-	}
+    public void testIniwt() {
+    }
 
-	public void testPeriodic() {
-		LiveWindow.run();
-	}
+    public void testPeriodic() {
+	LiveWindow.run();
+    }
 }
