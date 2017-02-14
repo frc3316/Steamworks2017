@@ -70,11 +70,7 @@ public class Joysticks
 		toggleIntakeBtn.whenPressed(new DBugToggleCommand(new MoveIntake(), new IntakeEmptyCommand()));
 		
 		DBugJoystickButton toggleChassisBrakeMode = new DBugJoystickButton(joystickOperator, "button_Chassis_Break_Toggle");
-
 		toggleChassisBrakeMode.whenPressed(new DBugToggleCommand(new BrakeMode(), new CoastMode()));
-		
-		lowerSpeedBtn = new DBugJoystickButton(joystickOperator, "button_Chassis_LowerSpeed");
-		higherSpeedBtn = new DBugJoystickButton(joystickOperator, "button_Chassis_HigherSpeed");
 		
 		DBugJoystickButton toggleClimbingButton = new DBugJoystickButton(joystickOperator, "button_Climbing_Toggle");
 		toggleClimbingButton.whenPressed(new DBugToggleCommand(new ClimbingUp(), new ClimbingStop()));

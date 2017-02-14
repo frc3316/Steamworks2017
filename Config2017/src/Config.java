@@ -228,7 +228,7 @@ public class Config
 			 * Variables
 			 */
 			{
-				addToVariables("intake_MoveIntake_V", 0.9);
+				addToVariables("intake_MoveIntake_V", 1.0);
 			}
 		}
 		

@@ -20,6 +20,6 @@ public class Installer extends DBugSubsystem {
     public void initDefaultCommand() {}
 
     public boolean PegPushes() {
-    	return switch1.get() && switch2.get();
+    	return switch1.get() || switch2.get();
     }
 }

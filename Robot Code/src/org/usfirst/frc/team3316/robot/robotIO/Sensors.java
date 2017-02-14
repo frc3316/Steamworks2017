@@ -59,8 +59,8 @@ public class Sensors {
 	 * Installer
 	 */
 	public void InstallerSensors() {
-		installerSwitch1 = new DigitalInput((int) config.get("INSTALLER_SWITCH1"));
-		installerSwitch2 = new DigitalInput((int) config.get("INSTALLER_SWITCH2"));
+		installerSwitch1 = new DigitalInput((int) config.get("INSTALLER_SWITCH_1"));
+		installerSwitch2 = new DigitalInput((int) config.get("INSTALLER_SWITCH_2"));
 	}
 	
 	/*

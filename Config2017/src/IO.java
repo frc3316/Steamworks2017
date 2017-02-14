@@ -213,9 +213,9 @@ public class IO
 					putCANA("CHASSIS_MOTOR_RIGHT_1", 0);
 					putCANA("CHASSIS_MOTOR_RIGHT_2", 1);
 					
-					putPWMA("INTAKE_MOTOR", 1);
+					putPWMA("INTAKE_MOTOR", 0);
 					
-					putPWMA("CLIMBING_MOTOR", 0);
+					putPWMA("CLIMBING_MOTOR", 1);
 				}
 
 				/*
@@ -232,13 +232,13 @@ public class IO
 				 * Robot A
 				 */
 				{
-					putPWMA("CLIMBING_SWITCH", 7);
+					putPWMA("CLIMBING_SWITCH", 8);
 					
 					putPWMA("INTAKE_SWITCH_1", 4);
 					putPWMA("INTAKE_SWITCH_2", 5);
 
-					putPWMA("INSTALLER_SWITCH1", 5);
-					putPWMA("INSTALLER_SWITCH1", 6);
+					putPWMA("INSTALLER_SWITCH_1", 7);
+					putPWMA("INSTALLER_SWITCH_2", 6);
 				}
 
 				/*

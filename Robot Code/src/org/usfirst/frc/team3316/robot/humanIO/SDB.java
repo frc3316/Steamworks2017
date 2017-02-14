@@ -32,18 +32,20 @@ public class SDB {
 		}
 
 		public void run() {
+			logger.info("SDB is running");
 			/*
 			 * Insert put methods here
 			 */
 
 			// For drivers
-			// TODO: Add "for-drivers" indications
+			
+			// Chassis
+			put("Brake mode", ((CANTalon) Robot.actuators.chassisLeft1SC).getBrakeEnableDuringNeutral());
 			
 			// Intake
 			put("Is Gear In", Robot.intake.isGearIn());
 
 			// Installer
-			put("Peg Pushes", Robot.installer.PegPushes());
 		}
 
 		private void put(String name, double d) {
@@ -136,9 +138,12 @@ public class SDB {
 		SmartDashboard.putData(new StopCompressor());
 
 		// Intake
-
 		putConfigVariableInSDB("intake_MoveIntake_V");
-
+		
+		// Cameras
+		CameraServer.getInstance().startAutomaticCapture("cam0", 0);
+		CameraServer.getInstance().startAutomaticCapture("cam1", 1);
+		
 		logger.info("Finished initSDB()");
 	}
 
