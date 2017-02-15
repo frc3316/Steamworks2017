@@ -206,7 +206,7 @@ public class Config {
 	     * Constants
 	     */
 	    {
-		addToConstants("INTAKE_SWITCH_THRESH", 2500.0);
+		addToConstants("INTAKE_SWITCH_THRESH", 100.0);
 	    }
 
 	    /*
@@ -225,7 +225,7 @@ public class Config {
 	     * Constants
 	     */
 	    {
-		addToConstants("INSTALLER_SWITCH_THRESH", 2500.0);
+		addToConstants("INSTALLER_SWITCH_THRESH", 100.0);
 	    }
 
 	    /*
@@ -243,14 +243,14 @@ public class Config {
 	     * Constants
 	     */
 	    {
-		addToConstants("CLIMBING_SWITCH_THRESH", 2500.0);
+		addToConstants("CLIMBING_SWITCH_THRESH", 100.0); // SWITCH DOES NOT EXIST
 	    }
 
 	    /*
 	     * Variables
 	     */
 	    {
-		addToVariables("climbing_Up_Voltage", 0.5);
+		addToVariables("climbing_Up_Voltage", 0.5                                                                                                                                                                              );
 		addToVariables("climbing_Down_Voltage", -0.5);
 	    }
 	}

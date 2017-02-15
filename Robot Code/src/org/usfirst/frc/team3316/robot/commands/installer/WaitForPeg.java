@@ -17,7 +17,7 @@ public class WaitForPeg extends DBugCommand {
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
-		return Robot.installer.PegPushes();
+		return Robot.installer.isPegPushing();
 	}
 
 	@Override

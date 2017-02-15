@@ -24,7 +24,7 @@ public class Installer extends DBugSubsystem {
     public void initDefaultCommand() {
     }
 
-    public boolean PegPushes() {
+    public boolean isPegPushing() {
 	return Utils.AnalogToDigitalInput(switch1, thresh) || Utils.AnalogToDigitalInput(switch2, thresh);
     }
 }

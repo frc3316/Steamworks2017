@@ -43,11 +43,19 @@ public class SDB {
 
 	    // Chassis
 	    put("Brake mode", ((CANTalon) Robot.actuators.chassisLeft1SC).getBrakeEnableDuringNeutral());
-
+	    
 	    // Intake
 	    put("Is Gear In", Robot.intake.isGearIn());
-
+	    
 	    // Installer
+	    put("Is Peg Pushing", Robot.installer.isPegPushing());
+	    
+	    // Climbing
+	    put("Climbing Current", Robot.actuators.climbingMotor.getCurrent());
+	    put("Climbing Voltage", Robot.actuators.climbingMotor.getVoltage());
+	    
+	    // Other
+	    put("Battery Voltage", Robot.sensors.pdp.getVoltage());
 	}
 
 	private void put(String name, double d) {
@@ -74,12 +82,10 @@ public class SDB {
 
     private Hashtable<String, Class<?>> variablesInSDB;
 
-    private CameraServer server;
-
     public SDB() {
 	variablesInSDB = new Hashtable<String, Class<?>>();
 
-	initLiveWindow();
+//	initLiveWindow();
 	initSDB();
 	// initDriverCamera();
     }
@@ -134,7 +140,7 @@ public class SDB {
 							       // THIS COMMAND
 
 	SmartDashboard.putData(new UpdateVariablesInConfig()); // NEVER REMOVE
-	// THIS COMMAND
+							       // THIS COMMAND
 
 	SmartDashboard.putData(new StartCompressor());
 	SmartDashboard.putData(new StopCompressor());

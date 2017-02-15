@@ -22,20 +22,20 @@ public class Utils
 	 * @return The converted value.
 	 */
 	public static boolean AnalogToDigitalInput(double value, double thresh) {
-		return value > thresh;
+		return value < thresh; // WAS value > thresh
 	}
 
 	/**
 	 * Converts a analog sensor output to digital values.
 	 * 
-	 * @param sensor
+	 * @param analogInput
 	 *            The current sensor to read from.
 	 * @param thresh
 	 *            The point that separates between TRUE and FALSE.
 	 * @return The converted value.
 	 */
-	public static boolean AnalogToDigitalInput(AnalogInput sensor, double thresh) {
-		return AnalogToDigitalInput(sensor.getVoltage(), thresh);
+	public static boolean AnalogToDigitalInput(AnalogInput analogInput, double thresh) {
+		return AnalogToDigitalInput(analogInput.getValue(), thresh);
 	}
 
 	/*
