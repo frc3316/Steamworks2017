@@ -9,8 +9,10 @@ import java.util.Set;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.commands.DriveDistance;
 import org.usfirst.frc.team3316.robot.commands.StartCompressor;
 import org.usfirst.frc.team3316.robot.commands.StopCompressor;
+import org.usfirst.frc.team3316.robot.commands.TurnByGyro;
 import org.usfirst.frc.team3316.robot.commands.intake.MoveIntake;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
@@ -43,19 +45,34 @@ public class SDB {
 
 	    // Chassis
 	    put("Brake mode", ((CANTalon) Robot.actuators.chassisLeft1SC).getBrakeEnableDuringNeutral());
-	    
-	    // Intake
-	    put("Is Gear In", Robot.intake.isGearIn());
-	    
-	    // Installer
-	    put("Is Peg Pushing", Robot.installer.isPegPushing());
-	    
-	    // Climbing
-	    put("Climbing Current", Robot.actuators.climbingMotor.getCurrent());
-	    put("Climbing Voltage", Robot.actuators.climbingMotor.getVoltage());
-	    
-	    // Other
-	    put("Battery Voltage", Robot.sensors.pdp.getVoltage());
+
+	    // // Intake
+	    // put("Is Gear In", Robot.intake.isGearIn());
+	    //
+	    // // Installer
+	    // put("Is Peg Pushing", Robot.installer.isPegPushing());
+	    //
+	    // // Climbing
+	    // put("Climbing Current",
+	    // Robot.actuators.climbingMotor.getCurrent());
+	    // put("Climbing Voltage",
+	    // Robot.actuators.climbingMotor.getVoltage());
+	    //
+	    // // Other
+	    // put("Battery Voltage", Robot.sensors.pdp.getVoltage());
+
+	    putConfigVariableInSDB("chassis_TurnByGyro_PID_Tolerance");
+
+	    putConfigVariableInSDB("chassis_TurnByGyro_PID_KP");
+	    putConfigVariableInSDB("chassis_TurnByGyro_PID_KI");
+	    putConfigVariableInSDB("chassis_TurnByGyro_PID_KD");
+
+	    SmartDashboard.putData("Turn 10 deg", new TurnByGyro(10.0));
+	    SmartDashboard.putData("Turn -10 deg", new TurnByGyro(-10.0));
+	    SmartDashboard.putData("Turn 45 deg", new TurnByGyro(45.0));
+	    SmartDashboard.putData("Turn -45 deg", new TurnByGyro(-45.0));
+	    SmartDashboard.putData("Turn 90 deg", new TurnByGyro(90.0));
+	    SmartDashboard.putData("Turn -90 deg", new TurnByGyro(-90.0));
 	}
 
 	private void put(String name, double d) {
@@ -85,7 +102,7 @@ public class SDB {
     public SDB() {
 	variablesInSDB = new Hashtable<String, Class<?>>();
 
-//	initLiveWindow();
+	// initLiveWindow();
 	initSDB();
 	// initDriverCamera();
     }

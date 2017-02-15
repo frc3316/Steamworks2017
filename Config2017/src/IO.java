@@ -279,6 +279,103 @@ public class IO {
 		 * Robot A
 		 */
 		{
+<<<<<<< HEAD
+=======
+			/*
+			 * PWM and CAN initialization
+			 */
+			{
+				/*
+				 * Robot A
+				 */
+				{
+					putCANA("CHASSIS_MOTOR_LEFT_1", 2);
+					putCANA("CHASSIS_MOTOR_LEFT_2", 3);
+					putCANA("CHASSIS_MOTOR_RIGHT_1", 0);
+					putCANA("CHASSIS_MOTOR_RIGHT_2", 1);
+					
+					putPWMA("INTAKE_MOTOR", 4);
+				}
+
+				/*
+				 * Robot B
+				 */
+				{}
+			}
+
+			/*
+			 * DIO initialization
+			 */
+			{
+				/*
+				 * Robot A
+				 */
+				{
+					putDIOA("CHASSIS_LEFT_ENCODER_CHANNEL_A", 2);
+					putDIOA("CHASSIS_LEFT_ENCODER_CHANNEL_B", 3);
+	
+					putDIOA("CHASSIS_RIGHT_ENCODER_CHANNEL_A", 0);
+					putDIOA("CHASSIS_RIGHT_ENCODER_CHANNEL_B", 1);
+				}
+
+				/*
+				 * Robot B
+				 */
+				{}
+			}
+
+			/*
+			 * AIO initialization
+			 */
+			{
+				/*
+				 * Robot A
+				 */
+				{}
+
+				/*
+				 * Robot B
+				 */
+				{}
+			}
+
+			/*
+			 * PDP initialization
+			 */
+			{
+				/*
+				 * Robot A
+				 */
+				{
+					putPDPA("CHASSIS_MOTOR_LEFT_1_PDP_CHANNEL", 0);
+					putPDPA("CHASSIS_MOTOR_LEFT_2_PDP_CHANNEL", 1);
+					putPDPA("CHASSIS_MOTOR_RIGHT_1_PDP_CHANNEL", 2);
+					putPDPA("CHASSIS_MOTOR_RIGHT_2_PDP_CHANNEL", 3);
+					
+					putPDPA("INTAKE_MOTOR_PDP_CHANNEL", 12);
+				}
+
+				/*
+				 * Robot B
+				 */
+				{}
+			}
+
+			/*
+			 * PCM initialization
+			 */
+			{
+				/*
+				 * Robot A
+				 */
+				{}
+
+				/*
+				 * Robot B
+				 */
+				{}
+			}
+>>>>>>> auton_drive_distance
 		}
 
 		/*
