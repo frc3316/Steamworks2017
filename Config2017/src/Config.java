@@ -113,157 +113,165 @@ public class Config {
 		}
 	    }
 	}
-    }
 
-    /*
-     * RobotIO
-     */
-    {
 	/*
-	 * Constants
+	 * RobotIO
 	 */
-	addToConstants("CURRENT_CONTROL_COUNTER", 10);
-
 	{
 	    /*
-	     * Chassis
+	     * Constants
 	     */
-	    addToConstantsA("CHASSIS_MOTOR_LEFT_REVERSE", false);
-	    addToConstantsA("CHASSIS_MOTOR_RIGHT_REVERSE", true);
+	    addToConstants("CURRENT_CONTROL_COUNTER", 10);
 
-	    addToVariables("chassis_Joystick_Right_Axis", 1);
-	    addToVariables("chassis_Joystick_Left_Axis", 5);
+	    {
+		/*
+		 * Chassis
+		 */
+		addToConstantsA("CHASSIS_MOTOR_LEFT_REVERSE", true);
+		addToConstantsA("CHASSIS_MOTOR_RIGHT_REVERSE", false);
 
-	    addToConstants("CHASSIS_LEFT_ENCODER_REVERSE", false);
-	    addToConstants("CHASSIS_RIGHT_ENCODER_REVERSE", true);
+		addToVariables("chassis_Joystick_Right_Axis", 1);
+		addToVariables("chassis_Joystick_Left_Axis", 5);
 
-	    addToConstants("CHASSIS_ENCODERS_DISTANCE_PER_PULSE", 0.00124224); // in
-									       // meters
+		addToConstants("CHASSIS_LEFT_ENCODER_REVERSE", false);
+		addToConstants("CHASSIS_RIGHT_ENCODER_REVERSE", true);
+
+		addToConstants("CHASSIS_ENCODERS_DISTANCE_PER_PULSE", 0.00124224); // in
+										   // meters
+
+		/*
+		 * Intake
+		 */
+		addToConstantsA("INTAKE_MOTOR_REVERSE", false);
+		
+		/*
+		 * Climbing
+		 */
+		addToConstantsA("CLIMBING_MOTOR_REVERSE", false);
+	    }
+	}
+
+	/*
+	 * Chassis
+	 */
+	{
+	    /*
+	     * Constants
+	     */
+	    {
+	    }
 
 	    /*
-	     * Intake
+	     * Variables
 	     */
-	    addToConstantsA("INTAKE_MOTOR_REVERSE", false);
-	}
-    }
-    /*
-     * Chassis
-     */
-    {
-	/*
-	 * Constants
-	 */
-	{
-	}
+	    {
+		addToVariables("chassis_TankDrive_DeadBand", 0.05);
 
-	/*
-	 * Variables
-	 */
-	{
-	    addToVariables("chassis_TankDrive_DeadBand", 0.05);
+		addToVariables("chassis_SpeedFactor_Medium", -0.8);
+		addToVariables("chassis_SpeedFactor_Higher", -1.0);
+		addToVariables("chassis_SpeedFactor_Lower", -0.5);
 
-	    addToVariables("chassis_SpeedFactor_Medium", -0.8);
-	    addToVariables("chassis_SpeedFactor_Higher", -1.0);
-	    addToVariables("chassis_SpeedFactor_Lower", -0.5);
+		addToVariables("chassis_TankDrive_InvertX", false);
+		addToVariables("chassis_TankDrive_InvertY", true);
+	    }
 
-	    addToVariables("chassis_TankDrive_InvertX", false);
-	    addToVariables("chassis_TankDrive_InvertY", true);
-	}
+	    /*
+	     * Drive Distance
+	     */
+	    {
+		// PID
+		// BY CAMERA
+		addToVariables("chassis_DriveByCamera_PID_KP", 0.0);
+		addToVariables("chassis_DriveByCamera_PID_KI", 0.0);
+		addToVariables("chassis_DriveByCamera_PID_KD", 0.0);
 
-	/*
-	 * Drive Distance
-	 */
-	{
-	    // PID
-	    // BY CAMERA
-	    addToVariables("chassis_DriveByCamera_PID_KP", 0.0);
-	    addToVariables("chassis_DriveByCamera_PID_KI", 0.0);
-	    addToVariables("chassis_DriveByCamera_PID_KD", 0.0);
+		// BY ENCODERS
+		addToVariables("chassis_DriveDistance_PID_Tolerance", 0.01);
 
-	    // BY ENCODERS
-	    addToVariables("chassis_DriveDistance_PID_Tolerance", 0.01);
+		addToVariables("chassis_DriveDistance_PID_KP", 250.0);
+		addToVariables("chassis_DriveDistance_PID_KI", 2.5);
+		addToVariables("chassis_DriveDistance_PID_KD", 0.0);
+	    }
 
-	    addToVariables("chassis_DriveDistance_PID_KP", 250.0);
-	    addToVariables("chassis_DriveDistance_PID_KI", 2.5);
-	    addToVariables("chassis_DriveDistance_PID_KD", 0.0);
-	}
+	    /*
+	     * TURN BY GYRO
+	     */
+	    {
+		// PID
+		addToVariables("chassis_TurnByGyro_PID_Tolerance", 1.0);
 
-	/*
-	 * TURN BY GYRO
-	 */
-	{
-	    // PID
-	    addToVariables("chassis_TurnByGyro_PID_Tolerance", 1.0);
+		addToVariables("chassis_TurnByGyro_PID_KP", 80.0);
+		addToVariables("chassis_TurnByGyro_PID_KI", 0.95);
+		addToVariables("chassis_TurnByGyro_PID_KD", 0.75);
+	    }
 
-	    addToVariables("chassis_TurnByGyro_PID_KP", 120.0);
-	    addToVariables("chassis_TurnByGyro_PID_KI", 0.9);
-	    addToVariables("chassis_TurnByGyro_PID_KD", 0.7);
+	    /*
+	     * Set Constant Voltage
+	     */
+	    {
+		addToVariables("chassis_SetConstantVoltage_Voltage", 0.0);
+	    }
+
 	}
 
 	/*
-	 * Set Constant Voltage
+	 * Intake
 	 */
 	{
-	    addToVariables("chassis_SetConstantVoltage_Voltage", 0.0);
-	}
+	    /*
+	     * Constants
+	     */
+	    {
+		addToConstants("INTAKE_SWITCH_THRESH", 100.0);
+	    }
 
-    }
-
-    /*
-     * Intake
-     */
-    {
-	/*
-	 * Constants
-	 */
-	{
-	    addToConstants("INTAKE_SWITCH_THRESH", 100.0);
-	}
-
-	/*
-	 * Variables
-	 */
-	{
-	    addToVariables("intake_MoveIntake_V", 1.0);
-	}
-    }
-
-    /*
-     * Installer
-     */
-    {
-	/*
-	 * Constants
-	 */
-	{
-	    addToConstants("INSTALLER_SWITCH_THRESH", 100.0);
+	    /*
+	     * Variables
+	     */
+	    {
+		addToVariables("intake_MoveIntake_V", 1.0);
+	    }
 	}
 
 	/*
-	 * Variables
+	 * Installer
 	 */
 	{
-	}
-    }
+	    /*
+	     * Constants
+	     */
+	    {
+		addToConstants("INSTALLER_SWITCH_THRESH", 100.0);
+	    }
 
-    /*
-     * Climbing
-     */
-    {
-	/*
-	 * Constants
-	 */
-	{
-	    addToConstants("CLIMBING_SWITCH_THRESH", 100.0); // SWITCH DOES NOT
-							     // EXIST
+	    /*
+	     * Variables
+	     */
+	    {
+	    }
 	}
 
 	/*
-	 * Variables
+	 * Climbing
 	 */
 	{
-	    addToVariables("climbing_Up_Voltage", 0.5);
-	    addToVariables("climbing_Down_Voltage", -0.5);
+	    /*
+	     * Constants
+	     */
+	    {
+		addToConstants("CLIMBING_SWITCH_THRESH", 100.0); // SWITCH DOES
+								 // NOT
+								 // EXIST
+		addToConstants("CLIMBING_CURRENT_THRESH", 0.0); // TODO: Measure the current
+	    }
+
+	    /*
+	     * Variables
+	     */
+	    {
+		addToVariables("climbing_Up_Voltage", 0.5);
+		addToVariables("climbing_Down_Voltage", -0.5);
+	    }
 	}
     }
 }

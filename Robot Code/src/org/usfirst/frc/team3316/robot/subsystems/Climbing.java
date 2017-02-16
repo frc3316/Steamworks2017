@@ -37,4 +37,8 @@ public class Climbing extends DBugSubsystem {
     public boolean isClimbingRaising() {
 	return Utils.AnalogToDigitalInput(limitSwitch, thresh);
     }
+    
+    public boolean isRobotClimbing() {
+	return motor.getCurrent() > (double) config.get("CLIMBING_CURRENT_THRESH");
+    }
 }

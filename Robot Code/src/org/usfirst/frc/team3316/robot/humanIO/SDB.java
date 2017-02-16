@@ -9,10 +9,12 @@ import java.util.Set;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
-import org.usfirst.frc.team3316.robot.commands.DriveDistance;
+import org.usfirst.frc.team3316.robot.auton.commands.DriveDistance;
+import org.usfirst.frc.team3316.robot.auton.commands.TurnByGyro;
 import org.usfirst.frc.team3316.robot.commands.StartCompressor;
 import org.usfirst.frc.team3316.robot.commands.StopCompressor;
-import org.usfirst.frc.team3316.robot.commands.TurnByGyro;
+import org.usfirst.frc.team3316.robot.commands.climbing.ClimbingDown;
+import org.usfirst.frc.team3316.robot.commands.climbing.ClimbingStop;
 import org.usfirst.frc.team3316.robot.commands.intake.MoveIntake;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
@@ -60,19 +62,13 @@ public class SDB {
 	    //
 	    // // Other
 	    // put("Battery Voltage", Robot.sensors.pdp.getVoltage());
-
-	    putConfigVariableInSDB("chassis_TurnByGyro_PID_Tolerance");
-
-	    putConfigVariableInSDB("chassis_TurnByGyro_PID_KP");
-	    putConfigVariableInSDB("chassis_TurnByGyro_PID_KI");
-	    putConfigVariableInSDB("chassis_TurnByGyro_PID_KD");
-
-	    SmartDashboard.putData("Turn 10 deg", new TurnByGyro(10.0));
-	    SmartDashboard.putData("Turn -10 deg", new TurnByGyro(-10.0));
-	    SmartDashboard.putData("Turn 45 deg", new TurnByGyro(45.0));
-	    SmartDashboard.putData("Turn -45 deg", new TurnByGyro(-45.0));
-	    SmartDashboard.putData("Turn 90 deg", new TurnByGyro(90.0));
-	    SmartDashboard.putData("Turn -90 deg", new TurnByGyro(-90.0));
+	    
+	    // Autonomous
+	    put("Distance", Robot.chassis.getDistance());
+	    put("Distance Left", Robot.chassis.getLeftDistance());
+	    put("Distance Right", Robot.chassis.getRightDistance());
+	    
+	    
 	}
 
 	private void put(String name, double d) {
@@ -162,12 +158,27 @@ public class SDB {
 	SmartDashboard.putData(new StartCompressor());
 	SmartDashboard.putData(new StopCompressor());
 
-	// Intake
-	putConfigVariableInSDB("intake_MoveIntake_V");
+	// // Intake
+	// putConfigVariableInSDB("intake_MoveIntake_V");
+	//
+	// // Cameras
+	// CameraServer.getInstance().startAutomaticCapture("cam0", 0);
+	// CameraServer.getInstance().startAutomaticCapture("cam1", 1);
 
-	// Cameras
-	CameraServer.getInstance().startAutomaticCapture("cam0", 0);
-	CameraServer.getInstance().startAutomaticCapture("cam1", 1);
+	// Autonomous
+
+	putConfigVariableInSDB("chassis_DriveDistance_PID_Tolerance");
+
+	putConfigVariableInSDB("chassis_DriveDistance_PID_KP");
+	putConfigVariableInSDB("chassis_DriveDistance_PID_KI");
+	putConfigVariableInSDB("chassis_DriveDistance_PID_KD");
+
+	SmartDashboard.putData("Drive 0.1 meter", new DriveDistance(0.1));
+	SmartDashboard.putData("Drive 1.0 meter", new DriveDistance(1.0));
+	SmartDashboard.putData("Drive 2.0 meter", new DriveDistance(2.0));
+	SmartDashboard.putData("Drive 0.5 meter", new DriveDistance(0.5));
+	
+	SmartDashboard.putData(new ClimbingDown());
 
 	logger.info("Finished initSDB()");
     }
