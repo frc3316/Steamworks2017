@@ -3,6 +3,7 @@ import cv2
 import numpy as np
 
 
+# TODO: Consider using https://docs.python.org/2/library/abc.html
 class DBugAbstractImage(object):
     """
     The abstract class of an image (e.g: frame taken from a camera), all types of images should inherit from
@@ -19,7 +20,7 @@ class DBugAbstractImage(object):
         """
         :return: a copy of self - a new image with the exact same pixels
         """
-        return DBugAbstractImage(cv2_image=self.image.copy())  # NOTE: For Barak how would i maintain the dynamic type?
+        return self.__class__(cv2_image=self.image.copy())
 
     def display_gui_window(self, window_title):
         """
@@ -60,12 +61,6 @@ class DBugColorImage(DBugAbstractImage):
         cv2_contours = [c.contour for c in contours]
         cv2.drawContours(self.image, cv2_contours, -1, line_color, line_thickness)  # -1 draw all contours in cv2_contours
 
-    def copy(self):
-        """
-        :return: a copy of self - a new image with the exact same pixels
-        """
-        return DBugColorImage(cv2_image=super(DBugColorImage, self).copy().image)
-
     def draw_rotated_enclosing_rectangle(self, contour, line_color=(0,0,0), line_thickness=1):
         """
         Draws the rotated enclosing rectangle of the given contour on self
@@ -104,9 +99,3 @@ class DBugBinaryImage(DBugAbstractImage):
         """
         (contours, _) = cv2.findContours(self.image.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         return [DbugContour(cv_contour=contour) for contour in contours]
-
-    def copy(self):
-        """
-        :return: a copy of self - a new image with the exact same pixels
-        """
-        return DBugBinaryImage(cv2_image=super(DBugBinaryImage, self).copy().image)

@@ -1,4 +1,8 @@
 # Imports:
+import argparse
+import traceback
+
+from cv2 import destroyAllWindows
 from constants import *
 from dbug_networking import DBugNetworking
 from dbug_video_stream import DBugVideoStream
@@ -22,13 +26,12 @@ def filter_sort_contours(contours):
     for contour in contours:
         (x_offset, y_offset, width, height) = contour.straight_enclosing_rectangle()
         if not (MIN_BOUND_RECT_AREA < contour.contour_area() < MAX_BOUND_RECT_AREA):
-            logger.debug("Rect denied, min-max rect area with area: " + str(width*height))
+            logger.debug("Rect denied, contour min-max area, contour area is: " + str(width*height))
             continue
 
         ratio = float(height) / float(width)
         if (MIN_HEIGHT_WIDTH_RATIO > ratio) or (MAX_HEIGHT_WIDTH_RATIO < ratio):
             logger.debug("Rect denied, height/width ratio")
-            print("R" + str(ratio))
             continue
 
         potential_bounders.append(contour)
@@ -45,11 +48,10 @@ def init_vision_command():
 
     # Video stream to get the images from
     camera_device_index = DBugVideoStream.get_camera_usb_device_index()
-    camera_device_index = 0 if camera_device_index is None else camera_device_index
 
-    print("Found camera index: " + str(camera_device_index))
+    logger.debug("Found camera index: " + str(camera_device_index))
 
-    if camera_device_index is None:
+    if camera_device_index is not None:
         cam = DBugVideoStream(camera_device_index=camera_device_index)
     else:
         cam = DBugVideoStream()
@@ -80,7 +82,7 @@ def run_vision_command(cam, robot_com):
             if result_obj is None or result_obj.azimuth_angle == UNABLE_TO_PROC_DEFAULT_VAL:
                 robot_com.send_no_data()
                 logger.warning("Couldn't find bounders... sending no data")
-                continue
+
             else:
                 robot_com.send_data(result_obj=result_obj)
 
@@ -101,7 +103,7 @@ def run_vision_command(cam, robot_com):
 
                 # Merged contour of bounders:
 
-                merged_contour = DbugContour.merge_contours(filtered_contours[0], filtered_contours[1])
+                merged_contour = filtered_contours[0] + filtered_contours[1]
                 copy_image.draw_rotated_enclosing_rectangle(contour=merged_contour, line_color=(0,255,0))
 
                 # Angle text:
@@ -113,13 +115,20 @@ def run_vision_command(cam, robot_com):
                 copy_image.display_gui_window(window_title="Original")
                 binary_image.display_gui_window(window_title="Binary")
 
-
-        except MemoryError as error:
+        except Exception as ex:
 
             # MARK: Possible Exception and reasons:
             # 1. Example Exception - Reason For Exception
-            print "An Error Occurred: " + str(error)
-            print "Skipping to the next frame!"
+            logger.error("Unhandled Exception:\n" + traceback.format_exc())
+            logger.debug("Skipping to the next frame!")
+
+            raise
+
+        finally:
+            destroyAllWindows()
+            cam.cam.release()
+        if robot_com.sock is not None:
+            robot_com.sock.close()
 
 if __name__ == "__main__":
 

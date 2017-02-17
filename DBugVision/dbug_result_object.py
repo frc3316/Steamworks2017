@@ -7,16 +7,16 @@ class DBugResult(object):
     This class represents the result of the image processing - the data that was extracted from the camera.
     This result can be later sent to the robot.
     """
-    def __init__(self, bounder1=UNABLE_TO_PROC_DEFAULT_VAL, bounder2=UNABLE_TO_PROC_DEFAULT_VAL):
-        if bounder1 == UNABLE_TO_PROC_DEFAULT_VAL or bounder2 == UNABLE_TO_PROC_DEFAULT_VAL:
+    def __init__(self, bounder1=None, bounder2=None):
+
+        self.bounder1 = bounder1
+        self.bounder2 = bounder2
+
+        if bounder1 is None or bounder2 is None:
             self.azimuth_angle = UNABLE_TO_PROC_DEFAULT_VAL
-            self.bounder1 = None
-            self.bounder2 = None
-            self.merger_contour = None
+            self.merged_contour = None
         else:
-            self.bounder1 = bounder1
-            self.bounder2 = bounder2
-            self.merged_contour = DbugContour.merge_contours(bounder1, bounder2)
+            self.merged_contour = bounder1 + bounder2
             (x_cord, y_cord) = self.merged_contour.rotated_enclosing_rectangle()[0]
             self.azimuth_angle = DBugResult._get_azimuth_angle(object_x_center=x_cord,
                                                                frame_width=RESIZE_IMAGE_WIDTH,

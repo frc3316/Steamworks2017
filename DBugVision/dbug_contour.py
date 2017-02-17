@@ -40,10 +40,9 @@ class DbugContour(object):
         """
         return self.rotated_enclosing_rectangle()[2]
 
-    @staticmethod
-    def merge_contours(contour1, contour2):
+    def __add__(self, other):
         """
-        :return: One contour which is the merger of contour1, contour 2 (holds both of their points)
+        :return: One contour which is the merger of self, other (holds both of their points)
         """
-        cont = vstack([contour1.contour, contour2.contour])
+        cont = vstack([self.contour, other.contour])
         return DbugContour(cv_contour=cont)

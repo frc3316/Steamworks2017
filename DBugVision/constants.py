@@ -33,10 +33,11 @@ else:
 # The default amount of frames to read from the camera in each update in order to clear the buffer
 DEFAULT_READ_BUFFER_AMOUNT = 4
 
-ROBORIO_MDNS = "roborio-3316-frc.local"
+ROBORIO_MDNS = "roborio-3316-frc.frc-robot.local"
 ROBORIO_PORT = 8000
+FALLBACK_ROBORIO_IP = "10.33.16.96"
 
-SHOULD_SHOW_GUI_IMAGES = True
+SHOULD_SHOW_GUI_IMAGES = False
 
 # Contour Filtering:
 
