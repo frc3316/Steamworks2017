@@ -8,7 +8,6 @@ public class WaitForPeg extends DBugCommand {
 	@Override
 	protected void init() {
 		// TODO Auto-generated method stub
-		requires(Robot.installer);
 	}
 
 	@Override
@@ -17,6 +16,9 @@ public class WaitForPeg extends DBugCommand {
 	@Override
 	protected boolean isFinished() {
 		// TODO Auto-generated method stub
+	    if (Robot.installer.isPegPushing()) {
+		logger.info("PEG IS PUSHING");
+	    }
 		return Robot.installer.isPegPushing();
 	}
 

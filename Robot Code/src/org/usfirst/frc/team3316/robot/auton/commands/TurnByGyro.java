@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class TurnByGyro extends DBugCommand {
 
-	private double angle, initAngle = 0;
+	private double angle;
 	private PIDController pid;
 
 	public TurnByGyro(double angle) {
@@ -35,7 +35,7 @@ public class TurnByGyro extends DBugCommand {
 			}
 
 			public double pidGet() {
-				double currentAngle = Robot.chassis.getYaw() - initAngle;
+				double currentAngle = Robot.chassis.getYaw();
 
 				return currentAngle;
 			}
@@ -65,8 +65,7 @@ public class TurnByGyro extends DBugCommand {
 				(double) config.get("chassis_TurnByGyro_PID_KD") / 10000);
 
 		pid.setSetpoint(angle);
-		
-		initAngle = Robot.chassis.getYaw();
+	
 
 		pid.enable();
 	}

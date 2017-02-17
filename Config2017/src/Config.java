@@ -127,8 +127,8 @@ public class Config {
 		/*
 		 * Chassis
 		 */
-		addToConstantsA("CHASSIS_MOTOR_LEFT_REVERSE", true);
-		addToConstantsA("CHASSIS_MOTOR_RIGHT_REVERSE", false);
+		addToConstantsA("CHASSIS_MOTOR_LEFT_REVERSE", false);
+		addToConstantsA("CHASSIS_MOTOR_RIGHT_REVERSE", true);
 
 		addToVariables("chassis_Joystick_Right_Axis", 1);
 		addToVariables("chassis_Joystick_Left_Axis", 5);
@@ -171,8 +171,8 @@ public class Config {
 		addToVariables("chassis_SpeedFactor_Higher", -1.0);
 		addToVariables("chassis_SpeedFactor_Lower", -0.5);
 
-		addToVariables("chassis_TankDrive_InvertX", false);
-		addToVariables("chassis_TankDrive_InvertY", true);
+		addToVariables("chassis_TankDrive_InvertX", true);
+		addToVariables("chassis_TankDrive_InvertY", false);
 	    }
 
 	    /*
@@ -186,10 +186,16 @@ public class Config {
 		addToVariables("chassis_DriveByCamera_PID_KD", 0.0);
 
 		// BY ENCODERS
+		// With overshoot
 		addToVariables("chassis_DriveDistance_PID_Tolerance", 0.01);
 
-		addToVariables("chassis_DriveDistance_PID_KP", 250.0);
-		addToVariables("chassis_DriveDistance_PID_KI", 2.5);
+		addToVariables("chassis_DriveDistanceOvershoot_PID_KP", 370.0);
+		addToVariables("chassis_DriveDistanceOvershoot_PID_KI", 1.4);
+		addToVariables("chassis_DriveDistanceOvershoot_PID_KD", 0.0);
+
+		// Without overshoot
+		addToVariables("chassis_DriveDistance_PID_KP", 230.0);
+		addToVariables("chassis_DriveDistance_PID_KI", 1.4);
 		addToVariables("chassis_DriveDistance_PID_KD", 0.0);
 	    }
 
@@ -200,9 +206,9 @@ public class Config {
 		// PID
 		addToVariables("chassis_TurnByGyro_PID_Tolerance", 1.0);
 
-		addToVariables("chassis_TurnByGyro_PID_KP", 80.0);
-		addToVariables("chassis_TurnByGyro_PID_KI", 0.95);
-		addToVariables("chassis_TurnByGyro_PID_KD", 0.75);
+		addToVariables("chassis_TurnByGyro_PID_KP", 75.0);
+		addToVariables("chassis_TurnByGyro_PID_KI", 0.7);
+		addToVariables("chassis_TurnByGyro_PID_KD", 5.0);
 	    }
 
 	    /*

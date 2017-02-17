@@ -9,10 +9,14 @@ import java.util.Set;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
-import org.usfirst.frc.team3316.robot.auton.commands.DriveDistance;
+import org.usfirst.frc.team3316.robot.auton.commands.DriveDistanceOvershoot;
+import org.usfirst.frc.team3316.robot.auton.commands.SetAngle;
 import org.usfirst.frc.team3316.robot.auton.commands.TurnByGyro;
+import org.usfirst.frc.team3316.robot.auton.sequences.AutonPosition1;
+import org.usfirst.frc.team3316.robot.auton.sequences.AutonPosition2;
 import org.usfirst.frc.team3316.robot.commands.StartCompressor;
 import org.usfirst.frc.team3316.robot.commands.StopCompressor;
+import org.usfirst.frc.team3316.robot.commands.chassis.MoveChassis;
 import org.usfirst.frc.team3316.robot.commands.climbing.ClimbingDown;
 import org.usfirst.frc.team3316.robot.commands.climbing.ClimbingStop;
 import org.usfirst.frc.team3316.robot.commands.intake.MoveIntake;
@@ -49,10 +53,10 @@ public class SDB {
 	    put("Brake mode", ((CANTalon) Robot.actuators.chassisLeft1SC).getBrakeEnableDuringNeutral());
 
 	    // // Intake
-	    // put("Is Gear In", Robot.intake.isGearIn());
+	     put("Is Gear In", Robot.intake.isGearIn());
 	    //
 	    // // Installer
-	    // put("Is Peg Pushing", Robot.installer.isPegPushing());
+	     put("Is Peg Pushing", Robot.installer.isPegPushing());
 	    //
 	    // // Climbing
 	    // put("Climbing Current",
@@ -64,11 +68,10 @@ public class SDB {
 	    // put("Battery Voltage", Robot.sensors.pdp.getVoltage());
 	    
 	    // Autonomous
-	    put("Distance", Robot.chassis.getDistance());
-	    put("Distance Left", Robot.chassis.getLeftDistance());
-	    put("Distance Right", Robot.chassis.getRightDistance());
-	    
-	    
+//	    put("Distance", Robot.chassis.getDistance());
+//	    put("Yaw Angle", Robot.chassis.getYaw());
+//	    
+//	    put("Pulses difference", Robot.sensors.chassisLeftEncoder.getRaw() - Robot.sensors.chassisRightEncoder.getRaw());
 	}
 
 	private void put(String name, double d) {
@@ -162,23 +165,18 @@ public class SDB {
 	// putConfigVariableInSDB("intake_MoveIntake_V");
 	//
 	// // Cameras
-	// CameraServer.getInstance().startAutomaticCapture("cam0", 0);
-	// CameraServer.getInstance().startAutomaticCapture("cam1", 1);
+	 CameraServer.getInstance().startAutomaticCapture("cam0", 0);
+	 CameraServer.getInstance().startAutomaticCapture("cam1", 1);
 
 	// Autonomous
 
-	putConfigVariableInSDB("chassis_DriveDistance_PID_Tolerance");
-
-	putConfigVariableInSDB("chassis_DriveDistance_PID_KP");
-	putConfigVariableInSDB("chassis_DriveDistance_PID_KI");
-	putConfigVariableInSDB("chassis_DriveDistance_PID_KD");
-
-	SmartDashboard.putData("Drive 0.1 meter", new DriveDistance(0.1));
-	SmartDashboard.putData("Drive 1.0 meter", new DriveDistance(1.0));
-	SmartDashboard.putData("Drive 2.0 meter", new DriveDistance(2.0));
-	SmartDashboard.putData("Drive 0.5 meter", new DriveDistance(0.5));
+//	SmartDashboard.putData("Drive 1.5m", new DriveDistanceOvershoot(1.5));
+//	SmartDashboard.putData("Set Angle to 50 deg", new SetAngle(50.0));
+//	
+//	SmartDashboard.putData(new AutonPosition2());
+//	SmartDashboard.putData(new AutonPosition1());
 	
-	SmartDashboard.putData(new ClimbingDown());
+//	SmartDashboard.putData(new ClimbingDown());
 
 	logger.info("Finished initSDB()");
     }

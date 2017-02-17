@@ -23,7 +23,7 @@ public class Chassis extends DBugSubsystem {
     private Encoder rightEncoder;
 
     // Variables
-    private double pitchOffset, rollOffset;
+    private double pitchOffset, rollOffset, yawOffset;
 
     public Chassis() {
 	// Actuators
@@ -71,6 +71,11 @@ public class Chassis extends DBugSubsystem {
 	pitchOffset = pitchOffset - getPitch();
 	SmartDashboard.putNumber("Pitch offset", pitchOffset);
     }
+    
+    public void resetYaw() {
+	yawOffset = yawOffset - getYaw();
+	SmartDashboard.putNumber("Yaw offset", yawOffset);
+    }
 
     public void resetRoll() {
 	rollOffset = rollOffset - getRoll();
@@ -78,7 +83,7 @@ public class Chassis extends DBugSubsystem {
     }
 
     public double getYaw() {
-	return navx.getAngle();
+	return navx.getAngle() + yawOffset;
     }
 
     // Returns the same heading in the range (-180) to (180)

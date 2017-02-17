@@ -17,12 +17,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  *
  */
-public class DriveDistance extends DBugCommand {
+public class DriveDistanceOvershoot extends DBugCommand {
 
 	private double dist, initDistance = 0;
 	private PIDController pid;
 
-	public DriveDistance(double distance) {
+	public DriveDistanceOvershoot(double distance) {
 		requires(Robot.chassis);
 		this.dist = distance;
 		initPID();
@@ -59,15 +59,13 @@ public class DriveDistance extends DBugCommand {
 	protected void init() {
 		Robot.chassis.setBrake(true);
 		
-		Robot.chassis.resetYaw();
-		
 		pid.setOutputRange(-1, 1);
 
 		pid.setAbsoluteTolerance((double) config.get("chassis_DriveDistance_PID_Tolerance"));
 
-		pid.setPID((double) config.get("chassis_DriveDistance_PID_KP") / 1000,
-				(double) config.get("chassis_DriveDistance_PID_KI") / 1000,
-				(double) config.get("chassis_DriveDistance_PID_KD") / 1000);
+		pid.setPID((double) config.get("chassis_DriveDistanceOvershoot_PID_KP") / 1000,
+				(double) config.get("chassis_DriveDistanceOvershoot_PID_KI") / 1000,
+				(double) config.get("chassis_DriveDistanceOvershoot_PID_KD") / 1000);
 
 		pid.setSetpoint(dist);
 
@@ -82,7 +80,11 @@ public class DriveDistance extends DBugCommand {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-	    return pid.onTarget();
+	    if (dist > 0) {
+		return Robot.chassis.getDistance() > (initDistance + dist);
+	    } else {
+		return Robot.chassis.getDistance() < (initDistance + dist);
+	    }
 	}
 
 	// Called once after isFinished returns true
