@@ -32,13 +32,13 @@ else:
 
 # The default amount of frames to read from the camera in each update in order to clear the buffer
 DEFAULT_READ_BUFFER_AMOUNT = 4
+DUMP_IMAGE_EVERY_FRAMES = 30
 
 ROBORIO_MDNS = "roborio-3316-frc.frc-robot.local"
 ROBORIO_PORT = 8000
 FALLBACK_ROBORIO_IP = "10.33.16.96"
 
-SHOULD_SHOW_GUI_IMAGES = False
-
+DUMP_IMAGE_PATH = "Result.png"
 # Contour Filtering:
 
 # The minimum/max area of a contour to be considered as a potential bounder

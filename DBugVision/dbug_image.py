@@ -30,6 +30,13 @@ class DBugAbstractImage(object):
         """
         cv2.imshow(window_title, self.image)
 
+    def save_to_path(self, path):
+        """
+        :param path: The relative path to save the image in self to
+        :return: None
+        """
+        cv2.imwrite(path, self.image)
+
 
 class DBugColorImage(DBugAbstractImage):
     """

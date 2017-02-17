@@ -7,10 +7,22 @@ from constants import *
 from dbug_networking import DBugNetworking
 from dbug_video_stream import DBugVideoStream
 from dbug_result_object import DBugResult
+from dbug_lock_file import LockFile
 from logger import logger
 from dbug_contour import DbugContour
 
-# TODO: move constants of dumping image, show gui windows and etc to command line args
+
+def parse_arguments():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--host", type=str, default=ROBORIO_MDNS,
+                        help="Roborio host address")
+    parser.add_argument("--port", type=int, default=ROBORIO_PORT,
+                        help="Roborio host port")
+    parser.add_argument("--dump_image", action="store_true", default=False,
+                        help="Dump images to current working directory")
+    parser.add_argument("--enable_network", action="store_true", default=True,
+                        help="Enable network communications")
+    return parser.parse_args()
 
 
 def filter_sort_contours(contours):
@@ -41,10 +53,10 @@ def filter_sort_contours(contours):
     return potential_bounders
 
 
-def init_vision_command():
+def init_vision_command(args):
 
     # The communication channel to the robot
-    robot_com = DBugNetworking(host=ROBORIO_MDNS,port=ROBORIO_PORT)
+    robot_com = DBugNetworking(host=args.host,port=args.port)
 
     # Video stream to get the images from
     camera_device_index = DBugVideoStream.get_camera_usb_device_index()
@@ -59,8 +71,9 @@ def init_vision_command():
     return cam, robot_com
 
 
-def run_vision_command(cam, robot_com):
+def run_vision_command(cam, robot_com, args):
 
+    frames_processed = 0
     # Capture frames non-stop, process them and send the results to the robot
     while True:
 
@@ -68,6 +81,8 @@ def run_vision_command(cam, robot_com):
         try:
 
             frame = cam.get_image()
+            frames_processed += 1
+
             binary_image = frame.filter_with_colors(LOWER_BOUND, UPPER_BOUND)
             unfiltered_contours = binary_image.detect_contours()
             filtered_contours = filter_sort_contours(unfiltered_contours)
@@ -79,17 +94,17 @@ def run_vision_command(cam, robot_com):
                 result_obj = DBugResult(bounder1=filtered_contours[0],
                                         bounder2=filtered_contours[1])
 
-            if result_obj is None or result_obj.azimuth_angle == UNABLE_TO_PROC_DEFAULT_VAL:
-                robot_com.send_no_data()
-                logger.warning("Couldn't find bounders... sending no data")
+            if args.enable_network:
 
-            else:
-                robot_com.send_data(result_obj=result_obj)
+                if result_obj is None or result_obj.azimuth_angle == UNABLE_TO_PROC_DEFAULT_VAL:
+                    robot_com.send_no_data()
+                    logger.warning("Couldn't find bounders... sending no data")
+                else:
+                    robot_com.send_data(result_obj=result_obj)
 
             # Saving or showing image
-            # TODO move this to a separate method, where should i put it Barak?
 
-            if SHOULD_SHOW_GUI_IMAGES:
+            if args.dump_image and frames_processed % DUMP_IMAGE_EVERY_FRAMES == 0:
 
                 # Filtered contours:
                 copy_image = frame.copy()
@@ -110,10 +125,9 @@ def run_vision_command(cam, robot_com):
 
                 copy_image.draw_text('AA: ' + str(result_obj.azimuth_angle), origin=(30,30))
 
-                # Finally display the frames:
-
-                copy_image.display_gui_window(window_title="Original")
-                binary_image.display_gui_window(window_title="Binary")
+                # Finally save the frames:
+                logger.debug("Writing frame to path: %s", DUMP_IMAGE_PATH)
+                copy_image.save_to_path(path=DUMP_IMAGE_PATH)
 
         except Exception as ex:
 
@@ -132,8 +146,15 @@ def run_vision_command(cam, robot_com):
 
 if __name__ == "__main__":
 
-    # TODO: Create a lock file to be sure that no other process is currently processing and sending data to the robot
+    lock_file = LockFile("dbug-computer-vision-process.loc")
 
-    cam, robot_com = init_vision_command()
+    if lock_file.is_locked():
+        raise ValueError("Lock File Locked!")
+    else:
+        lock_file.lock()
 
-    run_vision_command(cam, robot_com)
+    args = parse_arguments()
+
+    cam, robot_com = init_vision_command(args)
+
+    run_vision_command(cam, robot_com, args)

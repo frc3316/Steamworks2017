@@ -64,7 +64,7 @@ class DBugNetworking(object):
             self.find_network_addr()
 
         formatted_data = str(self.format_data(result_obj))
-        logger.dbug("Sending data: " + formatted_data)
+        logger.info("Sending data: " + formatted_data)
         self.sock.sendto(formatted_data.replace(' ', '') + '\n', self._address)
 
     def send_no_data(self):
