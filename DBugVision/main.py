@@ -20,7 +20,7 @@ def parse_arguments():
                         help="Roborio host port")
     parser.add_argument("--dump_image", action="store_true", default=False,
                         help="Dump images to current working directory")
-    parser.add_argument("--enable_network", action="store_true", default=True,
+    parser.add_argument("--enable_network", action="store_true", default=False,
                         help="Enable network communications")
     return parser.parse_args()
 
@@ -38,17 +38,19 @@ def filter_sort_contours(contours):
     for contour in contours:
         (x_offset, y_offset, width, height) = contour.straight_enclosing_rectangle()
         if not (MIN_BOUND_RECT_AREA < contour.contour_area() < MAX_BOUND_RECT_AREA):
-            logger.debug("Rect denied, contour min-max area, contour area is: " + str(width*height))
+            # logger.debug("Rect denied, contour min-max area, contour area is: " + str(width*height))
             continue
 
         ratio = float(height) / float(width)
         if (MIN_HEIGHT_WIDTH_RATIO > ratio) or (MAX_HEIGHT_WIDTH_RATIO < ratio):
-            logger.debug("Rect denied, height/width ratio")
+            # logger.debug("Rect denied, height/width ratio")
             continue
 
         potential_bounders.append(contour)
 
     potential_bounders.sort(key=lambda cnt: cnt.contour_area(), reverse=True)
+
+    logger.info("Found " + str(len(potential_bounders)) + " potential bounders")
 
     return potential_bounders
 
@@ -56,7 +58,7 @@ def filter_sort_contours(contours):
 def init_vision_command(args):
 
     # The communication channel to the robot
-    robot_com = DBugNetworking(host=args.host,port=args.port)
+    robot_com = DBugNetworking(host=args.host, port=args.port)
 
     # Video stream to get the images from
     camera_device_index = DBugVideoStream.get_camera_usb_device_index()
@@ -74,13 +76,18 @@ def init_vision_command(args):
 def run_vision_command(cam, robot_com, args):
 
     frames_processed = 0
-    # Capture frames non-stop, process them and send the results to the robot
-    while True:
+    # Making sure the vision process does not crash
+    try:
 
-        # Making sure the vision process does not crash
-        try:
+        # Capture frames non-stop, process them and send the results to the robot
+        while True:
 
             frame = cam.get_image()
+
+            if frame is None:
+                logger.error("Couldn't Read Image from self.cam!")
+                continue
+
             frames_processed += 1
 
             binary_image = frame.filter_with_colors(LOWER_BOUND, UPPER_BOUND)
@@ -129,18 +136,19 @@ def run_vision_command(cam, robot_com, args):
                 logger.debug("Writing frame to path: %s", DUMP_IMAGE_PATH)
                 copy_image.save_to_path(path=DUMP_IMAGE_PATH)
 
-        except Exception as ex:
+    except Exception as ex:
 
-            # MARK: Possible Exception and reasons:
-            # 1. Example Exception - Reason For Exception
-            logger.error("Unhandled Exception:\n" + traceback.format_exc())
-            logger.debug("Skipping to the next frame!")
+        # MARK: Possible Exception and reasons:
+        # 1. Example Exception - Reason For Exception
+        logger.error("Unhandled Exception:\n" + traceback.format_exc())
+        logger.debug("Skipping to the next frame!")
 
-            raise
+        raise
 
-        finally:
-            destroyAllWindows()
-            cam.cam.release()
+    finally:
+        destroyAllWindows()
+        cam.cam.release()
+        logger.info("Finally was called, releasing camera and more")
         if robot_com.sock is not None:
             robot_com.sock.close()
 

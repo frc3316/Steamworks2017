@@ -3,10 +3,9 @@ import cv2
 import numpy as np
 
 
-# TODO: Consider using https://docs.python.org/2/library/abc.html
 class DBugAbstractImage(object):
     """
-    The abstract class of an image (e.g: frame taken from a camera), all types of images should inherit from
+    The mother class of an image (e.g: frame taken from a camera), all types of images should inherit from
     this class.
     """
 

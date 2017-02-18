@@ -55,7 +55,6 @@ class DBugVideoStream(object):
         """
         got_image, new_frame = self.cam.read()
         if not got_image:  # Can't even grab one frame - might be a problem
-            logger.error("Couldn't Read Image from self.cam!")
             return
 
         for _ in xrange(self.read_buffer_amount - 1):  # minus one, since we already grabbed one frame.
