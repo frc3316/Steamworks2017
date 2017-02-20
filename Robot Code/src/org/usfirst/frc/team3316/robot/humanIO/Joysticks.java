@@ -4,8 +4,15 @@
 package org.usfirst.frc.team3316.robot.humanIO;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.commands.intake.IntakeEmptyCommand;
+import org.usfirst.frc.team3316.robot.commands.chassis.BrakeMode;
+import org.usfirst.frc.team3316.robot.commands.chassis.CoastMode;
+import org.usfirst.frc.team3316.robot.commands.climbing.ClimbingStop;
+import org.usfirst.frc.team3316.robot.commands.climbing.ClimbingUp;
+import org.usfirst.frc.team3316.robot.commands.intake.MoveIntake;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
+import org.usfirst.frc.team3316.robot.sequences.CollectGear;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -40,6 +47,7 @@ public class Joysticks
 	DBugLogger logger = Robot.logger;
 
 	public Joystick joystickLeft, joystickRight, joystickOperator;
+	public DBugJoystickButton lowerSpeedBtn, higherSpeedBtn;
 
 	/**
 	 * Initializes the joysticks.
@@ -58,5 +66,14 @@ public class Joysticks
 	public void initButtons()
 	{
 		// TODO: Add buttons after creating subsystems
+		
+		DBugJoystickButton toggleIntakeBtn = new DBugJoystickButton(joystickOperator, "button_Intake_Toggle");
+		toggleIntakeBtn.whenPressed(new DBugToggleCommand(new CollectGear(), new IntakeEmptyCommand()));
+		
+		DBugJoystickButton toggleChassisBrakeMode = new DBugJoystickButton(joystickOperator, "button_Chassis_Break_Toggle");
+		toggleChassisBrakeMode.whenPressed(new DBugToggleCommand(new BrakeMode(), new CoastMode()));
+		
+		DBugJoystickButton toggleClimbingButton = new DBugJoystickButton(joystickOperator, "button_Climbing_Toggle");
+		toggleClimbingButton.whenPressed(new DBugToggleCommand(new ClimbingUp(), new ClimbingStop()));
 	}
 }
