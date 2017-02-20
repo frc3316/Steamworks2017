@@ -9,7 +9,9 @@ import java.util.Set;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
-import org.usfirst.frc.team3316.robot.auton.commands.DriveDistanceOvershoot;
+import org.usfirst.frc.team3316.robot.auton.commands.DriveDistance;
+import org.usfirst.frc.team3316.robot.auton.commands.DriveDistanceLongRange;
+import org.usfirst.frc.team3316.robot.auton.commands.DriveDistanceShortRange;
 import org.usfirst.frc.team3316.robot.auton.commands.SetAngle;
 import org.usfirst.frc.team3316.robot.auton.commands.TurnByGyro;
 import org.usfirst.frc.team3316.robot.auton.sequences.AutonPosition1;
@@ -49,6 +51,11 @@ public class SDB {
 
 	    // For drivers
 
+
+	    put("Distance Right a", Robot.chassis.getRightDistance());
+	    put("Distance Left a", Robot.chassis.getLeftDistance());
+	    put("Yaw Angle a", Robot.chassis.getYaw());
+	    
 	    // Chassis
 	    put("Brake mode", ((CANTalon) Robot.actuators.chassisLeft1SC).getBrakeEnableDuringNeutral());
 
@@ -58,18 +65,15 @@ public class SDB {
 	    // // Installer
 	     put("Is Peg Pushing", Robot.installer.isPegPushing());
 	    //
-	    // // Climbing
-	    // put("Climbing Current",
-	    // Robot.actuators.climbingMotor.getCurrent());
-	    // put("Climbing Voltage",
-	    // Robot.actuators.climbingMotor.getVoltage());
-	    //
-	    // // Other
-	    // put("Battery Voltage", Robot.sensors.pdp.getVoltage());
+	     // Climbing
+	     put("Climbing Current",
+	     Robot.actuators.climbingMotor.getCurrent());
+	     put("Climbing Voltage",
+	     Robot.actuators.climbingMotor.getVoltage());
 	    
-	    // Autonomous
-//	    put("Distance", Robot.chassis.getDistance());
-//	    put("Yaw Angle", Robot.chassis.getYaw());
+	     // Other
+	     put("Battery Voltage", Robot.sensors.pdp.getVoltage());
+	    
 //	    
 //	    put("Pulses difference", Robot.sensors.chassisLeftEncoder.getRaw() - Robot.sensors.chassisRightEncoder.getRaw());
 	}
@@ -155,9 +159,6 @@ public class SDB {
 	SmartDashboard.putData(new UpdateVariablesInConfig()); // NEVER REMOVE
 							       // THIS COMMAND
 
-	SmartDashboard.putData(new UpdateVariablesInConfig()); // NEVER REMOVE
-							       // THIS COMMAND
-
 	SmartDashboard.putData(new StartCompressor());
 	SmartDashboard.putData(new StopCompressor());
 
@@ -173,10 +174,13 @@ public class SDB {
 //	SmartDashboard.putData("Drive 1.5m", new DriveDistanceOvershoot(1.5));
 //	SmartDashboard.putData("Set Angle to 50 deg", new SetAngle(50.0));
 //	
-//	SmartDashboard.putData(new AutonPosition2());
-//	SmartDashboard.putData(new AutonPosition1());
 	
 //	SmartDashboard.putData(new ClimbingDown());
+	
+	SmartDashboard.putData("Drive 1.95m", new DriveDistanceLongRange(1.95, 1.95));
+	SmartDashboard.putData("Drive -0.4m", new DriveDistanceShortRange(-0.4, -0.4));
+	
+	SmartDashboard.putData("position2", new AutonPosition2());
 
 	logger.info("Finished initSDB()");
     }

@@ -124,6 +124,7 @@ public class Robot extends IterativeRobot {
     }
 
     public void teleopInit() {
+	chassis.setBrake(true);
     }
 
     public void teleopPeriodic() {

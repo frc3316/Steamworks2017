@@ -19,26 +19,25 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DriveDistance extends DBugCommand {
 
-	private double dist, initDistance = 0;
-	private PIDController pid;
+	private double distRight, distLeft, initDistanceRight = 0, initDistanceLeft = 0;
+	private PIDController pidRight, pidLeft;
+	private double velocityRight = 0, velocityLeft = 0;
 
-	public DriveDistance(double distance) {
-		requires(Robot.chassis);
-		this.dist = distance;
-		initPID();
+	public DriveDistance(double distanceRight, double distanceLeft) {
+		this.distRight = distanceRight;
+		this.distLeft = distanceLeft;
+		initPIDRight();
+		initPIDLeft();
 	}
 
-	private void initPID() {
-		pid = new PIDController(0, 0, 0, new PIDSource() {
+	private void initPIDRight() {
+		pidRight = new PIDController(0, 0, 0, new PIDSource() {
 			public void setPIDSourceType(PIDSourceType pidSource) {
 				return;
 			}
 
 			public double pidGet() {
-				double currentDist = Robot.chassis.getDistance() - initDistance;
-
-				// REMOVE AFTER TESTINGS
-				SmartDashboard.putNumber("Current Distance", currentDist);
+				double currentDist = Robot.chassis.getRightDistance() - initDistanceRight;
 
 				return currentDist;
 			}
@@ -49,8 +48,30 @@ public class DriveDistance extends DBugCommand {
 		}, new PIDOutput() {
 
 			public void pidWrite(double output) {
-				double velocity = output;
-				Robot.chassis.setMotors(velocity, velocity);
+				velocityRight = output;
+			}
+		}, 0.02);
+	}
+	
+	private void initPIDLeft() {
+		pidLeft = new PIDController(0, 0, 0, new PIDSource() {
+			public void setPIDSourceType(PIDSourceType pidSource) {
+				return;
+			}
+
+			public double pidGet() {
+				double currentDist = Robot.chassis.getLeftDistance() - initDistanceLeft;
+
+				return currentDist;
+			}
+
+			public PIDSourceType getPIDSourceType() {
+				return PIDSourceType.kDisplacement;
+			}
+		}, new PIDOutput() {
+
+			public void pidWrite(double output) {
+			    velocityLeft = output;
 			}
 		}, 0.02);
 	}
@@ -61,34 +82,47 @@ public class DriveDistance extends DBugCommand {
 		
 		Robot.chassis.resetYaw();
 		
-		pid.setOutputRange(-1, 1);
+		pidRight.setOutputRange(-1, 1);
+		pidLeft.setOutputRange(-1, 1);
 
-		pid.setAbsoluteTolerance((double) config.get("chassis_DriveDistance_PID_Tolerance"));
+		pidRight.setAbsoluteTolerance((double) config.get("chassis_DriveDistance_PID_Tolerance"));
+		pidLeft.setAbsoluteTolerance((double) config.get("chassis_DriveDistance_PID_Tolerance"));
 
-		pid.setPID((double) config.get("chassis_DriveDistance_PID_KP") / 1000,
-				(double) config.get("chassis_DriveDistance_PID_KI") / 1000,
-				(double) config.get("chassis_DriveDistance_PID_KD") / 1000);
+		pidRight.setPID((double) config.get("chassis_DriveDistance_PID_RIGHT_KP") / 1000,
+				(double) config.get("chassis_DriveDistance_PID_RIGHT_KI") / 1000,
+				(double) config.get("chassis_DriveDistance_PID_RIGHT_KD") / 1000);
+		pidLeft.setPID((double) config.get("chassis_DriveDistance_PID_LEFT_KP") / 1000,
+			(double) config.get("chassis_DriveDistance_PID_LEFT_KI") / 1000,
+			(double) config.get("chassis_DriveDistance_PID_LEFT_KD") / 1000);
 
-		pid.setSetpoint(dist);
+		pidRight.setSetpoint(distRight);
+		pidLeft.setSetpoint(distLeft);
 
-		initDistance = Robot.chassis.getDistance();
+		initDistanceRight = Robot.chassis.getRightDistance();
+		initDistanceLeft = Robot.chassis.getLeftDistance();
 
-		pid.enable();
+		pidRight.enable();
+		pidLeft.enable();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+	    Robot.chassis.setMotors(velocityLeft, velocityRight);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-	    return pid.onTarget();
+	    return pidRight.onTarget() && pidLeft.onTarget();
 	}
 
 	// Called once after isFinished returns true
 	protected void fin() {
-		pid.reset();
-		pid.disable();
+		pidRight.reset();
+		pidRight.disable();
+		
+		pidLeft.reset();
+		pidLeft.disable();
+		
 		Robot.chassis.setMotors(0, 0);
 	}
 

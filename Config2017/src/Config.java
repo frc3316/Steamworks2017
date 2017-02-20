@@ -179,6 +179,8 @@ public class Config {
 	     * Drive Distance
 	     */
 	    {
+		addToVariables("chassis_DriveDistance_PID_Tolerance", 0.025);
+		
 		// PID
 		// BY CAMERA
 		addToVariables("chassis_DriveByCamera_PID_KP", 0.0);
@@ -186,17 +188,39 @@ public class Config {
 		addToVariables("chassis_DriveByCamera_PID_KD", 0.0);
 
 		// BY ENCODERS
-		// With overshoot
-		addToVariables("chassis_DriveDistance_PID_Tolerance", 0.01);
-
-		addToVariables("chassis_DriveDistanceOvershoot_PID_KP", 370.0);
-		addToVariables("chassis_DriveDistanceOvershoot_PID_KI", 1.4);
-		addToVariables("chassis_DriveDistanceOvershoot_PID_KD", 0.0);
-
-		// Without overshoot
-		addToVariables("chassis_DriveDistance_PID_KP", 230.0);
-		addToVariables("chassis_DriveDistance_PID_KI", 1.4);
-		addToVariables("chassis_DriveDistance_PID_KD", 0.0);
+		{
+		// Right
+		addToVariables("chassis_DriveDistance_PID_RIGHT_KP", 0.0);
+		addToVariables("chassis_DriveDistance_PID_RIGHT_KI", 0.0);
+		addToVariables("chassis_DriveDistance_PID_RIGHT_KD", 0.0);
+		// Left
+		addToVariables("chassis_DriveDistance_PID_LEFT_KP", 0.0);
+		addToVariables("chassis_DriveDistance_PID_LEFT_KI", 0.0);
+		addToVariables("chassis_DriveDistance_PID_LEFT_KD", 0.0);
+		{
+    			// Long range
+		
+    			// Right
+            		addToVariables("chassis_DriveDistanceLongRange_PID_RIGHT_KP", 125.0);
+            		addToVariables("chassis_DriveDistanceLongRange_PID_RIGHT_KI", 1.5);
+            		addToVariables("chassis_DriveDistanceLongRange_PID_RIGHT_KD", 3.0);
+            		// Left
+            		addToVariables("chassis_DriveDistanceLongRange_PID_LEFT_KP", 55.0);
+            		addToVariables("chassis_DriveDistanceLongRange_PID_LEFT_KI", 1.5);
+            		addToVariables("chassis_DriveDistanceLongRange_PID_LEFT_KD", 3.0);
+            		
+            		// Short range
+            		
+    			// Right
+            		addToVariables("chassis_DriveDistanceShortRange_PID_RIGHT_KP", 850.0);
+            		addToVariables("chassis_DriveDistanceShortRange_PID_RIGHT_KI", 1.0);
+            		addToVariables("chassis_DriveDistanceShortRange_PID_RIGHT_KD", 0.0);
+            		// Left
+            		addToVariables("chassis_DriveDistanceShortRange_PID_LEFT_KP", 850.0);
+            		addToVariables("chassis_DriveDistanceShortRange_PID_LEFT_KI", 1.0);
+            		addToVariables("chassis_DriveDistanceShortRange_PID_LEFT_KD", 0.0);
+		}
+		}
 	    }
 
 	    /*
@@ -236,6 +260,7 @@ public class Config {
 	     */
 	    {
 		addToVariables("intake_MoveIntake_V", 1.0);
+		addToVariables("intake_RollIn_Voltage", 1.0);
 	    }
 	}
 
@@ -275,8 +300,8 @@ public class Config {
 	     * Variables
 	     */
 	    {
-		addToVariables("climbing_Up_Voltage", 0.5);
-		addToVariables("climbing_Down_Voltage", -0.5);
+		addToVariables("climbing_Up_Voltage", 0.8);
+		addToVariables("climbing_Down_Voltage", -0.8);
 	    }
 	}
     }

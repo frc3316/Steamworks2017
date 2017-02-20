@@ -12,6 +12,7 @@ import org.usfirst.frc.team3316.robot.commands.climbing.ClimbingUp;
 import org.usfirst.frc.team3316.robot.commands.intake.MoveIntake;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
+import org.usfirst.frc.team3316.robot.sequences.CollectGear;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -67,7 +68,7 @@ public class Joysticks
 		// TODO: Add buttons after creating subsystems
 		
 		DBugJoystickButton toggleIntakeBtn = new DBugJoystickButton(joystickOperator, "button_Intake_Toggle");
-		toggleIntakeBtn.whenPressed(new DBugToggleCommand(new MoveIntake(), new IntakeEmptyCommand()));
+		toggleIntakeBtn.whenPressed(new DBugToggleCommand(new CollectGear(), new IntakeEmptyCommand()));
 		
 		DBugJoystickButton toggleChassisBrakeMode = new DBugJoystickButton(joystickOperator, "button_Chassis_Break_Toggle");
 		toggleChassisBrakeMode.whenPressed(new DBugToggleCommand(new BrakeMode(), new CoastMode()));

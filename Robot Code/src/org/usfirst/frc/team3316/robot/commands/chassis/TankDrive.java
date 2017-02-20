@@ -3,6 +3,7 @@ package org.usfirst.frc.team3316.robot.commands.chassis;
 import org.usfirst.frc.team3316.robot.Robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TankDrive extends Drive
 {
@@ -23,6 +24,7 @@ public class TankDrive extends Drive
 
 	protected void set()
 	{
+	    SmartDashboard.putNumber("Distance c", Robot.sensors.chassisLeftEncoder.getRaw());
 		left = getLeftY();
 		right = getRightY();
 	}
@@ -33,7 +35,7 @@ public class TankDrive extends Drive
 		double y = deadBand(joystickLeft.getY());
 		if (invertY)
 		{
-			return -y;
+		    return -y;
 		}
 		return y;
 	}
