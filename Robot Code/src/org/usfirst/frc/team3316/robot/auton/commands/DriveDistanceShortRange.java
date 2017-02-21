@@ -36,15 +36,18 @@ public class DriveDistanceShortRange extends DBugCommand {
 		config.add("chassis_DriveDistance_PID_LEFT_KP", config.get("chassis_DriveDistanceShortRange_PID_LEFT_KP"));
 		config.add("chassis_DriveDistance_PID_LEFT_KI", config.get("chassis_DriveDistanceShortRange_PID_LEFT_KI"));
 		config.add("chassis_DriveDistance_PID_LEFT_KD", config.get("chassis_DriveDistanceShortRange_PID_LEFT_KD"));
+
+		cmd.started = false;
 		cmd.start();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
-	protected void execute() {}
+	protected void execute() {
+	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-	    return (!cmd.isRunning() || cmd.isCanceled()) && cmd.started;
+		return (!cmd.isRunning() || cmd.isCanceled()) && cmd.started;
 	}
 
 	// Called once after isFinished returns true

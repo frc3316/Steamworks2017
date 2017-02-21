@@ -22,8 +22,9 @@ public class DriveDistanceLongRange extends DBugCommand {
 	private DriveDistance cmd;
 
 	public DriveDistanceLongRange(double distanceRight, double distanceLeft) {
-	    	requires(Robot.chassis);
+	    requires(Robot.chassis);
 		cmd = new DriveDistance(distanceRight, distanceLeft);
+		cmd.started = false;
 	}
 
 	// Called just before this Command runs the first time
