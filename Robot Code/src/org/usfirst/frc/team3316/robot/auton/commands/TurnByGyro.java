@@ -1,94 +1,87 @@
 package org.usfirst.frc.team3316.robot.auton.commands;
 
 import org.usfirst.frc.team3316.robot.Robot;
-import org.usfirst.frc.team3316.robot.chassis.motion.MotionPlanner;
-import org.usfirst.frc.team3316.robot.chassis.motion.PlannedMotion;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
-import org.usfirst.frc.team3316.robot.commands.chassis.BrakeMode;
-import org.usfirst.frc.team3316.robot.commands.chassis.CoastMode;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
-import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
 public class TurnByGyro extends DBugCommand {
 
-	private double angle;
-	private PIDController pid;
+    private double angle;
+    private PIDController pid;
 
-	public TurnByGyro(double angle) {
-		requires(Robot.chassis);
-		this.angle = angle;
-		initPID();
-	}
+    public TurnByGyro(double angle) {
+	requires(Robot.chassis);
+	this.angle = angle;
+	initPID();
+    }
 
-	private void initPID() {
-		pid = new PIDController(0, 0, 0, new PIDSource() {
-			public void setPIDSourceType(PIDSourceType pidSource) {
-				return;
-			}
+    private void initPID() {
+	pid = new PIDController(0, 0, 0, new PIDSource() {
+	    public void setPIDSourceType(PIDSourceType pidSource) {
+		return;
+	    }
 
-			public double pidGet() {
-				double currentAngle = Robot.chassis.getYaw();
+	    public double pidGet() {
+		double currentAngle = Robot.chassis.getYaw();
 
-				return currentAngle;
-			}
+		return currentAngle;
+	    }
 
-			public PIDSourceType getPIDSourceType() {
-				return PIDSourceType.kDisplacement;
-			}
-		}, new PIDOutput() {
+	    public PIDSourceType getPIDSourceType() {
+		return PIDSourceType.kDisplacement;
+	    }
+	}, new PIDOutput() {
 
-			public void pidWrite(double output) {
-				double velocity = output;
-				Robot.chassis.setMotors(velocity, -velocity);
-			}
-		}, 0.02);
-	}
+	    public void pidWrite(double output) {
+		double velocity = output;
+		Robot.chassis.setMotors(velocity, -velocity);
+	    }
+	}, 0.02);
+    }
 
-	// Called just before this Command runs the first time
-	protected void init() {
-		Robot.chassis.setBrake(true);
-		
-		pid.setOutputRange(-1, 1);
+    // Called just before this Command runs the first time
+    protected void init() {
+	Robot.chassis.setBrake(true);
 
-		pid.setAbsoluteTolerance((double) config.get("chassis_TurnByGyro_PID_Tolerance"));
+	pid.setOutputRange(-1, 1);
 
-		pid.setPID((double) config.get("chassis_TurnByGyro_PID_KP") / 10000,
-				(double) config.get("chassis_TurnByGyro_PID_KI") / 10000,
-				(double) config.get("chassis_TurnByGyro_PID_KD") / 10000);
+	pid.setAbsoluteTolerance((double) config.get("chassis_TurnByGyro_PID_Tolerance"));
 
-		pid.setSetpoint(angle);
-	
+	pid.setPID((double) config.get("chassis_TurnByGyro_PID_KP") / 10000,
+		(double) config.get("chassis_TurnByGyro_PID_KI") / 10000,
+		(double) config.get("chassis_TurnByGyro_PID_KD") / 10000);
 
-		pid.enable();
-	}
+	pid.setSetpoint(angle);
 
-	// Called repeatedly when this Command is scheduled to run
-	protected void execute() {
-	}
+	pid.enable();
+    }
 
-	// Make this return true when this Command no longer needs to run execute()
-	protected boolean isFinished() {
-		return pid.onTarget();
-	}
+    // Called repeatedly when this Command is scheduled to run
+    protected void execute() {
+    }
 
-	// Called once after isFinished returns true
-	protected void fin() {
-		pid.reset();
-		pid.disable();
-		Robot.chassis.setMotors(0, 0);
-	}
+    // Make this return true when this Command no longer needs to run execute()
+    protected boolean isFinished() {
+	return pid.onTarget();
+    }
 
-	// Called when another command which requires one or more of the same
-	// subsystems is scheduled to run
-	protected void interr() {
-		fin();
-	}
+    // Called once after isFinished returns true
+    protected void fin() {
+	pid.reset();
+	pid.disable();
+	Robot.chassis.setMotors(0, 0);
+    }
+
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
+    protected void interr() {
+	fin();
+    }
 }

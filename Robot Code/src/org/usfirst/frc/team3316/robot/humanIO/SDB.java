@@ -9,19 +9,11 @@ import java.util.Set;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
-import org.usfirst.frc.team3316.robot.auton.commands.DriveDistance;
 import org.usfirst.frc.team3316.robot.auton.commands.DriveDistanceLongRange;
 import org.usfirst.frc.team3316.robot.auton.commands.DriveDistanceShortRange;
-import org.usfirst.frc.team3316.robot.auton.commands.SetAngle;
-import org.usfirst.frc.team3316.robot.auton.commands.TurnByGyro;
-import org.usfirst.frc.team3316.robot.auton.sequences.AutonPosition1;
 import org.usfirst.frc.team3316.robot.auton.sequences.AutonPosition2;
 import org.usfirst.frc.team3316.robot.commands.StartCompressor;
 import org.usfirst.frc.team3316.robot.commands.StopCompressor;
-import org.usfirst.frc.team3316.robot.commands.chassis.MoveChassis;
-import org.usfirst.frc.team3316.robot.commands.climbing.ClimbingDown;
-import org.usfirst.frc.team3316.robot.commands.climbing.ClimbingStop;
-import org.usfirst.frc.team3316.robot.commands.intake.MoveIntake;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
