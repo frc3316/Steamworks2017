@@ -259,6 +259,7 @@ public class Config {
 			 */
 			{
 				addToConstants("INTAKE_SWITCH_THRESH", 100.0);
+				addToConstants("INTAKE_SERVO_ANGLE", 90.0);
 			}
 
 			/*

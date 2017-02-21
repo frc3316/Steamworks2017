@@ -26,6 +26,7 @@ public class Actuators
 	// Intake
 	public DBugSpeedController intakeMotor;
 	public SpeedController intakeMotorSC;
+	public Servo intakeExtenderServo;
 	
 	// Climbing
 	public DBugSpeedController climbingMotor;
@@ -100,6 +101,7 @@ public class Actuators
 	private void IntakeActuatorsA()
 	{
 		intakeMotorSC = new Talon((int) Robot.config.get("INTAKE_MOTOR"));
+		intakeExtenderServo = new Servo((int) Robot.config.get("INTAKE_SERVO"));
 	}
 
 	private void IntakeActuatorsB()

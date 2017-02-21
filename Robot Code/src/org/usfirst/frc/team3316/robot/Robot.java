@@ -8,6 +8,7 @@ import org.usfirst.frc.team3316.robot.auton.sequences.AutonPosition1;
 import org.usfirst.frc.team3316.robot.auton.sequences.AutonPosition2;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 import org.usfirst.frc.team3316.robot.commands.chassis.CoastMode;
+import org.usfirst.frc.team3316.robot.commands.intake.ReleaseIntakeExtender;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.humanIO.Joysticks;
 import org.usfirst.frc.team3316.robot.humanIO.SDB;
@@ -156,6 +157,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	public void autonomousInit() {
+		(new ReleaseIntakeExtender()).start();
 	}
 
 	public void autonomousPeriodic() {
