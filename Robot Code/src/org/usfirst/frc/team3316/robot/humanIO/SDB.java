@@ -12,7 +12,6 @@ import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.auton.commands.DriveDistance;
 import org.usfirst.frc.team3316.robot.auton.commands.DriveDistanceLongRange;
 import org.usfirst.frc.team3316.robot.auton.commands.DriveDistanceShortRange;
-import org.usfirst.frc.team3316.robot.auton.commands.SetAngle;
 import org.usfirst.frc.team3316.robot.auton.commands.TurnByGyro;
 import org.usfirst.frc.team3316.robot.auton.sequences.AutonPosition1;
 import org.usfirst.frc.team3316.robot.auton.sequences.AutonPosition2;
