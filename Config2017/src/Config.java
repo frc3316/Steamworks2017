@@ -199,7 +199,7 @@ public class Config {
 					addToVariables("chassis_DriveDistance_PID_LEFT_KD", 0.0);
 					
 					// Yaw
-					addToVariables("chassis_DriveDistance_PID_YAW_KP", 50.0);
+					addToVariables("chassis_DriveDistance_PID_YAW_KP", 100.0);
 					addToVariables("chassis_DriveDistance_PID_YAW_KI", 0.0);
 					addToVariables("chassis_DriveDistance_PID_YAW_KD", 0.0);
 					

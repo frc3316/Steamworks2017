@@ -20,7 +20,7 @@ public class CoastMode extends DBugCommand
 
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return true;
 	}
 
 	@Override

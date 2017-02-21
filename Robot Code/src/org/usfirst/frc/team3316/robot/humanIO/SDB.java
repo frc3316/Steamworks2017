@@ -52,9 +52,9 @@ public class SDB {
 	    // For drivers
 
 
-	    put("Distance Right a", Robot.chassis.getRightDistance());
-	    put("Distance Left a", Robot.chassis.getLeftDistance());
-	    put("Yaw Angle a", Robot.chassis.getYaw());
+	    put("Distance Right", Robot.chassis.getRightDistance());
+	    put("Distance Left", Robot.chassis.getLeftDistance());
+	    put("Yaw Angle", Robot.chassis.getYaw());
 	    
 	    // Chassis
 	    put("Brake mode", ((CANTalon) Robot.actuators.chassisLeft1SC).getBrakeEnableDuringNeutral());
@@ -181,6 +181,11 @@ public class SDB {
 	SmartDashboard.putData("Drive -0.4m", new DriveDistanceShortRange(-0.4, -0.4));
 	
 	SmartDashboard.putData("position2", new AutonPosition2());
+	SmartDashboard.putData("position1", new AutonPosition1());
+	
+	putConfigVariableInSDB("chassis_DriveDistance_PID_YAW_KP");
+	putConfigVariableInSDB("chassis_DriveDistance_PID_YAW_KI");
+	putConfigVariableInSDB("chassis_DriveDistance_PID_YAW_KD");
 
 	logger.info("Finished initSDB()");
     }

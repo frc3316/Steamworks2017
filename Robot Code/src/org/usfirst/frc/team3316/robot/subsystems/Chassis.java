@@ -51,6 +51,8 @@ public class Chassis extends DBugSubsystem {
      */
     public void setMotors(double left, double right) {
 	logger.finest("Setting chassis. left: " + left + ", right: " + right);
+	SmartDashboard.putNumber("left motor", left);
+	SmartDashboard.putNumber("right motor", right);
 
 	leftMotor1.setMotor(left);
 	leftMotor2.setMotor(left);

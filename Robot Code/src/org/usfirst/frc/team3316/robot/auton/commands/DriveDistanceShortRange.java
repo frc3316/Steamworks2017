@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DriveDistanceShortRange extends DBugCommand {
 
-	private DBugCommand cmd;
+	private DriveDistance cmd;
 
 	public DriveDistanceShortRange(double distanceRight, double distanceLeft) {
 		requires(Robot.chassis);
@@ -44,7 +44,7 @@ public class DriveDistanceShortRange extends DBugCommand {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-	    return !cmd.isRunning() || cmd.isCanceled();
+	    return (!cmd.isRunning() || cmd.isCanceled()) && cmd.started;
 	}
 
 	// Called once after isFinished returns true

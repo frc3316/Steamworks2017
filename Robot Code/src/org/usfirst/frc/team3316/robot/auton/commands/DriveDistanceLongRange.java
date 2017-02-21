@@ -19,10 +19,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class DriveDistanceLongRange extends DBugCommand {
 
-	private DBugCommand cmd;
+	private DriveDistance cmd;
 
 	public DriveDistanceLongRange(double distanceRight, double distanceLeft) {
-		requires(Robot.chassis);
+	    	requires(Robot.chassis);
 		cmd = new DriveDistance(distanceRight, distanceLeft);
 	}
 
@@ -44,12 +44,15 @@ public class DriveDistanceLongRange extends DBugCommand {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-	    return !cmd.isRunning() || cmd.isCanceled();
+	    logger.info("DriveDistanceLong isFinished: " + cmd.isRunning() + " " + cmd.isCanceled());
+	    return (!cmd.isRunning() || cmd.isCanceled()) && cmd.started;
 	}
 
 	// Called once after isFinished returns true
 	protected void fin() {
-		cmd.cancel();
+	    logger.info("DriveDistanceLong ended");
+	    cmd.started = false;
+	    cmd.cancel();
 	}
 
 	// Called when another command which requires one or more of the same
