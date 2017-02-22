@@ -6,6 +6,7 @@ import java.util.Timer;
 import org.usfirst.frc.team3316.robot.auton.sequences.AutonPassLine;
 import org.usfirst.frc.team3316.robot.auton.sequences.AutonPosition1;
 import org.usfirst.frc.team3316.robot.auton.sequences.AutonPosition2;
+import org.usfirst.frc.team3316.robot.auton.sequences.AutonPosition3;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 import org.usfirst.frc.team3316.robot.commands.chassis.CoastMode;
 import org.usfirst.frc.team3316.robot.commands.intake.ReleaseIntakeExtender;
@@ -138,6 +139,7 @@ public class Robot extends IterativeRobot {
 			});
 			autonChooser.addObject("Position 1", new AutonPosition1());
 			autonChooser.addObject("Position 2", new AutonPosition2());
+			autonChooser.addObject("Position 3", new AutonPosition3());
 			autonChooser.addObject("Pass line", new AutonPassLine());
 			SmartDashboard.putData("Auton Chooser", autonChooser); // After SDB initialized
 
@@ -158,6 +160,9 @@ public class Robot extends IterativeRobot {
 
 	public void autonomousInit() {
 		(new ReleaseIntakeExtender()).start();
+		if (autonChooser.getSelected() != null) {
+		    ((Command) autonChooser.getSelected()).start();
+		}
 	}
 
 	public void autonomousPeriodic() {
@@ -166,6 +171,9 @@ public class Robot extends IterativeRobot {
 
 	public void teleopInit() {
 		chassis.setBrake(true);
+		if (autonChooser.getSelected() != null) {
+		    ((Command) autonChooser.getSelected()).cancel();
+		}
 	}
 
 	public void teleopPeriodic() {

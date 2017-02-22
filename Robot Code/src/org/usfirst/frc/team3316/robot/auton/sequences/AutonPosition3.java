@@ -13,8 +13,8 @@ import org.usfirst.frc.team3316.robot.commands.installer.WaitForPeg;
 
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
-public class AutonPosition1 extends DBugCommandGroup {
-    public AutonPosition1() {
+public class AutonPosition3 extends DBugCommandGroup {
+    public AutonPosition3() {
 	addSequential(new ResetGyro());
 	addSequential(new DriveDistanceLongRange(1.92, 1.92));
 	addSequential(new TurnByGyro(53.0));

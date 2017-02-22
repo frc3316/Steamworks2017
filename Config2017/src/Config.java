@@ -167,7 +167,7 @@ public class Config {
 			{
 				addToVariables("chassis_TankDrive_DeadBand", 0.05);
 
-				addToVariables("chassis_SpeedFactor_Medium", -0.8);
+				addToVariables("chassis_SpeedFactor_Medium", -1.0);
 				addToVariables("chassis_SpeedFactor_Higher", -1.0);
 				addToVariables("chassis_SpeedFactor_Lower", -0.5);
 
@@ -199,7 +199,7 @@ public class Config {
 					addToVariables("chassis_DriveDistance_PID_LEFT_KD", 0.0);
 					
 					// Yaw
-					addToVariables("chassis_DriveDistance_PID_YAW_KP", 100.0);
+					addToVariables("chassis_DriveDistance_PID_YAW_KP", 85.0);
 					addToVariables("chassis_DriveDistance_PID_YAW_KI", 0.0);
 					addToVariables("chassis_DriveDistance_PID_YAW_KD", 0.0);
 					
@@ -259,7 +259,7 @@ public class Config {
 			 */
 			{
 				addToConstants("INTAKE_SWITCH_THRESH", 100.0);
-				addToConstants("INTAKE_SERVO_ANGLE", 90.0);
+				addToConstants("INTAKE_SERVO_ANGLE", 10.0);
 			}
 
 			/*
@@ -308,8 +308,8 @@ public class Config {
 			 * Variables
 			 */
 			{
-				addToVariables("climbing_Up_Voltage", 0.8);
-				addToVariables("climbing_Down_Voltage", -0.8);
+				addToVariables("climbing_Up_Voltage", 0.5);
+				addToVariables("climbing_Down_Voltage", -0.5);
 			}
 		}
 	}
