@@ -3,16 +3,18 @@ package org.usfirst.frc.team3316.robot.commands.chassis;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
-public class BrakeMode extends DBugCommand
+public class ResetGyro extends DBugCommand
 {
 	// TODO: Add commenting
 
-	public BrakeMode()
+	public ResetGyro()
 	{}
 
 	@Override
 	protected void init() {
-		Robot.chassis.setBrake(true);
+		Robot.chassis.resetYaw();
+		Robot.chassis.resetPitch();
+		Robot.chassis.resetRoll();
 	}
 
 	@Override

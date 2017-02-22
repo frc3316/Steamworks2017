@@ -85,3 +85,4 @@ local.properties
 */*.sublime-project
 */*.sublime-workspace
 */hs_err_pid*
+/bin/

@@ -13,116 +13,187 @@ import edu.wpi.first.wpilibj.PIDSourceType;
  */
 public class DriveDistance extends DBugCommand {
 
-    private double distRight, distLeft, initDistanceRight = 0, initDistanceLeft = 0;
-    private PIDController pidRight, pidLeft;
-    private double velocityRight = 0, velocityLeft = 0;
+	private double distRight, distLeft, initDistanceRight = 0, initDistanceLeft = 0, initYaw = 0;
+	private PIDController pidRight, pidLeft, pidYaw;
+	private double velocityRight = 0, velocityLeft = 0, ratio = 0;
+	public boolean started = false;
 
-    public DriveDistance(double distanceRight, double distanceLeft) {
-	this.distRight = distanceRight;
-	this.distLeft = distanceLeft;
-	initPIDRight();
-	initPIDLeft();
-    }
+	public DriveDistance(double distanceRight, double distanceLeft) {
+		this.distRight = distanceRight;
+		this.distLeft = distanceLeft;
 
-    private void initPIDRight() {
-	pidRight = new PIDController(0, 0, 0, new PIDSource() {
-	    public void setPIDSourceType(PIDSourceType pidSource) {
-		return;
-	    }
+		started = false;
 
-	    public double pidGet() {
-		double currentDist = Robot.chassis.getRightDistance() - initDistanceRight;
+		initPIDRight();
+		initPIDLeft();
+		initPIDYaw();
+	}
 
-		return currentDist;
-	    }
+	private void initPIDRight() {
+		pidRight = new PIDController(0, 0, 0, new PIDSource() {
+			public void setPIDSourceType(PIDSourceType pidSource) {
+				return;
+			}
 
-	    public PIDSourceType getPIDSourceType() {
-		return PIDSourceType.kDisplacement;
-	    }
-	}, new PIDOutput() {
+			public double pidGet() {
+				double currentDist = Robot.chassis.getRightDistance() - initDistanceRight;
 
-	    public void pidWrite(double output) {
-		velocityRight = output;
-	    }
-	}, 0.02);
-    }
+				return currentDist;
+			}
 
-    private void initPIDLeft() {
-	pidLeft = new PIDController(0, 0, 0, new PIDSource() {
-	    public void setPIDSourceType(PIDSourceType pidSource) {
-		return;
-	    }
+			public PIDSourceType getPIDSourceType() {
+				return PIDSourceType.kDisplacement;
+			}
+		}, new PIDOutput() {
 
-	    public double pidGet() {
-		double currentDist = Robot.chassis.getLeftDistance() - initDistanceLeft;
+			public void pidWrite(double output) {
+				velocityRight = output;
+			}
+		}, 0.02);
+	}
 
-		return currentDist;
-	    }
+	private void initPIDLeft() {
+		pidLeft = new PIDController(0, 0, 0, new PIDSource() {
+			public void setPIDSourceType(PIDSourceType pidSource) {
+				return;
+			}
 
-	    public PIDSourceType getPIDSourceType() {
-		return PIDSourceType.kDisplacement;
-	    }
-	}, new PIDOutput() {
+			public double pidGet() {
+				double currentDist = Robot.chassis.getLeftDistance() - initDistanceLeft;
 
-	    public void pidWrite(double output) {
-		velocityLeft = output;
-	    }
-	}, 0.02);
-    }
+				return currentDist;
+			}
 
-    // Called just before this Command runs the first time
-    protected void init() {
-	Robot.chassis.setBrake(true);
+			public PIDSourceType getPIDSourceType() {
+				return PIDSourceType.kDisplacement;
+			}
+		}, new PIDOutput() {
 
-	Robot.chassis.resetYaw();
+			public void pidWrite(double output) {
+				velocityLeft = output;
+			}
+		}, 0.02);
+	}
 
-	pidRight.setOutputRange(-1, 1);
-	pidLeft.setOutputRange(-1, 1);
+	private void initPIDYaw() {
+		pidYaw = new PIDController(0, 0, 0, new PIDSource() {
+			public void setPIDSourceType(PIDSourceType pidSource) {
+				return;
+			}
 
-	pidRight.setAbsoluteTolerance((double) config.get("chassis_DriveDistance_PID_Tolerance"));
-	pidLeft.setAbsoluteTolerance((double) config.get("chassis_DriveDistance_PID_Tolerance"));
+			public double pidGet() {
+				double currentYaw = Robot.chassis.getYaw() - initYaw;
 
-	pidRight.setPID((double) config.get("chassis_DriveDistance_PID_RIGHT_KP") / 1000,
-		(double) config.get("chassis_DriveDistance_PID_RIGHT_KI") / 1000,
-		(double) config.get("chassis_DriveDistance_PID_RIGHT_KD") / 1000);
-	pidLeft.setPID((double) config.get("chassis_DriveDistance_PID_LEFT_KP") / 1000,
-		(double) config.get("chassis_DriveDistance_PID_LEFT_KI") / 1000,
-		(double) config.get("chassis_DriveDistance_PID_LEFT_KD") / 1000);
+				return currentYaw;
+			}
 
-	pidRight.setSetpoint(distRight);
-	pidLeft.setSetpoint(distLeft);
+			public PIDSourceType getPIDSourceType() {
+				return PIDSourceType.kDisplacement;
+			}
+		}, new PIDOutput() {
 
-	initDistanceRight = Robot.chassis.getRightDistance();
-	initDistanceLeft = Robot.chassis.getLeftDistance();
+			public void pidWrite(double output) {
+				ratio = -output;
+			}
+		}, 0.02);
+	}
 
-	pidRight.enable();
-	pidLeft.enable();
-    }
+	// Called just before this Command runs the first time
+	protected void init() {
+		Robot.chassis.setBrake(true);
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-	Robot.chassis.setMotors(velocityLeft, velocityRight);
-    }
+		pidRight.setOutputRange(-1, 1);
+		pidLeft.setOutputRange(-1, 1);
+		pidYaw.setOutputRange(-1, 1);
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-	return pidRight.onTarget() && pidLeft.onTarget();
-    }
+		pidRight.setAbsoluteTolerance((double) config.get("chassis_DriveDistance_PID_Tolerance"));
+		pidLeft.setAbsoluteTolerance((double) config.get("chassis_DriveDistance_PID_Tolerance"));
 
-    // Called once after isFinished returns true
-    protected void fin() {
-	pidRight.reset();
-	pidRight.disable();
+		pidRight.setPID((double) config.get("chassis_DriveDistance_PID_RIGHT_KP") / 1000,
+				(double) config.get("chassis_DriveDistance_PID_RIGHT_KI") / 1000,
+				(double) config.get("chassis_DriveDistance_PID_RIGHT_KD") / 1000);
+		pidLeft.setPID((double) config.get("chassis_DriveDistance_PID_LEFT_KP") / 1000,
+				(double) config.get("chassis_DriveDistance_PID_LEFT_KI") / 1000,
+				(double) config.get("chassis_DriveDistance_PID_LEFT_KD") / 1000);
+		pidYaw.setPID((double) config.get("chassis_DriveDistance_PID_YAW_KP") / 1000,
+				(double) config.get("chassis_DriveDistance_PID_YAW_KI") / 1000,
+				(double) config.get("chassis_DriveDistance_PID_YAW_KD") / 1000);
 
-	pidLeft.reset();
-	pidLeft.disable();
+		pidRight.setSetpoint(distRight);
+		pidLeft.setSetpoint(distLeft);
+		pidYaw.setSetpoint(0.0);
 
-	Robot.chassis.setMotors(0, 0);
-    }
+		initDistanceRight = Robot.chassis.getRightDistance();
+		initDistanceLeft = Robot.chassis.getLeftDistance();
+		initYaw = Robot.chassis.getYaw();
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interr() {
-	fin();
-    }
+		pidRight.enable();
+		pidLeft.enable();
+		pidYaw.enable();
+		started = true;
+	}
+
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
+		Robot.chassis.setMotors(getLeftVolatge(velocityLeft, ratio), getRightVoltage(velocityRight, ratio));
+	}
+
+	// Make this return true when this Command no longer needs to run execute()
+	protected boolean isFinished() {
+		return pidRight.onTarget() && pidLeft.onTarget();
+	}
+
+	// Called once after isFinished returns true
+	protected void fin() {
+		pidRight.reset();
+		pidRight.disable();
+
+		pidLeft.reset();
+		pidLeft.disable();
+
+		pidYaw.reset();
+		pidYaw.disable();
+
+		Robot.chassis.setMotors(0, 0);
+	}
+
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interr() {
+		logger.info("DriveDistance interrupted");
+		fin();
+	}
+
+	// Utils
+	private double getLeftVolatge(double v, double r) {
+		if (v > 0) { // Driving forward
+			if (r > 0) { // Swerving right
+				return v * (-r + 1);
+			} else { // Swerving left
+				return v;
+			}
+		} else { // Driving back
+			if (r < 0) { // Swerving right
+				return v * (r + 1);
+			} else { // Swerving left
+				return v;
+			}
+		}
+	}
+
+	private double getRightVoltage(double v, double r) {
+		if (v > 0) { // Driving forward
+			if (r < 0) { // Swerving left
+				return v * (r + 1);
+			} else { // Swerving right
+				return v;
+			}
+		} else { // Driving back
+			if (r > 0) { // Swerving left
+				return v * (-r + 1);
+			} else { // Swerving right
+				return v;
+			}
+		}
+	}
 }
