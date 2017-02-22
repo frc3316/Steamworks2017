@@ -308,8 +308,8 @@ public class Config {
 			 * Variables
 			 */
 			{
-				addToVariables("climbing_Up_Voltage", 0.5);
-				addToVariables("climbing_Down_Voltage", -0.5);
+				addToVariables("climbing_Up_Voltage", 0.65);
+				addToVariables("climbing_Down_Voltage", -0.65);
 			}
 		}
 	}
