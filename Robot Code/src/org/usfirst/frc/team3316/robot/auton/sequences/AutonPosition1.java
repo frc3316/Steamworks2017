@@ -16,9 +16,9 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class AutonPosition1 extends DBugCommandGroup {
     public AutonPosition1() {
 	addSequential(new ResetGyro());
-	addSequential(new DriveDistanceLongRange(1.92, 1.92));
+	addSequential(new DriveDistanceLongRange(2.0, 2.0));
 	addSequential(new TurnByGyro(53.0));
-	addParallel(new DriveDistanceLongRange(1.9, 1.9));
+	addParallel(new DriveDistanceLongRange(3.0, 3.0));
 	addSequential(new WaitForPeg());
 	addSequential(new DriveDistanceShortRange(-0.4, -0.4));
     }

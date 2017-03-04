@@ -16,7 +16,6 @@ public class AutonPosition2 extends DBugCommandGroup {
 	addParallel(new DriveDistanceLongRange(2.15, 2.15));
 	addSequential(new WaitForPeg());
 	addParallel(new StopChassis());
-	addSequential(new WaitCommand(1.0));
 	addParallel(new DriveDistanceShortRange(-0.4, -0.4));
     }
 }

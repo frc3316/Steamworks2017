@@ -52,13 +52,22 @@ public class SDB {
 	    // For drivers
 
 	    // Chassis
-	    put("Brake mode", ((CANTalon) Robot.actuators.chassisLeft1SC).getBrakeEnableDuringNeutral());
+	    put("Brake", ((CANTalon) Robot.actuators.chassisLeft1SC).getBrakeEnableDuringNeutral());
+	    put("Distace right", Robot.chassis.getRightDistance());
+	    put("Distace left", Robot.chassis.getLeftDistance());
 
 	    // Intake
-	    put("Is Gear In", Robot.intake.isGearIn());
+	    put("Is Gear", Robot.intake.isGearIn());
 
 	    // Installer
-	    put("Is Peg Pushing", Robot.installer.isPegPushing());
+	    put("Is Peg", Robot.installer.isPegPushing());
+	    
+	    // Yaw
+	    put("Yaw angle", Robot.chassis.getYaw());
+	    
+	    // Climbing
+	    put("Climbing current", Robot.actuators.climbingMotor.getCurrent());
+	    put("Climbing voltage", Robot.actuators.climbingMotor.getVoltage());
 	}
 
 	private void put(String name, double d) {
@@ -88,7 +97,7 @@ public class SDB {
     public SDB() {
 	variablesInSDB = new Hashtable<String, Class<?>>();
 
-	initLiveWindow();
+//	initLiveWindow();
 	initSDB();
 	initDriverCameras();
     }
