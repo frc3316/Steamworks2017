@@ -48,5 +48,9 @@ public class Intake extends DBugSubsystem {
 		return Utils.AnalogToDigitalInput(switch1, thresh) || Utils.AnalogToDigitalInput(switch2, thresh)
 				|| Utils.AnalogToDigitalInput(switch3, thresh);
 	}
+	
+	public boolean isRollingIn() {
+	    return motor.getVoltage() > 0.0;
+	}
 
 }

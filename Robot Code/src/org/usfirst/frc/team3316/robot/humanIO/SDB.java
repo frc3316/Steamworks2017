@@ -58,6 +58,7 @@ public class SDB {
 
 	    // Intake
 	    put("Is Gear", Robot.intake.isGearIn());
+	    put("Is Rolling in", Robot.intake.isRollingIn());
 
 	    // Installer
 	    put("Is Peg", Robot.installer.isPegPushing());
