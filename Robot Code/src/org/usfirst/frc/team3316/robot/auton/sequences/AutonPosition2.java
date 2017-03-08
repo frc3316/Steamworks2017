@@ -13,9 +13,9 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class AutonPosition2 extends DBugCommandGroup {
     public AutonPosition2() {
-	addParallel(new DriveDistanceLongRange(2.15, 2.15));
+	addParallel(new DriveDistanceLongRange(2.3, 2.3));
 	addSequential(new WaitForPeg());
 	addParallel(new StopChassis());
-	addParallel(new DriveDistanceShortRange(-0.4, -0.4));
+	addParallel(new DriveDistanceShortRange(-0.65, -0.65));
     }
 }

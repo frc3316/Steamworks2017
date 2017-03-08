@@ -160,9 +160,6 @@ public class SDB {
 
 	// Intake
 	SmartDashboard.putData(new ReleaseIntakeExtender());
-	
-	// Climbing
-	SmartDashboard.putData(new ClimbingDown());
 
 	logger.info("Finished initSDB()");
     }

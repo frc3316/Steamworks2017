@@ -207,11 +207,11 @@ public class Config {
 						// Long range
 
 						// Right
-						addToVariables("chassis_DriveDistanceLongRange_PID_RIGHT_KP", 125.0);
+						addToVariables("chassis_DriveDistanceLongRange_PID_RIGHT_KP", 115.0);
 						addToVariables("chassis_DriveDistanceLongRange_PID_RIGHT_KI", 1.0);
 						addToVariables("chassis_DriveDistanceLongRange_PID_RIGHT_KD", 3.0);
 						// Left
-						addToVariables("chassis_DriveDistanceLongRange_PID_LEFT_KP", 55.0);
+						addToVariables("chassis_DriveDistanceLongRange_PID_LEFT_KP", 50.0);
 						addToVariables("chassis_DriveDistanceLongRange_PID_LEFT_KI", 1.0);
 						addToVariables("chassis_DriveDistanceLongRange_PID_LEFT_KD", 3.0);
 

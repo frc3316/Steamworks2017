@@ -50,7 +50,7 @@ public class Intake extends DBugSubsystem {
 	}
 	
 	public boolean isRollingIn() {
-	    return motor.getVoltage() > 0.0;
+	    return motor.getVoltage() != 0.0;
 	}
 
 }
