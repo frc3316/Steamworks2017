@@ -18,7 +18,7 @@ public class AutonPosition1 extends DBugCommandGroup {
 	addSequential(new ResetGyro());
 	addSequential(new DriveDistanceLongRange(2.0, 2.0));
 	addSequential(new TurnByGyro(53.0));
-	addParallel(new DriveDistanceLongRange(3.0, 3.0));
+	addParallel(new DriveDistanceShortRange(1.0, 1.0)); // TODO: Change values
 	addSequential(new WaitForPeg());
 	addSequential(new DriveDistanceShortRange(-0.4, -0.4));
     }
