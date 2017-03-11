@@ -22,6 +22,8 @@ public class SetSpeed extends DBugCommand {
 
 		initPIDSpeed();
 		initPIDYaw();
+		
+		requires(Robot.chassis);
 	}
 
 	private void initPIDSpeed() {

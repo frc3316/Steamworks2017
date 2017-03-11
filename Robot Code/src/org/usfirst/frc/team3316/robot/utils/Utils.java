@@ -71,5 +71,20 @@ public class Utils
 				new Point(table[0][top], table[1][top]));
 		return valueToReturn;
 	}
+	/**
+	 * Returns all the values which are bigger then the lowestValue
+	 * @param value - (double) the given value to be filtered
+	 * @param lowestValue - (double) the absolute lowest value to be 
+	 * @param defaultValue
+	 * @return
+	 */
+	public static double lowPassFilter(double value, double lowestValue, double defaultValue) {
+	    if (Math.abs(value) >= Math.abs(lowestValue)) {
+		return value;
+	    }
+	    else {
+		return defaultValue;
+	    }
+	}
 
 }

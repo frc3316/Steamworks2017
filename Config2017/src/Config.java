@@ -199,7 +199,7 @@ public class Config {
 					addToVariables("chassis_DriveDistance_PID_LEFT_KD", 0.0);
 					
 					// Yaw
-					addToVariables("chassis_DriveDistance_PID_YAW_KP", 95.0);
+					addToVariables("chassis_DriveDistance_PID_YAW_KP", 76.0);
 					addToVariables("chassis_DriveDistance_PID_YAW_KI", 0.0);
 					addToVariables("chassis_DriveDistance_PID_YAW_KD", 0.0);
 					
@@ -207,11 +207,11 @@ public class Config {
 						// Long range
 
 						// Right
-						addToVariables("chassis_DriveDistanceLongRange_PID_RIGHT_KP", 115.0);
+						addToVariables("chassis_DriveDistanceLongRange_PID_RIGHT_KP", 125.0);
 						addToVariables("chassis_DriveDistanceLongRange_PID_RIGHT_KI", 1.0);
 						addToVariables("chassis_DriveDistanceLongRange_PID_RIGHT_KD", 3.0);
 						// Left
-						addToVariables("chassis_DriveDistanceLongRange_PID_LEFT_KP", 50.0);
+						addToVariables("chassis_DriveDistanceLongRange_PID_LEFT_KP", 90.0);
 						addToVariables("chassis_DriveDistanceLongRange_PID_LEFT_KI", 1.0);
 						addToVariables("chassis_DriveDistanceLongRange_PID_LEFT_KD", 3.0);
 
@@ -233,8 +233,8 @@ public class Config {
 			 * SetSpeed
 			 */
 			{				
-				addToVariables("chassis_SetSpeed_PID_KP", 115.0);
-				addToVariables("chassis_SetSpeed_PID_KI", 1.0);
+				addToVariables("chassis_SetSpeed_PID_KP", 70.0);
+				addToVariables("chassis_SetSpeed_PID_KI", 0.3);
 				addToVariables("chassis_SetSpeed_PID_KD", 0.0);
 			}
 
@@ -245,7 +245,7 @@ public class Config {
 				// PID
 				addToVariables("chassis_TurnByGyro_PID_Tolerance", 1.0);
 
-				addToVariables("chassis_TurnByGyro_PID_KP", 75.0);
+				addToVariables("chassis_TurnByGyro_PID_KP", 52.0);
 				addToVariables("chassis_TurnByGyro_PID_KI", 0.7);
 				addToVariables("chassis_TurnByGyro_PID_KD", 5.0);
 			}

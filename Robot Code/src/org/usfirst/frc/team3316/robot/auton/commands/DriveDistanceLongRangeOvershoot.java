@@ -6,11 +6,11 @@ import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 /**
  *
  */
-public class DriveDistanceLongRangeOverflow extends DBugCommand {
+public class DriveDistanceLongRangeOvershoot extends DBugCommand {
 
 	private DriveDistanceOverflow cmd;
 
-	public DriveDistanceLongRangeOverflow(double distanceRight, double distanceLeft) {
+	public DriveDistanceLongRangeOvershoot(double distanceRight, double distanceLeft) {
 	    requires(Robot.chassis);
 		cmd = new DriveDistanceOverflow(distanceRight, distanceLeft);
 		cmd.started = false;

@@ -10,7 +10,9 @@ import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.auton.commands.DriveDistanceLongRange;
+import org.usfirst.frc.team3316.robot.auton.commands.DriveDistanceLongRangeOvershoot;
 import org.usfirst.frc.team3316.robot.auton.commands.DriveDistanceShortRange;
+import org.usfirst.frc.team3316.robot.auton.commands.SetSpeed;
 import org.usfirst.frc.team3316.robot.auton.commands.TurnByGyro;
 import org.usfirst.frc.team3316.robot.auton.sequences.AutonPosition1;
 import org.usfirst.frc.team3316.robot.auton.sequences.AutonPosition2;
@@ -55,6 +57,7 @@ public class SDB {
 	    put("Brake", ((CANTalon) Robot.actuators.chassisLeft1SC).getBrakeEnableDuringNeutral());
 	    put("Distace right", Robot.chassis.getRightDistance());
 	    put("Distace left", Robot.chassis.getLeftDistance());
+	    put("Speed", Robot.chassis.getSpeed());
 
 	    // Intake
 	    put("Is Gear", Robot.intake.isGearIn());
@@ -157,6 +160,8 @@ public class SDB {
 	
 	// Chassis
 	SmartDashboard.putData(new ResetGyro());
+	
+	SmartDashboard.putData(new SetSpeed(1.0));
 
 	// Intake
 	SmartDashboard.putData(new ReleaseIntakeExtender());

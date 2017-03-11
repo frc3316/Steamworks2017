@@ -140,7 +140,7 @@ public class DriveDistanceOverflow extends DBugCommand {
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		if (distLeft > 0 && distRight > 0) {
+		if (distLeft < 0 && distRight < 0) {
 		    // moving forwards
 		    return distRight >= Robot.chassis.getRightDistance() - initDistanceRight && distLeft >= Robot.chassis.getLeftDistance() - initDistanceLeft;
 		}
