@@ -129,6 +129,10 @@ public class Chassis extends DBugSubsystem {
     public double getDistance() {
 	 return (rightEncoder.getDistance() + leftEncoder.getDistance()) / 2;
     }
+    
+    public double getSpeed() {
+	return (getLeftSpeed() + getRightSpeed()) / 2;
+    }
 
     public void resetEncoders() {
 	rightEncoder.reset();

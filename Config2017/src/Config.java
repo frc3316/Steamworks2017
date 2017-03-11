@@ -167,7 +167,7 @@ public class Config {
 			{
 				addToVariables("chassis_TankDrive_DeadBand", 0.05);
 
-				addToVariables("chassis_SpeedFactor_Medium", -0.9);
+				addToVariables("chassis_SpeedFactor_Medium", -0.95);
 				addToVariables("chassis_SpeedFactor_Higher", -1.0);
 				addToVariables("chassis_SpeedFactor_Lower", -0.5);
 
@@ -227,6 +227,15 @@ public class Config {
 						addToVariables("chassis_DriveDistanceShortRange_PID_LEFT_KD", 0.0);
 					}
 				}
+			}
+			
+			/*
+			 * SetSpeed
+			 */
+			{				
+				addToVariables("chassis_SetSpeed_PID_KP", 115.0);
+				addToVariables("chassis_SetSpeed_PID_KI", 1.0);
+				addToVariables("chassis_SetSpeed_PID_KD", 0.0);
 			}
 
 			/*
@@ -308,8 +317,8 @@ public class Config {
 			 * Variables
 			 */
 			{
-				addToVariables("climbing_Up_Voltage", 0.8);
-				addToVariables("climbing_Down_Voltage", -0.8);
+				addToVariables("climbing_Up_Voltage", 0.9);
+				addToVariables("climbing_Down_Voltage", 0.9);
 			}
 		}
 	}
