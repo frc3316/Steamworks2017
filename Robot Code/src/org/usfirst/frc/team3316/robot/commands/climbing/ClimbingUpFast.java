@@ -15,7 +15,7 @@ public class ClimbingUpFast extends DBugCommand {
 
 	@Override
 	protected void execute() {
-		Robot.climbing.setMotor((double) config.get("climbing_Up_Voltage"));
+		Robot.climbing.setMotor((double) config.get("climbing_UpFast_Voltage"));
 	}
 
 	@Override

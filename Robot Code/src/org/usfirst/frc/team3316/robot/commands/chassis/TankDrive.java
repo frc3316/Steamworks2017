@@ -13,7 +13,7 @@ public class TankDrive extends Drive
 
 	static boolean invertY, invertX;
 
-	static double deadBand = 0.0;
+	static double deadBand = 0.0, speedFactor;
 
 	public TankDrive()
 	{
@@ -25,8 +25,11 @@ public class TankDrive extends Drive
 	protected void set()
 	{
 	    SmartDashboard.putNumber("Distance c", Robot.sensors.chassisLeftEncoder.getRaw());
-		left = getLeftY();
-		right = getRightY();
+		left = getLeftY() * speedFactor;
+		right = getRightY() * speedFactor;
+		
+		
+		speedFactor = (double) config.get("chassis_SpeedFactor_Medium");
 	}
 
 	protected static double getLeftY()

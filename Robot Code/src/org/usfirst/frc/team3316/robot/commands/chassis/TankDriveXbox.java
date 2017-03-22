@@ -19,12 +19,10 @@ public class TankDriveXbox extends Drive {
 	joystickLeft = Robot.joysticks.joystickLeft;
 	joystickRight = Robot.joysticks.joystickRight;
 	joystickOperator = Robot.joysticks.joystickOperator;
-
-	speedFactor = (double) config.get("chassis_SpeedFactor_Medium");
     }
 
     protected void set() {
-	speedFactor = (double) config.get("chassis_SpeedFactor_Medium");
+	speedFactor = (double) config.get("chassis_SpeedFactor_Current");
 
 	right = getLeftY() * speedFactor;
 	left = getRightY() * speedFactor;
