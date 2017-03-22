@@ -3,8 +3,11 @@ package org.usfirst.frc.team3316.robot.commands.climbing;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
 
-public class ClimbingUp extends DBugCommand {
-
+public class ClimbingUpSlow extends DBugCommand {
+	public ClimbingUpSlow() {
+	    requires(Robot.climbing);
+	}
+    
 	@Override
 	protected void init() {
 		Robot.climbing.setMotor(0.0);
@@ -12,7 +15,7 @@ public class ClimbingUp extends DBugCommand {
 
 	@Override
 	protected void execute() {
-		Robot.climbing.setMotor((double) config.get("climbing_Up_Voltage"));
+		Robot.climbing.setMotor((double) config.get("climbing_UpSlow_Voltage"));
 	}
 
 	@Override

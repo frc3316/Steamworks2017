@@ -8,7 +8,8 @@ import org.usfirst.frc.team3316.robot.commands.intake.IntakeEmptyCommand;
 import org.usfirst.frc.team3316.robot.commands.chassis.BrakeMode;
 import org.usfirst.frc.team3316.robot.commands.chassis.CoastMode;
 import org.usfirst.frc.team3316.robot.commands.climbing.ClimbingStop;
-import org.usfirst.frc.team3316.robot.commands.climbing.ClimbingUp;
+import org.usfirst.frc.team3316.robot.commands.climbing.ClimbingUpFast;
+import org.usfirst.frc.team3316.robot.commands.climbing.ClimbingUpSlow;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 import org.usfirst.frc.team3316.robot.sequences.CollectGear;
@@ -73,6 +74,9 @@ public class Joysticks
 		toggleChassisBrakeMode.whenPressed(new DBugToggleCommand(new BrakeMode(), new CoastMode()));
 		
 		DBugJoystickButton toggleClimbingButton = new DBugJoystickButton(joystickOperator, "button_Climbing_Toggle");
-		toggleClimbingButton.whenPressed(new DBugToggleCommand(new ClimbingUp(), new ClimbingStop()));
+		toggleClimbingButton.whenPressed(new DBugToggleCommand(new ClimbingUpFast(), new ClimbingStop()));
+		
+		DBugJoystickButton toggleClimbingSlowButton = new DBugJoystickButton(joystickOperator, "button_ClimbingSlow_Toggle");
+		toggleClimbingSlowButton.whenPressed(new DBugToggleCommand(new ClimbingUpSlow(), new ClimbingStop()));
 	}
 }

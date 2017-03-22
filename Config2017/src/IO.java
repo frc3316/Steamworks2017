@@ -191,7 +191,7 @@ public class IO {
 		    putCANA("CHASSIS_MOTOR_RIGHT_1", 0);
 		    putCANA("CHASSIS_MOTOR_RIGHT_2", 1);
 
-		    putPWMA("INTAKE_MOTOR", 0);
+		    putPWMA("INTAKE_MOTOR", 3);
 		    putPWMA("INTAKE_SERVO", 2);
 
 		    putPWMA("CLIMBING_MOTOR", 1);

@@ -110,6 +110,7 @@ public class Config {
 					addToVariables("button_Chassis_Break_Toggle", 1);
 					addToVariables("button_Chassis_LowerSpeed", 7);
 					addToVariables("button_Chassis_HigherSpeed", 8);
+					addToVariables("button_ClimbingSlow_Toggle", 4);
 				}
 			}
 		}
@@ -173,6 +174,8 @@ public class Config {
 
 				addToVariables("chassis_TankDrive_InvertX", true);
 				addToVariables("chassis_TankDrive_InvertY", false);
+				
+				addToVariables("chassis_LowPassFilter_LowestValue", 0.05);
 			}
 
 			/*
@@ -318,6 +321,7 @@ public class Config {
 			 */
 			{
 				addToVariables("climbing_Up_Voltage", 0.9);
+				addToVariables("climbing_UpSlow_Voltage", 0.4);
 				addToVariables("climbing_Down_Voltage", 0.9);
 			}
 		}

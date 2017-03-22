@@ -72,6 +72,7 @@ public class SDB {
 	    // Climbing
 	    put("Climbing current", Robot.actuators.climbingMotor.getCurrent());
 	    put("Climbing voltage", Robot.actuators.climbingMotor.getVoltage());
+	    put("Is Climbing", Robot.climbing.isRollingIn());
 	}
 
 	private void put(String name, double d) {

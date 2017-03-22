@@ -1,6 +1,7 @@
 package org.usfirst.frc.team3316.robot.subsystems;
 
 import org.usfirst.frc.team3316.robot.Robot;
+import org.usfirst.frc.team3316.robot.commands.climbing.ClimbingAxis;
 import org.usfirst.frc.team3316.robot.robotIO.DBugSpeedController;
 import org.usfirst.frc.team3316.robot.utils.Utils;
 
@@ -37,8 +38,12 @@ public class Climbing extends DBugSubsystem {
     public boolean isClimbingRaising() {
 	return Utils.AnalogToDigitalInput(limitSwitch, thresh);
     }
-    
+
     public boolean isRobotClimbing() {
 	return motor.getCurrent() > (double) config.get("CLIMBING_CURRENT_THRESH");
+    }
+
+    public boolean isRollingIn() {
+	return motor.getVoltage() != 0.0;
     }
 }
