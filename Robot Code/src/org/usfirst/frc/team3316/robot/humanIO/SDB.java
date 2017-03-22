@@ -47,27 +47,29 @@ public class SDB {
 
 	public void run() {
 //	    logger.info("SDB is running");
-	    /*
-	     * Insert put methods here
-	     */
 
-	    // For drivers
+	    /*
+	     * For driver (nosh nosh)
+	     */
 
 	    // Chassis
 	    put("Brake", ((CANTalon) Robot.actuators.chassisLeft1SC).getBrakeEnableDuringNeutral());
+	    
 	    put("Distace right", Robot.chassis.getRightDistance());
 	    put("Distace left", Robot.chassis.getLeftDistance());
 	    put("Speed", Robot.chassis.getSpeed());
-
+	    
+	    put("Yaw angle", Robot.chassis.getYaw());
+	    
+	    put("Low Speed", Robot.chassis.isDrivingSlowly());
+	    put("High Speed", Robot.chassis.isDrivingFast());
+	    
 	    // Intake
 	    put("Is Gear", Robot.intake.isGearIn());
 	    put("Is Rolling in", Robot.intake.isRollingIn());
 
 	    // Installer
 	    put("Is Peg", Robot.installer.isPegPushing());
-	    
-	    // Yaw
-	    put("Yaw angle", Robot.chassis.getYaw());
 	    
 	    // Climbing
 	    put("Climbing current", Robot.actuators.climbingMotor.getCurrent());
@@ -155,14 +157,9 @@ public class SDB {
     private void initSDB() {
 	SmartDashboard.putData(new UpdateVariablesInConfig()); // NEVER REMOVE
 							       // THIS COMMAND
-
-	SmartDashboard.putData(new StartCompressor());
-	SmartDashboard.putData(new StopCompressor());
 	
 	// Chassis
 	SmartDashboard.putData(new ResetGyro());
-	
-	SmartDashboard.putData(new SetSpeed(1.0));
 
 	// Intake
 	SmartDashboard.putData(new ReleaseIntakeExtender());

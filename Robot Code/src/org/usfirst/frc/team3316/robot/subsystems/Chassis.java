@@ -139,4 +139,12 @@ public class Chassis extends DBugSubsystem {
 	rightEncoder.reset();
 	leftEncoder.reset();
     }
+    
+    public boolean isDrivingSlowly() {
+	return config.get("chassis_SpeedFactor_Current") == config.get("chassis_SpeedFactor_Lower");
+    }
+    
+    public boolean isDrivingFast() {
+	return config.get("chassis_SpeedFactor_Current") == config.get("chassis_SpeedFactor_Higher");
+    }
 }
