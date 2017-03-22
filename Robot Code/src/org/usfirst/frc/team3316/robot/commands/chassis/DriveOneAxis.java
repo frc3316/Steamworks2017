@@ -74,7 +74,6 @@ public class DriveOneAxis extends DBugCommand {
     @Override
     protected void execute() {
 	// TODO Auto-generated method stub
-	// TODO Auto-generated method stub
 	speedFactor = (double) config.get("chassis_SpeedFactor_Current");
 
 	double leftVoltage = getLeftVolatge(getY() * speedFactor, ratio);
