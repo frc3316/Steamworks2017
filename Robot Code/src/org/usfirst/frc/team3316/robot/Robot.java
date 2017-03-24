@@ -8,6 +8,7 @@ import org.usfirst.frc.team3316.robot.auton.sequences.AutonPosition1;
 import org.usfirst.frc.team3316.robot.auton.sequences.AutonPosition2;
 import org.usfirst.frc.team3316.robot.auton.sequences.AutonPosition3;
 import org.usfirst.frc.team3316.robot.commands.DBugCommand;
+import org.usfirst.frc.team3316.robot.commands.chassis.ChassisHighSpeed;
 import org.usfirst.frc.team3316.robot.commands.chassis.CoastMode;
 import org.usfirst.frc.team3316.robot.commands.intake.ReleaseIntakeExtender;
 import org.usfirst.frc.team3316.robot.config.Config;
@@ -171,6 +172,8 @@ public class Robot extends IterativeRobot {
 
 	public void teleopInit() {
 		chassis.setBrake(true);
+		(new ChassisHighSpeed()).start();
+		
 		if (autonChooser.getSelected() != null) {
 		    ((Command) autonChooser.getSelected()).cancel();
 		}

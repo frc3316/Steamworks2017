@@ -75,6 +75,10 @@ public class SDB {
 	    put("Climbing current", Robot.actuators.climbingMotor.getCurrent());
 	    put("Climbing voltage", Robot.actuators.climbingMotor.getVoltage());
 	    put("Is Climbing", Robot.climbing.isRollingIn());
+	    
+	    
+	    // TO REMOVE
+	    SmartDashboard.putBoolean("axis button", Robot.joysticks.DriveOneAxisAxisButton.get());
 	}
 
 	private void put(String name, double d) {

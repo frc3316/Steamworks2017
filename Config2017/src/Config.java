@@ -108,6 +108,8 @@ public class Config {
 					addToVariables("button_Chassis_Break_Toggle", 1);
 					addToVariables("button_Chassis_Speed_Toggle", 6);
 					addToVariables("button_Chassis_DriveOneAxis", 3);
+					addToVariables("axis_Chassis_DriveOneAxis", 3);
+					addToVariables("axis_Chassis_SwitchLimit", 0.5);
 					
 					addToVariables("button_ClimbingFast_Toggle", 4);
 					addToVariables("button_ClimbingSlow_Toggle", 2);
