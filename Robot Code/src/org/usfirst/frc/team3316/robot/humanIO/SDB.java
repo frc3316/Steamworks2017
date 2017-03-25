@@ -16,8 +16,6 @@ import org.usfirst.frc.team3316.robot.auton.commands.SetSpeed;
 import org.usfirst.frc.team3316.robot.auton.commands.TurnByGyro;
 import org.usfirst.frc.team3316.robot.auton.sequences.AutonPosition1;
 import org.usfirst.frc.team3316.robot.auton.sequences.AutonPosition2;
-import org.usfirst.frc.team3316.robot.commands.StartCompressor;
-import org.usfirst.frc.team3316.robot.commands.StopCompressor;
 import org.usfirst.frc.team3316.robot.commands.chassis.MoveChassis;
 import org.usfirst.frc.team3316.robot.commands.chassis.ResetGyro;
 import org.usfirst.frc.team3316.robot.commands.climbing.ClimbingDown;
@@ -62,7 +60,6 @@ public class SDB {
 	    put("Yaw angle", Robot.chassis.getYaw());
 	    
 	    put("Low Speed", Robot.chassis.isDrivingSlowly());
-	    put("High Speed", Robot.chassis.isDrivingFast());
 	    
 	    // Intake
 	    put("Is Gear", Robot.intake.isGearIn());
@@ -75,10 +72,6 @@ public class SDB {
 	    put("Climbing current", Robot.actuators.climbingMotor.getCurrent());
 	    put("Climbing voltage", Robot.actuators.climbingMotor.getVoltage());
 	    put("Is Climbing", Robot.climbing.isRollingIn());
-	    
-	    
-	    // TO REMOVE
-	    SmartDashboard.putBoolean("axis button", Robot.joysticks.DriveOneAxisAxisButton.get());
 	}
 
 	private void put(String name, double d) {

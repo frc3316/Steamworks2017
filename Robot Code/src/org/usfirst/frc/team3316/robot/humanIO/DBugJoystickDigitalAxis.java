@@ -3,7 +3,6 @@ package org.usfirst.frc.team3316.robot.humanIO;
 import java.util.TimerTask;
 
 import org.usfirst.frc.team3316.robot.Robot;
-import org.usfirst.frc.team3316.robot.commands.StartCompressor;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Trigger.ButtonScheduler;
