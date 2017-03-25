@@ -1,0 +1,131 @@
+<xml version="1.0">
+<dashboard>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="976" y="338"/>
+		<width>224</width>
+		<property name="Text" value="Back View"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="308" y="514"/>
+		<property name="Text" value="Other"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="64" y="512"/>
+		<width>128</width>
+		<height>16</height>
+		<property name="Text" value="Commands"/>
+		<property name="Horizontal Alignment" value="Left"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1216" y="18"/>
+		<width>112</width>
+		<property name="Text" value="Indications"/>
+		<property name="Horizontal Alignment" value="Left"/>
+	</static-widget>
+	<widget field="Distace left" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="304" y="576"/>
+		<width>144</width>
+	</widget>
+	<widget field="Brake" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="1216" y="48"/>
+		<width>93</width>
+		<height>40</height>
+	</widget>
+	<widget field="Is Climbing" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="1216" y="338"/>
+		<width>116</width>
+		<height>78</height>
+		<property name="Color to show when true" value="255.255.0.255"/>
+	</widget>
+	<widget field="Is Rolling in" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="1216" y="144"/>
+		<width>118</width>
+		<height>80</height>
+		<property name="Color to show when true" value="0.0.0.255"/>
+	</widget>
+	<widget field="Low Speed" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="1216" y="87"/>
+		<width>118</width>
+		<height>41</height>
+	</widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1009" y="394"/>
+		<width>96</width>
+		<height>19</height>
+		<property name="Text" value="Autonomous"/>
+		<property name="Horizontal Alignment" value="Left"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="16" y="482"/>
+		<width>944</width>
+		<property name="Text" value="Front View"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
+		<location x="976" y="16"/>
+		<width>224</width>
+		<height>320</height>
+		<property name="Camera Choice" value=""/>
+	</static-widget>
+	<widget field="Is Gear" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="1216" y="240"/>
+		<width>102</width>
+		<height>41</height>
+		<property name="Color to show when true" value="255.153.51.255"/>
+	</widget>
+	<widget field="Is Peg" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.BooleanBox">
+		<location x="1216" y="281"/>
+		<width>97</width>
+		<height>39</height>
+		<property name="Color to show when true" value="102.102.102.255"/>
+	</widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
+		<location x="16" y="16"/>
+		<width>464</width>
+		<height>464</height>
+		<property name="Camera Choice" value="cam1"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
+		<location x="480" y="16"/>
+		<width>480</width>
+		<height>464</height>
+		<property name="Camera Choice" value=""/>
+	</static-widget>
+	<widget field="ReleaseIntakeExtender" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="65" y="543"/>
+	</widget>
+	<widget field="UpdateVariablesInConfig" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="64" y="608"/>
+	</widget>
+	<widget field="Auton Chooser" type="String Chooser" class="edu.wpi.first.smartdashboard.gui.elements.Chooser">
+		<location x="1072" y="384"/>
+		<property name="Use Radio Buttons" value="false"/>
+	</widget>
+	<widget field="ResetGyro" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="64" y="576"/>
+	</widget>
+	<widget field="Climbing current" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="480" y="544"/>
+		<width>176</width>
+	</widget>
+	<widget field="Speed" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="304" y="636"/>
+		<width>144</width>
+	</widget>
+	<widget field="Distace right" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="302" y="604"/>
+	</widget>
+	<widget field="Climbing voltage" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="480" y="576"/>
+		<width>176</width>
+	</widget>
+	<widget field="Yaw angle" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="304" y="544"/>
+		<width>144</width>
+	</widget>
+</dashboard>
+<live-window>
+</live-window>
+	<hidden field="running"/>
+	<hidden field="High Speed"/>
+	<hidden field="axis button"/>
+</xml>
