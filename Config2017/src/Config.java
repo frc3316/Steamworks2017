@@ -108,7 +108,8 @@ public class Config {
 					addToVariables("button_Chassis_Break_Toggle", 1);
 					addToVariables("button_Chassis_Speed_Toggle", 6);
 					addToVariables("button_Chassis_DriveOneAxis", 3);
-					addToVariables("axis_Chassis_DriveOneAxis", 3);
+					addToVariables("axis_Chassis_DriveOneAxis1", 3);
+					addToVariables("axis_Chassis_DriveOneAxis2", 2);
 					addToVariables("axis_Chassis_SwitchLimit", 0.5);
 					
 					addToVariables("button_ClimbingFast_Toggle", 4);
@@ -170,7 +171,7 @@ public class Config {
 			{
 				addToVariables("chassis_TankDrive_DeadBand", 0.05);
 
-				addToVariables("chassis_SpeedFactor_Higher", -0.95);
+				addToVariables("chassis_SpeedFactor_Higher", -1.0);
 				addToVariables("chassis_SpeedFactor_Lower", -0.3);
 				addToVariables("chassis_SpeedFactor_Current", -0.95); // the default value
 
@@ -253,6 +254,22 @@ public class Config {
 				addToVariables("chassis_TurnByGyro_PID_KP", 52.0);
 				addToVariables("chassis_TurnByGyro_PID_KI", 0.7);
 				addToVariables("chassis_TurnByGyro_PID_KD", 5.0);
+			}
+			
+			/*
+			 * DRIVE BY SPEED
+			 */
+			{
+				addToVariables("chassis_DriveBySpeed_HighestSpeedLeft", 3.0); // in mps
+				addToVariables("chassis_DriveBySpeed_HighestSpeedRight", 3.0); // in mps
+			    
+                		addToVariables("chassis_DriveBySpeed_PID_Left_KP", 20.0);
+                		addToVariables("chassis_DriveBySpeed_PID_Left_KI", 0.5);
+                		addToVariables("chassis_DriveBySpeed_PID_Left_KD", 0.0);
+                
+                		addToVariables("chassis_DriveBySpeed_PID_Right_KP", 20.0);
+                		addToVariables("chassis_DriveBySpeed_PID_Right_KI", 0.5);
+                		addToVariables("chassis_DriveBySpeed_PID_Right_KD", 0.0);
 			}
 
 			/*

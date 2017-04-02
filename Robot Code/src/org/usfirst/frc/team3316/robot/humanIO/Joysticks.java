@@ -46,7 +46,7 @@ public class Joysticks {
 
     public Joystick joystickLeft, joystickRight, joystickOperator;
     public DBugJoystickButton lowerSpeedBtn, higherSpeedBtn;
-    public DBugJoystickDigitalAxis DriveOneAxisAxisButton;
+    public DBugJoystickDigitalAxis DriveOneAxisAxisButton1;
 
     /**
      * Initializes the joysticks.
@@ -75,9 +75,13 @@ public class Joysticks {
 	DBugJoystickButton DriveOneAxisButton = new DBugJoystickButton(joystickOperator, "button_Chassis_DriveOneAxis");
 	DriveOneAxisButton.whileHeld(new DriveOneAxis());
 
-	DriveOneAxisAxisButton = new DBugJoystickDigitalAxis(joystickOperator,
-		(int) config.get("axis_Chassis_DriveOneAxis"), (int) config.get("axis_Chassis_SwitchLimit"));
-	DriveOneAxisAxisButton.whileHeld(new DriveOneAxis());
+	DriveOneAxisAxisButton1 = new DBugJoystickDigitalAxis(joystickOperator,
+		(int) config.get("axis_Chassis_DriveOneAxis1"), (double) config.get("axis_Chassis_SwitchLimit"));
+	DriveOneAxisAxisButton1.whileHeld(new DriveOneAxis());
+	
+	DBugJoystickDigitalAxis DriveOneAxisAxisButton2 = new DBugJoystickDigitalAxis(joystickOperator,
+		(int) config.get("axis_Chassis_DriveOneAxis2"), (double) config.get("axis_Chassis_SwitchLimit"));
+	DriveOneAxisAxisButton2.whileHeld(new DriveOneAxis());
 
 	/*
 	 * Intake

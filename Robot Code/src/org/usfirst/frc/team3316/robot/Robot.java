@@ -121,7 +121,7 @@ public class Robot extends IterativeRobot {
 			 * Choosers
 			 */
 			autonChooser = new SendableChooser();
-			autonChooser.addDefault("Empty Auton", new DBugCommand() {
+			autonChooser.addObject("Empty Auton", new DBugCommand() {
 				protected boolean isFinished() {
 					return false;
 				}
@@ -139,7 +139,7 @@ public class Robot extends IterativeRobot {
 				}
 			});
 			autonChooser.addObject("Position 1", new AutonPosition1());
-			autonChooser.addObject("Position 2", new AutonPosition2());
+			autonChooser.addDefault("Position 2", new AutonPosition2());
 			autonChooser.addObject("Position 3", new AutonPosition3());
 			autonChooser.addObject("Pass line", new AutonPassLine());
 			SmartDashboard.putData("Auton Chooser", autonChooser); // After SDB initialized

@@ -16,6 +16,7 @@ import org.usfirst.frc.team3316.robot.auton.commands.SetSpeed;
 import org.usfirst.frc.team3316.robot.auton.commands.TurnByGyro;
 import org.usfirst.frc.team3316.robot.auton.sequences.AutonPosition1;
 import org.usfirst.frc.team3316.robot.auton.sequences.AutonPosition2;
+import org.usfirst.frc.team3316.robot.commands.chassis.DriveBySpeed;
 import org.usfirst.frc.team3316.robot.commands.chassis.MoveChassis;
 import org.usfirst.frc.team3316.robot.commands.chassis.ResetGyro;
 import org.usfirst.frc.team3316.robot.commands.climbing.ClimbingDown;
@@ -72,6 +73,10 @@ public class SDB {
 	    put("Climbing current", Robot.actuators.climbingMotor.getCurrent());
 	    put("Climbing voltage", Robot.actuators.climbingMotor.getVoltage());
 	    put("Is Climbing", Robot.climbing.isRollingIn());
+	    
+	    // TODO: REMOVE
+	    put("Speed left", Robot.chassis.getLeftSpeed());
+	    put("Speed right", Robot.chassis.getRightSpeed());
 	}
 
 	private void put(String name, double d) {
@@ -160,14 +165,17 @@ public class SDB {
 
 	// Intake
 	SmartDashboard.putData(new ReleaseIntakeExtender());
+	
+	
+	SmartDashboard.putData(new DriveBySpeed());
 
 	logger.info("Finished initSDB()");
     }
     
     private void initDriverCameras() {
 	// Cameras
-	CameraServer.getInstance().startAutomaticCapture("cam0", 0);
-	CameraServer.getInstance().startAutomaticCapture("cam1", 1);
+//	CameraServer.getInstance().startAutomaticCapture("cam0", 0);
+//	CameraServer.getInstance().startAutomaticCapture("cam1", 1);
     }
 
     /**
