@@ -7,6 +7,8 @@ import java.util.Map;
 import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 public class VisionServer implements Runnable
 {
 	public static Map<String, Double> Data;
@@ -64,6 +66,7 @@ public class VisionServer implements Runnable
 
 	public void run()
 	{
+	    SmartDashboard.putBoolean("is connected", isConnected);
 		DatagramSocket serverSocket = null;
 		try
 		{
@@ -98,7 +101,7 @@ public class VisionServer implements Runnable
 				isConnected = true;
 				
 				String sentence = new String(receivePacket.getData());
-//				logger.finest("Packet data length: " + receivePacket.getLength());
+				logger.finest("Packet data length: " + receivePacket.getLength());
 				VisionServer.Data = parseLine(sentence);
 				
 //				logger.finest("Parsed line");
@@ -107,7 +110,7 @@ public class VisionServer implements Runnable
 			{
 				logger.severe("Vision server couldn't receive a packet");
 				isConnected = false;
-//				logger.severe(e);
+				logger.severe(e);
 			}
 		}
 	}

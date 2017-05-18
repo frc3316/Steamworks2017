@@ -93,6 +93,7 @@ public class Robot extends IterativeRobot {
 
 			Robot.actuators.GeneralActuators();
 			Robot.sensors.GeneralSensors();
+			Robot.sensors.VisionSensors();
 
 			/*
 			 * Subsystems
