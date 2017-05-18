@@ -1,5 +1,11 @@
 <xml version="1.0">
 <dashboard>
+	<widget field="left motor" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="0" y="136"/>
+	</widget>
+	<widget field="right motor" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="21" y="1"/>
+	</widget>
 	<widget field="Distace left" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
 		<location x="960" y="652"/>
 		<width>144</width>
@@ -111,22 +117,127 @@
 		<property name="Horizontal Alignment" value="Left"/>
 	</static-widget>
 	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
-		<location x="1300" y="265"/>
-		<width>267</width>
-		<property name="Text" value="Back View"/>
-	</static-widget>
-	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
 		<location x="15" y="538"/>
 		<width>1248</width>
 		<property name="Text" value="Front View"/>
 	</static-widget>
+	<widget field="counter" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="481" y="497"/>
+	</widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="976" y="338"/>
+		<width>224</width>
+		<property name="Text" value="Back View"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="308" y="514"/>
+		<property name="Text" value="Other"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="64" y="512"/>
+		<width>128</width>
+		<height>16</height>
+		<property name="Text" value="Commands"/>
+		<property name="Horizontal Alignment" value="Left"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1216" y="18"/>
+		<width>112</width>
+		<property name="Text" value="Indications"/>
+		<property name="Horizontal Alignment" value="Left"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1009" y="394"/>
+		<width>96</width>
+		<height>19</height>
+		<property name="Text" value="Autonomous"/>
+		<property name="Horizontal Alignment" value="Left"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="16" y="482"/>
+		<width>944</width>
+		<property name="Text" value="Front View"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
+		<location x="976" y="16"/>
+		<width>224</width>
+		<height>320</height>
+		<property name="Camera Choice" value="cam0"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
+		<location x="16" y="16"/>
+		<width>464</width>
+		<height>464</height>
+		<property name="Camera Choice" value="cam1"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
+		<location x="479" y="23"/>
+		<width>466</width>
+		<height>452</height>
+		<property name="Camera Choice" value="cam0"/>
+	</static-widget>
+	<widget field="SetSpeed" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="0" y="388"/>
+	</widget>
+	<widget field="StopCompressor" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="0" y="320"/>
+	</widget>
+	<widget field="StartCompressor" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="0" y="286"/>
+	</widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="976" y="338"/>
+		<width>224</width>
+		<property name="Text" value="Back View"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="308" y="514"/>
+		<property name="Text" value="Other"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="64" y="512"/>
+		<width>128</width>
+		<height>16</height>
+		<property name="Text" value="Commands"/>
+		<property name="Horizontal Alignment" value="Left"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1216" y="18"/>
+		<width>112</width>
+		<property name="Text" value="Indications"/>
+		<property name="Horizontal Alignment" value="Left"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="1009" y="394"/>
+		<width>96</width>
+		<height>19</height>
+		<property name="Text" value="Autonomous"/>
+		<property name="Horizontal Alignment" value="Left"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.Label">
+		<location x="16" y="482"/>
+		<width>944</width>
+		<property name="Text" value="Front View"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
+		<location x="976" y="16"/>
+		<width>224</width>
+		<height>320</height>
+		<property name="Camera Choice" value="cam0"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
+		<location x="16" y="16"/>
+		<width>464</width>
+		<height>464</height>
+		<property name="Camera Choice" value="cam1"/>
+	</static-widget>
+	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
+		<location x="479" y="23"/>
+		<width>466</width>
+		<height>452</height>
+		<property name="Camera Choice" value=""/>
+	</static-widget>
 </dashboard>
 <live-window>
 </live-window>
-	<hidden field="StartCompressor"/>
-	<hidden field="left motor"/>
-	<hidden field="SetSpeed"/>
-	<hidden field="counter"/>
-	<hidden field="right motor"/>
-	<hidden field="StopCompressor"/>
 </xml>

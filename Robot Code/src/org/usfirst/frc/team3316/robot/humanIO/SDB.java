@@ -174,8 +174,8 @@ public class SDB {
     
     private void initDriverCameras() {
 	// Cameras
-//	CameraServer.getInstance().startAutomaticCapture("cam0", 0);
-//	CameraServer.getInstance().startAutomaticCapture("cam1", 1);
+	CameraServer.getInstance().startAutomaticCapture("cam0", 0);
+	CameraServer.getInstance().startAutomaticCapture("cam1", 1);
     }
 
     /**

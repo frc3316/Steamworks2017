@@ -205,7 +205,7 @@ public class Config {
 					addToVariables("chassis_DriveDistance_PID_LEFT_KD", 0.0);
 					
 					// Yaw
-					addToVariables("chassis_DriveDistance_PID_YAW_KP", 76.0);
+					addToVariables("chassis_DriveDistance_PID_YAW_KP", 270.0);
 					addToVariables("chassis_DriveDistance_PID_YAW_KI", 0.0);
 					addToVariables("chassis_DriveDistance_PID_YAW_KD", 0.0);
 					
@@ -213,11 +213,11 @@ public class Config {
 						// Long range
 
 						// Right
-						addToVariables("chassis_DriveDistanceLongRange_PID_RIGHT_KP", 125.0);
+						addToVariables("chassis_DriveDistanceLongRange_PID_RIGHT_KP", 110.0);
 						addToVariables("chassis_DriveDistanceLongRange_PID_RIGHT_KI", 1.0);
 						addToVariables("chassis_DriveDistanceLongRange_PID_RIGHT_KD", 3.0);
 						// Left
-						addToVariables("chassis_DriveDistanceLongRange_PID_LEFT_KP", 90.0);
+						addToVariables("chassis_DriveDistanceLongRange_PID_LEFT_KP", 85.0);
 						addToVariables("chassis_DriveDistanceLongRange_PID_LEFT_KI", 1.0);
 						addToVariables("chassis_DriveDistanceLongRange_PID_LEFT_KD", 3.0);
 
@@ -251,7 +251,7 @@ public class Config {
 				// PID
 				addToVariables("chassis_TurnByGyro_PID_Tolerance", 1.0);
 
-				addToVariables("chassis_TurnByGyro_PID_KP", 52.0);
+				addToVariables("chassis_TurnByGyro_PID_KP", 82.0);
 				addToVariables("chassis_TurnByGyro_PID_KI", 0.7);
 				addToVariables("chassis_TurnByGyro_PID_KD", 5.0);
 			}
@@ -339,7 +339,7 @@ public class Config {
 			 * Variables
 			 */
 			{
-				addToVariables("climbing_UpFast_Voltage", 0.9);
+				addToVariables("climbing_UpFast_Voltage", 1.0);
 				addToVariables("climbing_UpSlow_Voltage", 0.4);
 				addToVariables("climbing_Down_Voltage", 0.9);
 			}
