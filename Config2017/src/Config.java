@@ -192,6 +192,7 @@ public class Config {
 				addToVariables("chassis_DriveByCamera_PID_KP", 0.0);
 				addToVariables("chassis_DriveByCamera_PID_KI", 0.0);
 				addToVariables("chassis_DriveByCamera_PID_KD", 0.0);
+				
 
 				// BY ENCODERS
 				{
