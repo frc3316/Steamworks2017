@@ -66,7 +66,6 @@ public class VisionServer implements Runnable
 
 	public void run()
 	{
-	    SmartDashboard.putBoolean("is connected", isConnected);
 		DatagramSocket serverSocket = null;
 		try
 		{
@@ -81,6 +80,7 @@ public class VisionServer implements Runnable
 
 		while (true)
 		{
+		    SmartDashboard.putBoolean("is connected", isConnected);
 			if (lastTime == 0)
 			{
 				lastTime = System.currentTimeMillis();
@@ -96,21 +96,26 @@ public class VisionServer implements Runnable
 				serverSocket.setSoTimeout(100);
 				serverSocket.receive(receivePacket);
 
-				logger.finest("Received packet");
+//				logger.finest("Received packet");
 				
 				isConnected = true;
 				
 				String sentence = new String(receivePacket.getData());
-				logger.finest("Packet data length: " + receivePacket.getLength());
+				
+				System.out.println("PACKET DATA: " + sentence);
+				SmartDashboard.putString("PACKET DATA", sentence);
+				
+//				logger.finest("Packet data length: " + receivePacket.getLength());
 				VisionServer.Data = parseLine(sentence);
+				SmartDashboard.putNumber("AA", VisionServer.Data.get("AA"));
 				
 //				logger.finest("Parsed line");
 			}
 			catch (Exception e)
 			{
-				logger.severe("Vision server couldn't receive a packet");
+//				logger.severe("Vision server couldn't receive a packet");
 				isConnected = false;
-				logger.severe(e);
+//				logger.severe(e);
 			}
 		}
 	}

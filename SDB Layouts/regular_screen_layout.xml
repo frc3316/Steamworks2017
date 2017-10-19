@@ -87,18 +87,6 @@
 		<height>39</height>
 		<property name="Color to show when true" value="102.102.102.255"/>
 	</widget>
-	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
-		<location x="16" y="16"/>
-		<width>464</width>
-		<height>464</height>
-		<property name="Camera Choice" value="cam1"/>
-	</static-widget>
-	<static-widget class="edu.wpi.first.smartdashboard.gui.elements.CameraServerViewer">
-		<location x="479" y="23"/>
-		<width>466</width>
-		<height>452</height>
-		<property name="Camera Choice" value=""/>
-	</static-widget>
 	<widget field="ReleaseIntakeExtender" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
 		<location x="65" y="543"/>
 	</widget>
@@ -139,6 +127,51 @@
 	</widget>
 	<widget field="StartCompressor" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
 		<location x="0" y="286"/>
+	</widget>
+	<widget field="TurnByCameraPID" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="554" y="151"/>
+	</widget>
+	<widget field="Paths together" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="482" y="326"/>
+	</widget>
+	<widget field="DriveBySpeed" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="261" y="283"/>
+	</widget>
+	<widget field="Path Following" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="0" y="9"/>
+	</widget>
+	<widget field="Drive 1m" type="Command" class="edu.wpi.first.smartdashboard.gui.elements.Command">
+		<location x="303" y="177"/>
+	</widget>
+	<widget field="RIGHT SPEED" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="8" y="8"/>
+	</widget>
+	<widget field="Is Object Detected" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="11" y="12"/>
+	</widget>
+	<widget field="Speed right" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="28" y="27"/>
+	</widget>
+	<widget field="LEFT SPEED" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="27" y="1"/>
+	</widget>
+	<widget field="is connected" type="Boolean" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="3" y="15"/>
+	</widget>
+	<widget field="chassis_DriveByDistance_PID_KP" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="24" y="31"/>
+	</widget>
+	<widget field="chassis_DriveByDistance_PID_KI" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="25" y="23"/>
+	</widget>
+	<widget field="chassis_DriveByDistance_PID_KD" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="7" y="3"/>
+	</widget>
+	<widget field="Speed left" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="27" y="7"/>
+	</widget>
+	<widget field="YAW" type="Number" class="edu.wpi.first.smartdashboard.gui.elements.TextBox">
+		<location x="14" y="31"/>
 	</widget>
 </dashboard>
 <live-window>

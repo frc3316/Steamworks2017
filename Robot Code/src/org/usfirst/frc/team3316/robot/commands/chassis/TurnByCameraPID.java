@@ -10,105 +10,90 @@ import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class TurnByCameraPID extends DBugCommand
-{
-	private static PIDController pid;
-	private static double setPoint;
-	private double lastTowerAngle;
-	private static double tolerance;
+public class TurnByCameraPID extends DBugCommand {
+    private static PIDController pid;
+    private static double setPoint;
+    private double lastTowerAngle;
+    private static double tolerance;
 
-	public TurnByCameraPID()
-	{
-		requires(Robot.chassis);
+    public TurnByCameraPID() {
+	requires(Robot.chassis);
 
-		pid = new PIDController(0, 0, 0, new PIDSource()
-		{
-			public void setPIDSourceType(PIDSourceType pidSource)
-			{
-			}
+	pid = new PIDController(0, 0, 0, new PIDSource() {
+	    public void setPIDSourceType(PIDSourceType pidSource) {
+	    }
 
-			public double pidGet()
-			{
-				return Robot.chassis.getYaw();
-			}
+	    public double pidGet() {
+		return Robot.chassis.getYaw();
+	    }
 
-			public PIDSourceType getPIDSourceType()
-			{
-				return PIDSourceType.kDisplacement;
-			}
-		}, new PIDOutput()
-		{
-			public void pidWrite(double output)
-			{
-				double velocity = output;
-				Robot.chassis.setMotors(velocity, -velocity);
-			}
-		});
+	    public PIDSourceType getPIDSourceType() {
+		return PIDSourceType.kDisplacement;
+	    }
+	}, new PIDOutput() {
+	    public void pidWrite(double output) {
+		double velocity = output;
+		if (AlignShooter.isObjectDetected()) {
+		    Robot.chassis.setMotors(velocity, -velocity);
+		}
+	    }
+	});
 
-		pid.setOutputRange(-1, 1);
-	}
+	pid.setOutputRange(-1, 1);
+    }
 
-	protected void init()
-	{
-		setPoint = 0.0;
-		lastTowerAngle = Double.MAX_VALUE;
-		tolerance = (double) config.get("turret_PID_Tolerance");
+    protected void init() {
+	setPoint = 0.0;
+	lastTowerAngle = Double.MAX_VALUE;
+	tolerance = (double) config.get("chassis_TurnByGyro_PID_Tolerance");
 
-		pid.setAbsoluteTolerance(tolerance);
+	pid.setAbsoluteTolerance(tolerance);
+
+	pid.setSetpoint(setPoint);
+
+	pid.enable();
+    }
+
+    protected void execute() {
+	pid.setPID((double) config.get("chassis_TurnByGyro_PID_KP") / 1000,
+		(double) config.get("chassis_TurnByGyro_PID_KI") / 1000,
+		(double) config.get("chassis_TurnByGyro_PID_KD") / 1000);
+
+	double currentAngle = Robot.chassis.getYaw();
+
+	/*
+	 * This code is with setpoint set by the vision
+	 */
+	if (AlignShooter.isObjectDetected()) {
+	    double towerAngle = AlignShooter.getTowerAngle();
+
+	    if (towerAngle != lastTowerAngle && towerAngle != 3316.0) {
+
+		setPoint = towerAngle + currentAngle;
+
+		lastTowerAngle = towerAngle;
 
 		pid.setSetpoint(setPoint);
+	    }
+	} else {
+	    pid.reset();
+	    pid.enable();
 
-		pid.enable();
+	    Robot.chassis.setMotors(0.0, 0.0);
 	}
+    }
 
-	protected void execute()
-	{
-		pid.setPID((double) config.get("turret_PID_KP") / 1000, 
-				(double) config.get("turret_PID_KI") / 1000,
-				(double) config.get("turret_PID_KD") / 1000);
+    protected boolean isFinished() {
+	return false;
+    }
 
-		double currentAngle = Robot.chassis.getYaw();
+    protected void fin() {
+	pid.reset();
 
-		/*
-		 * This code is with setpoint set by the vision
-		 */
-		if (AlignShooter.isObjectDetected())
-		{
-			double towerAngle = AlignShooter.getTowerAngle();
-			
-			if (towerAngle != lastTowerAngle && towerAngle != 3316.0)
-			{
-				
-				setPoint = towerAngle + currentAngle;
-				
-				lastTowerAngle = towerAngle;
+	Robot.chassis.setMotors(0.0, 0.0);
+    }
 
-				pid.setSetpoint(setPoint);
-			}
-		}
-		else
-		{
-			pid.reset();
-			pid.enable();
-			
-			Robot.chassis.setMotors(0.0, 0.0);
-		}
-	}
-
-	protected boolean isFinished()
-	{
-		return isFin;
-	}
-
-	protected void fin()
-	{
-		pid.reset();
-
-		Robot.chassis.setMotors(0.0, 0.0);
-	}
-
-	protected void interr()
-	{
-		fin();
-	}
+    protected void interr() {
+	fin();
+    }
 }

@@ -233,6 +233,14 @@ public class Config {
 						addToVariables("chassis_DriveDistanceShortRange_PID_LEFT_KI", 1.0);
 						addToVariables("chassis_DriveDistanceShortRange_PID_LEFT_KD", 0.0);
 					}
+					
+					// testing
+					{
+					    addToVariables("chassis_DriveByDistance_PID_KP", 0.0);
+					    addToVariables("chassis_DriveByDistance_PID_KI", 0.0);
+					    addToVariables("chassis_DriveByDistance_PID_KD", 0.0);
+					    addToVariables("chassis_DriveByDistance_PID_SP", 1.0);
+					}
 				}
 			}
 			
@@ -252,9 +260,9 @@ public class Config {
 				// PID
 				addToVariables("chassis_TurnByGyro_PID_Tolerance", 1.0);
 
-				addToVariables("chassis_TurnByGyro_PID_KP", 82.0);
+				addToVariables("chassis_TurnByGyro_PID_KP", 15.0);
 				addToVariables("chassis_TurnByGyro_PID_KI", 0.7);
-				addToVariables("chassis_TurnByGyro_PID_KD", 5.0);
+				addToVariables("chassis_TurnByGyro_PID_KD", 3.0);
 			}
 			
 			/*

@@ -16,15 +16,19 @@ import org.usfirst.frc.team3316.robot.auton.commands.SetSpeed;
 import org.usfirst.frc.team3316.robot.auton.commands.TurnByGyro;
 import org.usfirst.frc.team3316.robot.auton.sequences.AutonPosition1;
 import org.usfirst.frc.team3316.robot.auton.sequences.AutonPosition2;
+import org.usfirst.frc.team3316.robot.commands.DriveByDistance;
 import org.usfirst.frc.team3316.robot.commands.chassis.DriveBySpeed;
 import org.usfirst.frc.team3316.robot.commands.chassis.MoveChassis;
 import org.usfirst.frc.team3316.robot.commands.chassis.ResetGyro;
+import org.usfirst.frc.team3316.robot.commands.chassis.TurnByCameraPID;
 import org.usfirst.frc.team3316.robot.commands.climbing.ClimbingDown;
 import org.usfirst.frc.team3316.robot.commands.climbing.ClimbingStop;
 import org.usfirst.frc.team3316.robot.commands.intake.MoveIntake;
 import org.usfirst.frc.team3316.robot.commands.intake.ReleaseIntakeExtender;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
+import org.usfirst.frc.team3316.robot.vision.AlignShooter;
+import org.usfirst.frc.team3316.robot.vision.VisionServer;
 
 import com.ctre.CANTalon;
 
@@ -77,6 +81,9 @@ public class SDB {
 	    // TODO: REMOVE
 	    put("Speed left", Robot.chassis.getLeftSpeed());
 	    put("Speed right", Robot.chassis.getRightSpeed());
+	    
+	    // Vision
+	    put("Is Object Detected", AlignShooter.isObjectDetected());
 	}
 
 	private void put(String name, double d) {
@@ -168,6 +175,13 @@ public class SDB {
 	
 	
 	SmartDashboard.putData(new DriveBySpeed());
+	SmartDashboard.putData(new TurnByCameraPID());
+	
+	// testing
+	SmartDashboard.putData("Drive 1m", new DriveByDistance((double) config.get("chassis_DriveByDistance_PID_SP")));
+	putConfigVariableInSDB("chassis_DriveByDistance_PID_KP");
+	putConfigVariableInSDB("chassis_DriveByDistance_PID_KI");
+	putConfigVariableInSDB("chassis_DriveByDistance_PID_KD");
 
 	logger.info("Finished initSDB()");
     }
