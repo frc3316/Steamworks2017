@@ -26,8 +26,7 @@ import org.usfirst.frc.team3316.robot.commands.intake.ReleaseIntakeExtender;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
-import com.ctre.CANTalon;
-
+import com.ctre.phoenix.MotorControl.CAN.TalonSRX;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
@@ -52,7 +51,7 @@ public class SDB {
 	     */
 
 	    // Chassis
-	    put("Brake", ((CANTalon) Robot.actuators.chassisLeft1SC).getBrakeEnableDuringNeutral());
+	    put("Brake", ((TalonSRX) Robot.actuators.chassisLeft1SC).getBrakeEnableDuringNeutral());
 	    
 	    put("Distace right", Robot.chassis.getRightDistance());
 	    put("Distace left", Robot.chassis.getLeftDistance());

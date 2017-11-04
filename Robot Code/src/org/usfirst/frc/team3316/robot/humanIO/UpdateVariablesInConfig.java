@@ -33,15 +33,15 @@ public class UpdateVariablesInConfig extends Command
     	{
     		if (entry.getValue() == Double.class)
     		{
-    			config.add(entry.getKey(), (double) SmartDashboard.getNumber(entry.getKey()));
+    		    	config.add(entry.getKey(), (double) SmartDashboard.getNumber(entry.getKey(), 0.0));
     		}
     		else if (entry.getValue() == Integer.class)
     		{
-    			config.add(entry.getKey(), (int) SmartDashboard.getNumber(entry.getKey()));
+    			config.add(entry.getKey(), (int) SmartDashboard.getNumber(entry.getKey(), 0.0));
     		}
     		else if (entry.getValue() == Boolean.class)
     		{
-    			config.add(entry.getKey(), (boolean) SmartDashboard.getBoolean(entry.getKey()));
+    		    	config.add(entry.getKey(), (boolean) SmartDashboard.getBoolean(entry.getKey(), false));
     		}
     	}
     }

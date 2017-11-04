@@ -7,7 +7,7 @@ import org.usfirst.frc.team3316.robot.Robot;
 import org.usfirst.frc.team3316.robot.config.Config;
 import org.usfirst.frc.team3316.robot.logger.DBugLogger;
 
-import com.ctre.CANTalon;
+import com.ctre.phoenix.MotorControl.CAN.TalonSRX;
 
 import edu.wpi.first.wpilibj.*;
 
@@ -21,7 +21,7 @@ public class Actuators
 
 	// Chassis
 	public DBugSpeedController chassisLeft1, chassisLeft2, chassisRight1, chassisRight2;
-	public SpeedController chassisLeft1SC, chassisLeft2SC, chassisRight1SC, chassisRight2SC;
+	public TalonSRX chassisLeft1SC, chassisLeft2SC, chassisRight1SC, chassisRight2SC;
 	
 	// Intake
 	public DBugSpeedController intakeMotor;
@@ -63,10 +63,10 @@ public class Actuators
 	 */
 	private void ChassisActuatorsA()
 	{
-		chassisLeft1SC = new CANTalon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_1"));
-		chassisLeft2SC = new CANTalon((int) Robot.config.get("CHASSIS_MOTOR_LEFT_2"));
-		chassisRight1SC = new CANTalon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_1"));
-		chassisRight2SC = new CANTalon((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_2"));
+		chassisLeft1SC = new TalonSRX((int) Robot.config.get("CHASSIS_MOTOR_LEFT_1"));
+		chassisLeft2SC = new TalonSRX((int) Robot.config.get("CHASSIS_MOTOR_LEFT_2"));
+		chassisRight1SC = new TalonSRX((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_1"));
+		chassisRight2SC = new TalonSRX((int) Robot.config.get("CHASSIS_MOTOR_RIGHT_2"));
 	}
 
 	private void ChassisActuatorsB()
